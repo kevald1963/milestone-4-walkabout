@@ -1,0 +1,8 @@
+*sqlite3*
+*__pycache__
+*pyc
+pyvenv.cfg
+bin
+lib
+lib64
+share
