@@ -3,6 +3,15 @@ body {
     padding-top: 100px;
 }
 
+.navbar-default {
+    background-color: #468847;
+    border-color: #468847;
+}
+
+.navbar {
+    background-image: none;
+}
+
 footer {
     margin-top: 40px;
     padding-top: 20px;
@@ -16,7 +25,7 @@ footer {
 }
 
 .accountform {
-    padding-top: 100px;
+    padding-top: 20px;
 }
 
 .badge {
