@@ -17,9 +17,14 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.views import static
 from accounts import urls as urls_accounts
+from organisation import urls as urls_organisation
+from organisation.views import all_organisations
+from .settings import MEDIA_ROOT
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^accounts/', include(urls_accounts))
-    #url(r'^home/', include(urls_home))
+    url(r'^accounts/', include(urls_accounts)),
+    url(r'^organisation/', include(urls_organisation)),
+    #url(r'^home/', include(urls_home)),
+    url(r'^media/(?P<path>.*)$', static.serve, {'document_root': MEDIA_ROOT}),    
 ]

@@ -17,6 +17,10 @@ body {
     font-size: 30px;
 }
 
+.search {
+    margin-bottom: 20px;
+}
+
 .btn-custom {
     background-color: #468847;
     color: white;

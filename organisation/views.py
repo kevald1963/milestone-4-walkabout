@@ -5,4 +5,4 @@ from .models import Organisation
 def all_organisations(request):
     """ Get all the organisations from the database. """
     organisations = Organisation.objects.all()
-    return render(request, "organisations.html", {"organisations": organisations})
+    return render(request, "organisation.html", {"organisations": organisations})

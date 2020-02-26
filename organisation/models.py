@@ -6,18 +6,17 @@ class Organisation(models.Model):
     objects = models.Manager()
     
     name = models.CharField(max_length = 50)
-    description = models.TextField(300)
-    logo_text = models.CharField(max_length = 15)
-    glyphicon_name = models.CharField(max_length = 20)
-    image_path = models.TextField(1024)
-    image = models.ImageField(upload_to = 'images')
-    address_1 = models.CharField(max_length = 30)
-    address_2 = models.CharField(max_length = 30)
-    address_3 = models.CharField(max_length = 30)
-    address_4 = models.CharField(max_length = 30)
-    post_code = models.CharField(max_length = 8)
+    description = models.TextField()
+    logo_text = models.CharField(max_length = 15, blank=True)
+    glyphicon_name = models.CharField(max_length = 20, blank=True)
+    image_path = models.TextField(blank=True)
+    image = models.ImageField(upload_to = 'images', blank=True)
+    address_1 = models.CharField(max_length = 40)
+    address_2 = models.CharField(max_length = 40)
+    address_3 = models.CharField(max_length = 40, blank=True)
+    address_4 = models.CharField(max_length = 40, blank=True)
+    post_code = models.CharField(max_length = 10)
     email_address = models.CharField(max_length = 40)
-    password = models.CharField(max_length = 20)
 
     def __str__(self):
         return self.name
