@@ -1,16 +1,40 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="row">
-    {% for organisation in organisations %}
+<div class="container"></div>
+    <div class="panel-group" id="accordion">
+        {% for organisation in organisations %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse[]">{{ organisation.name }}</a>
+                    </h4>
+                    <div class="organisation">
+                        <img src="{{ MEDIA_URL }}{{ organisation.image }}" alt="??" width="40%" height="auto" >
+                    </div>
+                </div>
+                <div id="collapse[]" class="panel-collapse collapse in">
+                    <div class="panel-body">{{ organisation.description }}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div> 
+</div>
+
+
+
+<!-- 
+    <div class="row">
         <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-default">
             <div class="panel-body">
                 <h3>{{ organisation.name }}</h3>
                 <p class="organisation-description">{{ organisation.description }}</p>
+                <div class="organisation" style="background-image: {{ MEDIA_URL }}{{ organisation.image }};">
+                    <img src="{{ MEDIA_URL }}{{ organisation.image }}">
+                </div>
             </div>
-            <div class="organisation" style="background-image: url('{{ MEDIA_URL }}{{ organisation.image }}')"></div>
         </div>
-    {% endfor %}
+    </div>
 </div>
-
+-->
 {% endblock %}
