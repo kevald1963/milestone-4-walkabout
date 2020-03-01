@@ -11,6 +11,7 @@ class Organisation(models.Model):
     glyphicon_name = models.CharField(max_length = 20, blank=True)
     image_path = models.TextField(blank=True)
     image = models.ImageField(upload_to = 'images', blank=True)
+    image_caption = models.CharField(max_length = 70, blank=True)
     address_1 = models.CharField(max_length = 40)
     address_2 = models.CharField(max_length = 40)
     address_3 = models.CharField(max_length = 40, blank=True)

@@ -1,3 +1,10 @@
+
+.link_btn button a {
+    color: white;
+    margin: 10px;
+    min-width: 300px;
+}
+
 body {
     font-family: Arial;
     padding-top: 100px;

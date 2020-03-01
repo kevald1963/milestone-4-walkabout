@@ -2,39 +2,38 @@
 {% block content %}
 
 <div class="container"></div>
-    <div class="panel-group" id="accordion">
-        {% for organisation in organisations %}
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse[]">{{ organisation.name }}</a>
-                    </h4>
-                    <div class="organisation">
-                        <img src="{{ MEDIA_URL }}{{ organisation.image }}" alt="??" width="40%" height="auto" >
+    {% for organisation in organisations %}
+        <div class="row">
+            <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-12 display panel panel-default">
+                <div class="panel-body">
+                    <h3>{{ organisation.name }}</h3>
+                    <p class="organisation-description">{{ organisation.description }}</p>
+                    <div class="row">
+                        <span>
+                        <div class="col-xs-12 col-md-6">
+                            <img src="{{ MEDIA_URL }}{{ organisation.image }}" alt="{{ organisation.image_caption }}" title="{{ organisation.image_caption }}" width="100%" height="auto"/>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="row">
+                                <div class="link_btn">
+                                    <!-- VIEW, EDIT, and DELETE buttons -->
+                                    <div class="col-xs-12">
+                                        <button type="button" class="btn btn-primary btn-lg"><a href="#">View</a></button>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <button type="button" class="btn btn-primary btn-lg"><a href="#">Update</a></button>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <button type="button" class="btn btn-danger btn-lg"><a href="#">Delete</a></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div id="collapse[]" class="panel-collapse collapse in">
-                    <div class="panel-body">{{ organisation.description }}</div>
-                </div>
             </div>
-        {% endfor %}
-    </div> 
+        </div> 
+    {% endfor %}
 </div>
 
-
-
-<!-- 
-    <div class="row">
-        <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-default">
-            <div class="panel-body">
-                <h3>{{ organisation.name }}</h3>
-                <p class="organisation-description">{{ organisation.description }}</p>
-                <div class="organisation" style="background-image: {{ MEDIA_URL }}{{ organisation.image }};">
-                    <img src="{{ MEDIA_URL }}{{ organisation.image }}">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
--->
 {% endblock %}
