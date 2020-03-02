@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load bootstrap_tags %}
+{% block content %}
+
+<form method="POST" action="" class="organisationform">
+    <fieldset class="form-group">
+        <legend>Edit Organisation</legend>
+        {% csrf_token %}
+        {{ user_form | as_bootstrap }}
+        <button type="submit" class="btn btn-custom">Update</button>
+    </fieldset>
+</form>
+
+{% endblock %}
