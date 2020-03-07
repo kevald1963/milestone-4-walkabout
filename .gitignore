@@ -2,8 +2,9 @@
 *__pycache__
 *pyc
 pyvenv.cfg
-.wslrun
 bin
 lib
 lib64
 share
+venv
+.idea
