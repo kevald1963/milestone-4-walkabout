@@ -5,7 +5,7 @@ from .models import Organisation
 def all_organisations(request):
     """ Get all the organisations from the database. """
     organisations = Organisation.objects.all()
-    return render(request, "organisation.html", {"organisations": organisations})
+    return render(request, "organisations.html", {"organisations": organisations})
 
 def edit_organisation(request):
     """ Get the selected organisations from the database for editing. """
