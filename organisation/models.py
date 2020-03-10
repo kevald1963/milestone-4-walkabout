@@ -18,7 +18,7 @@ class Organisation(models.Model):
     address_3 = models.CharField(max_length=40, blank=True)
     address_4 = models.CharField(max_length=40, blank=True)
     post_code = models.CharField(max_length=10)
-    email_address = models.CharField(max_length=40)
+    email_address = models.EmailField(max_length=40)
 
     def __str__(self):
         return self.name
