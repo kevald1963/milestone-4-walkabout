@@ -15,11 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from django.views.generic import RedirectView
 from django.views import static
+from django.views.generic import RedirectView
 from accounts import urls as urls_accounts
 from organisation import urls as urls_organisation
-from organisation.views import all_organisations
 from .settings import MEDIA_ROOT
 
 urlpatterns = [

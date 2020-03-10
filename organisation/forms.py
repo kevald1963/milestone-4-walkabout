@@ -8,6 +8,7 @@ class EditOrganisationForm(forms.ModelForm):
         fields = (
             'name',
             'description',
+            'contact',
             'is_parent',
             'logo_text',
             'glyphicon_name',
@@ -20,4 +21,6 @@ class EditOrganisationForm(forms.ModelForm):
             'address_4',
             'post_code',
             'email_address',
+            'home_number',
+            'mobile_number',
         )

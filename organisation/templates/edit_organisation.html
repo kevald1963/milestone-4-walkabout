@@ -2,13 +2,13 @@
 {% load bootstrap_tags %}
 {% block content %}
 
-<form method="POST" enctype="multipart/form-data">
-    <fieldset class="form-group">
-        <legend>Edit Organisation</legend>
-        {% csrf_token %}
-        {{ user_form | as_bootstrap }}
-        <button type="submit" class="btn btn-custom">Save</button>
-    </fieldset>
-</form>
+    <form method="POST" enctype="multipart/form-data">
+        <fieldset class="form-group">
+            <legend>Edit Organisation</legend>
+            {% csrf_token %}
+            {{ form | as_bootstrap }}
+            <button type="submit" class="btn btn-custom">Save</button>
+        </fieldset>
+    </form>
 
 {% endblock %}

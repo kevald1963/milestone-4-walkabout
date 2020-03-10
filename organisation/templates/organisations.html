@@ -7,18 +7,15 @@
             <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-12 display panel panel-default">
                 <div class="panel-body">
                     <h3>{{ organisation.name }}</h3>
-                    <p class="organisation-description">{{ organisation.description }}</p>
+                    <p class="organisation-description">{{ organisation.description|truncatewords:40 }}</p>
+                    <p><a href="{% url 'organisation_detail' organisation.id %}" class="btn btn-default">Read more</a></p>
                     <div class="row">
-                        <span>
                         <div class="col-xs-12 col-md-6">
                             <img src="{{ MEDIA_URL }}{{ organisation.image }}" alt="{{ organisation.image_caption }}" title="{{ organisation.image_caption }}" width="100%" height="auto"/>
                         </div>
                         <div class="col-xs-12 col-md-6">
                             <div class="row">
-                                <!-- VIEW, EDIT, and DELETE buttons -->
-                                <div class="col-xs-12">
-                                    <button type="button" class="btn link_btn btn-lg"><a href="#">View</a></button>
-                                </div>
+                                <!-- EDIT and DELETE buttons -->
                                 <div class="col-xs-12">
                                     <button type="button" class="btn link_btn btn-lg"><a href="{% url 'edit_organisation' organisation.id %}">Edit</a></button>
                                 </div>

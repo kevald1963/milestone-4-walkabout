@@ -7,6 +7,7 @@ class Organisation(models.Model):
     
     name = models.CharField(max_length=50)
     description = models.TextField()
+    contact = models.CharField(max_length=50, blank=True)
     is_parent = models.BooleanField(verbose_name='Is parent organisation?', default=False)
     logo_text = models.CharField(max_length=15, blank=True)
     glyphicon_name = models.CharField(max_length=20, blank=True)
@@ -19,6 +20,8 @@ class Organisation(models.Model):
     address_4 = models.CharField(max_length=40, blank=True)
     post_code = models.CharField(max_length=10)
     email_address = models.EmailField(max_length=40)
+    home_number = models.CharField(max_length=14, blank=True)
+    mobile_number = models.CharField(max_length=14, blank=True)
 
     def __str__(self):
         return self.name
