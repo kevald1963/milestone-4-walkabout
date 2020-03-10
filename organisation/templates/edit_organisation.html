@@ -2,12 +2,12 @@
 {% load bootstrap_tags %}
 {% block content %}
 
-<form method="POST" action="" class="organisationform">
+<form method="POST" action="" class="organisationform" enctype="multipart/form-data">
     <fieldset class="form-group">
         <legend>Edit Organisation</legend>
         {% csrf_token %}
         {{ user_form | as_bootstrap }}
-        <button type="submit" class="btn btn-custom">Update</button>
+        <button type="submit" class="btn btn-custom">Save</button>
     </fieldset>
 </form>
 

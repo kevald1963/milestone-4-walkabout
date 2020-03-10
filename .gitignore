@@ -9,3 +9,4 @@ share
 venv
 .idea
 stgp_org.json
+*.bat

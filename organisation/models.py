@@ -20,8 +20,5 @@ class Organisation(models.Model):
     post_code = models.CharField(max_length=10)
     email_address = models.CharField(max_length=40)
 
-    class Meta:
-        ordering = ['-is_parent']
-
     def __str__(self):
         return self.name
