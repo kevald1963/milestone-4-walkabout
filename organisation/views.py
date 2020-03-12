@@ -13,6 +13,7 @@ def all_organisations(request):
 
     return render(request, "organisations.html", {"organisations": organisations})
 
+
 def organisation_detail(request, pk):
     """
     A view that returns a single organisation's details based on the organisation
@@ -22,7 +23,8 @@ def organisation_detail(request, pk):
     organisation = get_object_or_404(Organisation, pk=pk)
     return render(request, "organisation_detail.html", {'organisation': organisation})
 
-def create_or_edit_organisation(request, pk):
+
+def create_or_edit_organisation(request, pk=None):
     """
     A view to create or edit an organisation depending on whether the organisation
     primary key is null or not.
@@ -31,9 +33,17 @@ def create_or_edit_organisation(request, pk):
     if request.method == 'POST':
         form = EditOrganisationForm(request.POST, request.FILES, instance=organisation)
         if form.is_valid():
-            org = form.save()
+            form.save()
             return redirect(all_organisations)
     else:
         form = EditOrganisationForm(instance=organisation)
 
-    return render(request, 'edit_organisation.html', {'form': form})
+    if organisation is None:
+        # If no data found then invoke page to add organisation.
+        operation_type = "add"
+    else:
+        # Otherwise invoke page to edit organisation.
+        operation_type = "edit"
+
+    return render(request, operation_type + '_organisation.html', {'form': form})
+
