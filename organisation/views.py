@@ -33,7 +33,7 @@ def create_or_edit_organisation(request, pk=None):
     if request.method == 'POST':
         form = EditOrganisationForm(request.POST, request.FILES, instance=organisation)
         if form.is_valid():
-            form.save()
+            organisation = form.save()
             return redirect(all_organisations)
     else:
         form = EditOrganisationForm(instance=organisation)
