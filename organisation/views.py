@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic.edit import DeleteView
+from django.core.urlresolvers import reverse_lazy
 from .forms import EditOrganisationForm
 from .models import Organisation
 
@@ -6,7 +8,7 @@ from .models import Organisation
 # Create your views here.
 def all_organisations(request):
     """
-    Get all the organisations from the database ordered by is_parent flag so that parent organisation
+    Get all the organisations from the database, ordered by is_parent flag so that parent organisation
     is always shown at top of the page.
     """
     organisations = Organisation.objects.all().order_by('-is_parent')
@@ -26,7 +28,7 @@ def organisation_detail(request, pk):
 
 def create_or_edit_organisation(request, pk=None):
     """
-    A view to create or edit an organisation depending on whether the organisation
+    A view to create or edit an organisation depending on whether the organisation's
     primary key is null or not.
     """
     organisation = get_object_or_404(Organisation, pk=pk) if pk else None
@@ -47,3 +49,11 @@ def create_or_edit_organisation(request, pk=None):
 
     return render(request, operation_type + '_organisation.html', {'form': form})
 
+
+class OrganisationDelete(DeleteView):
+    """
+    Delete the organisation and return Organisations page.
+    """
+    model = Organisation
+    template_name = 'organisation_confirm_delete.html'
+    success_url = reverse_lazy('all_organisations')

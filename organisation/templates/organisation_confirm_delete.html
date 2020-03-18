@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <legend>Confirm Delete</legend>
+    <form method="post">{% csrf_token %}
+        <p><strong>Name:</strong> {{ object.name }}</p>
+        </p><strong>Description:</strong> {{ object.description }}</p>
+        <hr>
+        <p>Are you sure you want to delete this organisation?</p>
+        <input type="submit" value="Confirm"/>
+        <input type="button" value="Cancel"/>
+    </form>
+
+{% endblock %}
