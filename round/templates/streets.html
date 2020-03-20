@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container"></div>
+    <legend>Streets</legend>
+    <h3>Round: {{ street.round }}</h3>
+    {% for street in streets %}
+        <div class="row">
+            <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-6 display panel panel-default">
+                <div class="panel-body">
+                    <h3>{{ street.name }}</h3>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <!-- EDIT and DELETE buttons -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button type="button" class="btn link_btn btn-lg"><a href="{% url 'edit_street' street.id %}">Edit</a></button>
+                                </div>
+                                <div class="col-xs-12">
+                                    <button type="button" class="btn link_btn_danger btn-lg"><a href="{% url 'delete_street' street.id %}">Delete</a></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

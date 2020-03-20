@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class Round(models.Model):
     objects = models.Manager()
@@ -9,6 +10,7 @@ class Round(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Street(models.Model):
     objects = models.Manager()

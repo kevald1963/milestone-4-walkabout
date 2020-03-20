@@ -18,8 +18,8 @@ def all_organisations(request):
 
 def organisation_detail(request, pk):
     """
-    A view that returns a single organisation's details based on the organisation
-    primary key and renders it to the 'oraanisation_detail.html' template.
+    A view that returns a single organisation's details based on its primary key
+    and renders it to the 'oraanisation_detail.html' template.
     Returns a 404 error if the organisation is not found.
     """
     organisation = get_object_or_404(Organisation, pk=pk)
@@ -28,7 +28,7 @@ def organisation_detail(request, pk):
 
 def create_or_edit_organisation(request, pk=None):
     """
-    A view to create or edit an organisation depending on whether the organisation's
+    A view to create or edit an organisation depending on whether its
     primary key is null or not.
     """
     organisation = get_object_or_404(Organisation, pk=pk) if pk else None
@@ -52,7 +52,7 @@ def create_or_edit_organisation(request, pk=None):
 
 class OrganisationDelete(DeleteView):
     """
-    Delete the organisation and return Organisations page.
+    Delete the organisation and return to Organisations page after delete confirmation.
     """
     model = Organisation
     template_name = 'organisation_confirm_delete.html'

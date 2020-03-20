@@ -19,6 +19,7 @@ from django.views import static
 from django.views.generic import RedirectView
 from accounts import urls as urls_accounts
 from organisation import urls as urls_organisation
+from round import urls as urls_round
 from .settings import MEDIA_ROOT
 
 #from organisation.views import OrganisationDelete
@@ -28,6 +29,6 @@ urlpatterns = [
     url(r'^$', RedirectView.as_view(url='organisation/')),
     url(r'^accounts/', include(urls_accounts)),
     url(r'^organisation/', include(urls_organisation)),
+    url(r'^round/', include(urls_round)),
     url(r'^media/(?P<path>.*)$', static.serve, {'document_root': MEDIA_ROOT}),
-#    url(r'^organisation/(?P<pk>\d+)/delete/$', OrganisationDelete.as_view(), name='delete_organisation'),
 ]
