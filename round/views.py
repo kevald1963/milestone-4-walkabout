@@ -10,7 +10,7 @@ def all_rounds(request):
     """
     Get all the delivery rounds from the database, ordered by name.
     """
-    rounds = Round.objects.all().order_by('-name')
+    rounds = Round.objects.all().order_by('name')
 
     return render(request, "rounds.html", {"rounds": rounds})
 
@@ -36,7 +36,7 @@ def create_or_edit_round(request, pk=None):
         # Otherwise invoke page to edit round.
         operation_type = "edit"
 
-    return render(request, operation_type + '_organisation.html', {'form': form})
+    return render(request, operation_type + '_round.html', {'form': form})
 
 
 class RoundDelete(DeleteView):
@@ -52,7 +52,7 @@ def all_streets(request):
     """
     Get all the streets from the database, ordered by name.
     """
-    streets = Street.objects.all().order_by('-name')
+    streets = Street.objects.all().order_by('name')
 
     return render(request, "streets.html", {"streets": streets})
 
@@ -62,7 +62,7 @@ def create_or_edit_street(request, pk=None):
     A view to create or edit a street depending on whether its
     primary key is null or not.
     """
-    round = get_object_or_404(Round, pk=pk) if pk else None
+    street = get_object_or_404(Round, pk=pk) if pk else None
     if request.method == 'POST':
         form = EditStreetForm(request.POST, instance=street)
         if form.is_valid():

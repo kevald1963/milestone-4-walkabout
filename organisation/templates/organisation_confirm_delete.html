@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <legend>Organisation Delete</legend>
-    <form method="POST">{% csrf_token %}
+    <form method="POST">
+        <legend>Organisation Delete</legend>
+        {% csrf_token %}
         <p><strong>Organisation name:</strong> {{ object.name }}</p>
         </p><strong>Description:</strong> {{ object.description }}</p>
         <hr>
