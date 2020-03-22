@@ -62,7 +62,7 @@ def create_or_edit_street(request, pk=None):
     A view to create or edit a street depending on whether its
     primary key is null or not.
     """
-    street = get_object_or_404(Round, pk=pk) if pk else None
+    street = get_object_or_404(Street, pk=pk) if pk else None
     if request.method == 'POST':
         form = EditStreetForm(request.POST, instance=street)
         if form.is_valid():

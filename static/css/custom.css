@@ -4,25 +4,29 @@ a {
     display: block;
 }
 
-h3 {
+h2, h3, h4 {
     color: rebeccapurple;
 }
 
 .link_btn {
     color: white;
     background-color: rebeccapurple;
-    margin: 10px;
-    margin-left: 100px;
-    width: 300px;
+    margin: 0px;
+    width: 150px;
 }
 
-.link_btn_danger
-{
+.link_btn_danger {
     color: white;
     background-color: red;
-    margin: 10px;
-    margin-left: 100px;
-    width: 300px;
+    margin: 0px;
+    width: 150px;
+}
+
+.link_btn_streets {
+    color: white;
+    background-color: turquoise;
+    margin: 0px;
+    width: 150px;
 }
 
 body {
