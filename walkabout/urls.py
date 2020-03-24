@@ -22,8 +22,6 @@ from organisation import urls as urls_organisation
 from round import urls as urls_round
 from .settings import MEDIA_ROOT
 
-#from organisation.views import OrganisationDelete
-
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', RedirectView.as_view(url='organisation/')),

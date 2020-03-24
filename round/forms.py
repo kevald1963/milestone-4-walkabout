@@ -17,8 +17,8 @@ class EditStreetForm(forms.ModelForm):
         fields = (
             'name',
             'comments',
+            'round',
             'door_number_start',
             'door_number_end',
-            'round',
             'post_code',
         )

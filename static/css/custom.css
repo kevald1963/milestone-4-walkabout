@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700');
+
 a {
     text-decoration: none;
     color: white;
@@ -24,7 +26,7 @@ h2, h3, h4 {
 
 .link_btn_streets {
     color: white;
-    background-color: turquoise;
+    background-color: #4b90e8;  // light-blue
     margin: 0px;
     width: 150px;
 }
@@ -48,7 +50,14 @@ body {
     font-size: 30px;
 }
 
-.search {
+.round_header {
+    background-color: #4b90e8;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+.search, .filter {
     margin-bottom: 20px;
 }
 
@@ -57,7 +66,6 @@ body {
     color: white;
     border-color: #468847;
 }
-
 
 footer {
     margin-top: 40px;
