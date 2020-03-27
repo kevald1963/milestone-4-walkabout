@@ -11,7 +11,6 @@ def all_rounds(request):
     Get all the delivery rounds from the database, ordered by name.
     """
     rounds = Round.objects.all().order_by('name')
-
     return render(request, 'rounds.html', {'rounds': rounds})
 
 

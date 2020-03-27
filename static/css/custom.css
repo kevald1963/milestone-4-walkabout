@@ -50,15 +50,47 @@ body {
     font-size: 30px;
 }
 
-.round_header {
+.round-summary {
     background-color: #4b90e8;
     color: white;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
 }
 
-.search, .filter {
-    margin-bottom: 20px;
+#filter-rounds-input {
+    background-image: url('/static/images/search-26227.png');
+    background-size: 2% auto;
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+}
+.filter {
+    margin-bottom: 10px;
+}
+
+#rounds-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#rounds-list li {
+    border: 1px solid #ddd;
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 16px;
+    color: black;
+    display: block
+}
+
+#rounds-list li:hover:not(.header) {
+    background-color: #eee;
 }
 
 .btn-custom {
