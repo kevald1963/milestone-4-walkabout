@@ -101,12 +101,14 @@
     </footer>
 
     <script>
+        // Add a tooltip to an image.
         $(document).ready(function(){
             $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
 
     <script>
+        // Filter rounds by through all list items, and hiding those that don't match the search query.
         function filterRounds() {
             var input, filter, ul, li, p, i, txtValue;
             input = document.getElementById("filter-rounds-input");
@@ -114,7 +116,6 @@
             ul = document.getElementById("rounds-list");
             li = ul.getElementsByTagName("li");
 
-            // Loop through all list items, and hide those who don't match the search query.
             for (i = 0; i < li.length; i++) {
                 p = li[i].getElementsByTagName("p")[0];
                 txtValue = p.textContent || p.innerText;
