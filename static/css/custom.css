@@ -6,8 +6,9 @@ a {
     display: block;
 }
 
-h2, h3, h4 {
-    color: rebeccapurple;
+.streets-assigned {
+    color: black;
+    font-size: 18px;
 }
 
 .link_btn {
@@ -57,7 +58,7 @@ body {
     font-size: 16px;
 }
 
-#filter-rounds-input {
+#filter-input {
     background-image: url('/static/images/search-26227.png');
     background-size: 2% auto;
     background-position: 10px 12px;
@@ -72,24 +73,23 @@ body {
     margin-bottom: 10px;
 }
 
-#rounds-list {
+#data-list {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-#rounds-list li {
+#data-list li {
     border: 1px solid #ddd;
     margin-top: -1px; /* Prevent double borders */
     background-color: #f6f6f6;
-    padding: 12px;
+    padding: 10px;
     text-decoration: none;
     font-size: 16px;
     color: black;
-    display: block
 }
 
-#rounds-list li:hover:not(.header) {
+#data-list li:hover:not(.header) {
     background-color: #eee;
 }
 

@@ -2,21 +2,21 @@
 {% block content %}
 
 <div class="container"></div>
-    <legend>Rounds</legend>
+    <pre class="round-summary">Rounds</pre>
     {% if not rounds %}
         <p>No rounds created yet. These can be created from the Rounds menu above.</p>
     {% else %}
         <div class="filter" title="Search image from freepnglogos.com">
-            <input id="filter-rounds-input" onkeyup="filterRounds()" placeholder="Filter by round name.." type="text">
+            <input id="filter-input" onkeyup="filterRounds()" placeholder="Filter by round name.." type="text">
         </div>
-        <ul id="rounds-list">
+        <ul id="data-list">
             {% for round in rounds %}
                 <div class="row">
                     <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-12">
                         <li>
                             <div class="row">
                                 <div class="col-xs-12 col-md-6">
-                                    <p>{{ round.name }}</p>
+                                    <p>{{ round.name }} ({{ round.description }})</p>
                                 </div>
                                 <div class="col-xs-12 col-md-6">
                                     <div class="row">

@@ -108,12 +108,12 @@
     </script>
 
     <script>
-        // Filter rounds by through all list items, and hiding those that don't match the search query.
-        function filterRounds() {
+        // Filter listed data by looping through all list items, and hiding those that don't match the search query.
+        function filter() {
             var input, filter, ul, li, p, i, txtValue;
-            input = document.getElementById("filter-rounds-input");
+            input = document.getElementById("filter-input");
             filter = input.value.toUpperCase();
-            ul = document.getElementById("rounds-list");
+            ul = document.getElementById("data-list");
             li = ul.getElementsByTagName("li");
 
             for (i = 0; i < li.length; i++) {

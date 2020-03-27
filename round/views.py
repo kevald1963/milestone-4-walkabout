@@ -6,6 +6,14 @@ from .models import Round, Street
 
 
 # Create your views here.
+def copy_round(request):
+    """
+    Get all the delivery rounds from the database, ordered by name.
+    round = Round.objects.all().order_by('name')
+    return render(request, 'rounds.html', {'rounds': rounds})"
+    """
+
+
 def all_rounds(request):
     """
     Get all the delivery rounds from the database, ordered by name.

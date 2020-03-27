@@ -3,35 +3,41 @@
 
 <div class="container"></div>
     {% for round_data in round %}
-        <pre class="round-summary">Round: {{ round_data.name }}   Description: {{ round_data.description }}</pre></h3>
+        <pre class="round-summary">Round: {{ round_data.name }} ({{ round_data.description }})</pre>
     {% endfor %}
     {% if not streets %}
         <p>No streets assigned yet to this round.</p>
     {% else %}
-        {% for street in streets %}
-            <div class="row">
-                <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-12 display panel panel-default">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-xs-12 col-md-6">
-                                <p><strong>Street: </strong>{{ street.name }}</p>
-                            </div>
-                            <div class="col-xs-12 col-md-6">
-                                <div class="row">
-                                    <!-- Display a horizontal button group for sm, md and lg devices. -->
-                                    <div class="hidden-xs col-sm-12 col-md-12 col-lg-12">
-                                        <div class="btn-group" role="group" aria-label="Horizontal button group for Edit Street and Delete Street.">
-                                            <span class="btn link_btn btn-md"><a href="{% url 'edit_street' street.id %}">Edit</a></span>
-                                            <span class="btn link_btn_danger btn-md"><a href="{% url 'delete_street' street.id %}">Delete</a></span>
+        <div class="filter" title="Search image from freepnglogos.com">
+            <input id="filter-input" onkeyup="filter()" placeholder="Filter by street name.." type="text">
+        </div>
+        <p class="streets-assigned">Streets assigned to this round:</p>
+        <ul id="data-list">
+            {% for street in streets %}
+                <div class="row">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-12">
+                        <li>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6">
+                                    <p>{{ street.name }}</p>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="row">
+                                        <!-- Display a horizontal button group for sm, md and lg devices. -->
+                                        <div class="hidden-xs col-sm-12 col-md-12 col-lg-12">
+                                            <div class="btn-group" role="group" aria-label="Horizontal button group for Edit Street and Delete Street.">
+                                                <span class="btn link_btn btn-md"><a href="{% url 'edit_street' street.id %}">Edit</a></span>
+                                                <span class="btn link_btn_danger btn-md"><a href="{% url 'delete_street' street.id %}">Delete</a></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </li>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </ul>
     {% endif %}
 </div>
 
