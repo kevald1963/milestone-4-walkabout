@@ -1,10 +1,12 @@
 # Walkabout 
 
-Walkabout is an app for managing political party leafleting and canvassing campaigns.
+Walkabout is an app for managing leafleting, canvassing and surveying campaigns.
 
-**Background**
+**Inspiration for project**
 
 I am an active member of South Tyneside Green Party (STGP), an affiliate of the Green Party of England and Wales (GPEW). The idea for developing this app has come from my own experience of leafleting on behalf of STGP using paper copies of maps and street rounds. These are not only cumbersome to handle and susceptible to weather conditions but, from an organiser’s point of view, the later collation of valuable information from the round, such as missed streets and households, new supporters, and so forth, is difficult and time consuming, especially across teams of activists. Furthermore, while most leafleting campaigns cover every household in the round, there are times when only specific households are delivered to e.g. New Year cards to supporters. Canvassing also tends to be targeted at known or likely supporters. Correctly selecting the data for printing out data for specific households only, is currently a labour-intensive job. An app could automate all these routine and tedious functions.
+
+However, this app is not just for use by political parties, it can also be used by parcel delivery companies, market researchers, trade advertisers, community groups and so on. The app has been written so that much of the content relating to the organisation using it, is stored on the database so that it can be displayed on the app's pages rather than hard-coding into them. This means that the content can easily be changed by the end user. Various custom pages have been created to allow management of such user data.
 
 **Glossary of terms**
 
