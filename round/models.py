@@ -24,3 +24,15 @@ class Street(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Address(models.Model):
+    objects = models.Manager()
+
+    door_number = models.SmallIntegerField()
+    name = models.ForeignKey(Street, on_delete=models.CASCADE)
+    comments = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
+

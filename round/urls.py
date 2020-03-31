@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from .views import all_rounds, create_or_edit_round, all_streets, create_or_edit_street, attached_streets
+from .views import create_addresses
 from . import views
 
 
@@ -13,4 +14,5 @@ urlpatterns = [
     url(r'^round/street/(?P<pk>\d+)/edit/$', create_or_edit_street, name='edit_street'),
     url(r'^round/street/(?P<pk>\d+)/delete/$', views.StreetDelete.as_view(), name='delete_street'),
     url(r'^round/(?P<pk>\d+)/attached_streets/$', attached_streets, name='attached_streets'),
+    url(r'^round/(?P<pk>\d+)/attached_streets/create_addresses/$', create_addresses, name='create_addresses'),
 ]

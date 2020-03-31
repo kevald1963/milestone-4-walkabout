@@ -24,9 +24,9 @@
                                         <!-- Contains EDIT, DELETE and VIEW STREETS buttons -->
                                         <div class="hidden-xs col-sm-12 col-md-12 col-lg-12">
                                             <div class="btn-group" role="group" aria-label="Horizontal button group for Edit Round, Delete Round and View Streets (of this Round).">
-                                                <span class="btn link_btn btn-md"><a href="{% url 'edit_round' round.id %}">Edit</a></span>
-                                                <span class="btn link_btn_danger btn-md"><a href="{% url 'delete_round' round.id %}">Delete</a></span>
-                                                <span class="btn link_btn_streets btn-md"><a href="{% url 'attached_streets' round.id %}">View streets</a></span>
+                                                <span class="btn link-btn-purple btn-md"><a href="{% url 'edit_round' round.id %}">Edit</a></span>
+                                                <span class="btn link-btn-red btn-md"><a href="{% url 'delete_round' round.id %}">Delete</a></span>
+                                                <span class="btn link-btn-light-blue btn-md"><a href="{% url 'attached_streets' round.id %}">View streets</a></span>
                                             </div>
                                         </div>
                                     </div>

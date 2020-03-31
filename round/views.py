@@ -2,18 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.edit import DeleteView
 from django.core.urlresolvers import reverse_lazy
 from .forms import EditRoundForm, EditStreetForm
-from .models import Round, Street
+from .models import Round, Street, Address
 
 
 # Create your views here.
-def copy_round(request):
-    """
-    Get all the delivery rounds from the database, ordered by name.
-    round = Round.objects.all().order_by('name')
-    return render(request, 'rounds.html', {'rounds': rounds})"
-    """
-
-
 def all_rounds(request):
     """
     Get all the delivery rounds from the database, ordered by name.
@@ -105,3 +97,21 @@ def attached_streets(request, pk):
     streets = Street.objects.select_related('round').filter(round=pk).order_by('name')
 
     return render(request, 'attached_streets.html', {'round': round, 'streets': streets})
+
+
+def create_addresses(request, pk):
+    """
+    Create the addresses for this street.
+    """
+    street = Street.objects.get(id=pk)
+    comments = ""
+    door_end = street.door_number_end + 1
+    # Create a record for each address and save to the database.
+    for door_number in range(1, door_end):
+        address = Address(door_number=door_number, name=street, comments=comments)
+        address.save()
+
+    # Select the address just saved to send to template.
+    addresses = Address.objects.select_related('name').filter(name=pk).order_by('door_number')
+    return render(request, 'addresses.html', {'street': street, 'addresses': addresses})
+

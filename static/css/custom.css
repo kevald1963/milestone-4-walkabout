@@ -11,21 +11,21 @@ a {
     font-size: 18px;
 }
 
-.link_btn {
+.link-btn-purple {
     color: white;
     background-color: rebeccapurple;
     margin: 0px;
     width: 150px;
 }
 
-.link_btn_danger {
+.link-btn-red {
     color: white;
     background-color: red;
     margin: 0px;
     width: 150px;
 }
 
-.link_btn_streets {
+.link-btn-light-blue {
     color: white;
     background-color: #4b90e8;  // light-blue
     margin: 0px;
