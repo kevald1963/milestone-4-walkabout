@@ -19,6 +19,7 @@
                                     <div class="btn-group" role="group" aria-label="Horizontal button group for Edit Street and Delete Street.">
                                         <span class="btn link-btn-purple btn-md"><a href="{% url 'edit_street' street.id %}">Edit</a></span>
                                         <span class="btn link-btn-red btn-md"><a href="{% url 'delete_street' street.id %}">Delete</a></span>
+                                        <span class="btn link-btn-light-blue btn-md"><a href="{% url 'create_addresses' street.id %}">Create addresses</a></span>
                                     </div>
                                 </div>
                             </div>

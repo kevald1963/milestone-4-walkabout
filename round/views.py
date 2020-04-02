@@ -99,19 +99,35 @@ def attached_streets(request, pk):
     return render(request, 'attached_streets.html', {'round': round, 'streets': streets})
 
 
+def view_addresses(request, pk):
+    """"
+    View the addresses for this street
+    """
+    street = Street.objects.get(id=pk)
+    addresses = Address.objects.select_related('name').filter(name=pk).order_by('door_number')
+    return render(request, 'addresses.html', {'street': street, 'addresses': addresses})
+
+
 def create_addresses(request, pk):
     """
-    Create the addresses for this street.
+    Create the addresses for this street, deleting any old ones first.
     """
+    # Check for any addresses already existing for this street.
+    addresses_exist = Address.objects.select_related('name').filter(name=pk).order_by('door_number')
+
+    # If any found, delete them.
+    if addresses_exist:
+        addresses_exist.delete()
+
+    # Create a record for each new address and save to the database.
     street = Street.objects.get(id=pk)
     comments = ""
     door_end = street.door_number_end + 1
-    # Create a record for each address and save to the database.
     for door_number in range(1, door_end):
         address = Address(door_number=door_number, name=street, comments=comments)
         address.save()
 
-    # Select the address just saved to send to template.
+    # Select the addresses just saved to display in template.
     addresses = Address.objects.select_related('name').filter(name=pk).order_by('door_number')
     return render(request, 'addresses.html', {'street': street, 'addresses': addresses})
 
