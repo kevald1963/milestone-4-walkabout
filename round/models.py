@@ -31,7 +31,7 @@ class Address(models.Model):
 
     door_number = models.SmallIntegerField()
     name = models.ForeignKey(Street)
-    comments = models.TextField(blank=True)
+    comments = models.CharField(max_length=80, blank=True)
 
     class Meta:
         ordering = ['name', 'door_number']

@@ -2,6 +2,7 @@
 {% block content %}
 
 <div class="container"></div>
+    <pre class="round-summary">Street: {{ street.name }}</pre>
     {% if not addresses %}
         <p>No addresses assigned yet to this round.</p>
     {% else %}
@@ -16,7 +17,8 @@
                         <li>
                             <div class="row">
                                 <div class="col-xs-12 col-md-6">
-                                    <p>{{ address.door_number }}, {{ address.name }}, {{ address.comment }}</p>
+                                    <p>{{ address.door_number }} {{ address.name }}</p>
+                                    <p><em><strong>{{ address.comments }}</strong></em></p>
                                 </div>
                                 <div class="col-xs-12 col-md-6">
                                     <div class="row">
