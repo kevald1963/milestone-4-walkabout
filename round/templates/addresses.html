@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="container"></div>
+<div class="container">
     <pre class="round-summary">Street: {{ street.name }}</pre>
     {% if not addresses %}
         <p>No addresses assigned yet to this round.</p>
@@ -18,16 +18,15 @@
                             <div class="row">
                                 <div class="col-xs-12 col-md-6">
                                     <p>{{ address.door_number }} {{ address.name }}</p>
-                                    <p><em><strong>{{ address.comments }}</strong></em></p>
+                                    <p class="address-comments">{{ address.comments }}</p>
                                 </div>
                                 <div class="col-xs-12 col-md-6">
                                     <div class="row">
                                         <!-- Display a horizontal button group for sm, md and lg devices. -->
                                         <div class="hidden-xs col-sm-12 col-md-12 col-lg-12">
-                                            <div class="btn-group" role="group" aria-label="Horizontal button group for Edit Street and Delete Street.">
-                                                <span class="btn link-btn-purple btn-md"><a href="#">Edit comments</a></span>
+                                            <div class="btn-group" role="group" aria-label="Horizontal button group for Edit Comments and Delete Comments.">
+                                                <span class="btn link-btn-purple btn-md"><a href="{% url 'edit_address' street.id address.id %}">Edit comments</a></span>
                                                 <span class="btn link-btn-red btn-md"><a href="#">Delete comments</a></span>
-                                                <span class="btn link-btn-light-blue btn-md"><a href="#">Insert address</a></span>
                                             </div>
                                         </div>
                                     </div>

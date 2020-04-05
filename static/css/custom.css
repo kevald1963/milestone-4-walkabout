@@ -99,6 +99,10 @@ body {
     border-color: #468847;
 }
 
+.address-comments {
+    font-weight: bold;
+}
+
 footer {
     margin-top: 40px;
     padding-top: 20px;

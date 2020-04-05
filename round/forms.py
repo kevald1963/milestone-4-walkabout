@@ -1,5 +1,5 @@
 from django import forms
-from .models import Round, Street
+from .models import Round, Street, Address
 
 
 class EditRoundForm(forms.ModelForm):
@@ -22,3 +22,13 @@ class EditStreetForm(forms.ModelForm):
             'door_number_end',
             'post_code',
         )
+
+
+class EditAddressForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        fields = (
+            'door_number',
+            'comments',
+        )
+

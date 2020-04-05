@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.edit import DeleteView
 from django.core.urlresolvers import reverse_lazy
-from .forms import EditRoundForm, EditStreetForm
+from .forms import EditRoundForm, EditStreetForm, EditAddressForm
 from .models import Round, Street, Address
 
 
@@ -99,23 +99,12 @@ def attached_streets(request, pk):
     return render(request, 'attached_streets.html', {'round': round, 'streets': streets})
 
 
-def view_addresses(request, pk):
-    """"
-    View the addresses for this street
-    """
-    street = Street.objects.get(id=pk)
-    addresses = Address.objects.select_related('name').filter(name=pk).order_by('door_number')
-    return render(request, 'addresses.html', {'street': street, 'addresses': addresses})
-
-
 def create_addresses(request, pk):
     """
     Create the addresses for this street, deleting any old ones first.
     """
-    # Check for any addresses already existing for this street.
+    # Delete any addresses already existing for this street.
     addresses_exist = Address.objects.select_related('name').filter(name=pk).order_by('door_number')
-
-    # If any found, delete them.
     if addresses_exist:
         addresses_exist.delete()
 
@@ -131,3 +120,31 @@ def create_addresses(request, pk):
     addresses = Address.objects.select_related('name').filter(name=pk).order_by('door_number')
     return render(request, 'addresses.html', {'street': street, 'addresses': addresses})
 
+
+def view_addresses(request, pk):
+    """"
+    View the addresses for this street.
+    """
+    street = Street.objects.get(id=pk)
+    addresses = Address.objects.select_related('name').filter(name=pk).order_by('door_number')
+    return render(request, 'addresses.html', {'street': street, 'addresses': addresses})
+
+
+def edit_address(request, pk, pk2):
+    """
+    Edit the comments field only for this addresses.
+    """
+    street = get_object_or_404(Street, pk=pk)
+    address = get_object_or_404(Address, pk=pk2)
+    if request.method == 'POST':
+        form = EditAddressForm(request.POST, instance=address)
+        if form.is_valid():
+            form.save()
+            return redirect(view_addresses, pk)
+    else:
+        form = EditAddressForm(instance=address)
+
+    # address = Address.objects.get(id=pk2)
+    # form = EditAddressForm(instance=address)
+
+    return render(request, 'edit_address.html', {'street': street, 'form': form})
