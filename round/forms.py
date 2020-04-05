@@ -28,7 +28,6 @@ class EditAddressForm(forms.ModelForm):
     class Meta:
         model = Address
         fields = (
-            'door_number',
             'comments',
         )
 

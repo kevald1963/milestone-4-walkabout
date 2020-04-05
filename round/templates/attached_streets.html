@@ -3,7 +3,7 @@
 
 <div class="container"></div>
     {% for round_data in round %}
-        <pre class="round-summary">Round: {{ round_data.name }} ({{ round_data.description }})</pre>
+        <pre class="page-summary">Round: {{ round_data.name }} ({{ round_data.description }})</pre>
     {% endfor %}
     {% if not streets %}
         <p>No streets assigned yet to this round.</p>

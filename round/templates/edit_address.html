@@ -2,11 +2,11 @@
 {% load bootstrap_tags %}
 {% block content %}
 
-    <pre class="round-summary">Edit address for {{ street.name }}</pre>
+    <pre class="page-summary">Edit comments for address {{ address.door_number }} {{ street.name }}</pre>
     <form method="POST">
         {% csrf_token %}
         {{ form | as_bootstrap }}
-        <button type="submit" class="btn btn-custom">Save</button>
+        <button type="submit" class="btn btn-custom btn-md">Save</button>
         <a href="{% url 'view_addresses' street.id %}" class="btn btn-default">Cancel</a>
     </form>
 

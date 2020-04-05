@@ -144,7 +144,4 @@ def edit_address(request, pk, pk2):
     else:
         form = EditAddressForm(instance=address)
 
-    # address = Address.objects.get(id=pk2)
-    # form = EditAddressForm(instance=address)
-
-    return render(request, 'edit_address.html', {'street': street, 'form': form})
+    return render(request, 'edit_address.html', {'street': street, 'address': address, 'form': form})

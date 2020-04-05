@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 
+    <pre class="page-summary">Delete round</pre>
     <form method="POST">
-        <legend>Round Delete</legend>
         {% csrf_token %}
         <p><strong>Name: </strong>{{ object.name }}</p>
         </p><strong>Description: </strong>{{ object.description }}</p>
         <hr>
         <p>Are you sure you want to delete this round?</p>
-        <input type="submit" value="Confirm" class="btn btn-default"/>
-        <a href="{% url 'all_rounds' %}" class="btn btn-default">Cancel</a>
+        <input type="submit" value="Confirm" class="btn btn-custom btn-md"/>
+        <a href="{% url 'all_rounds' %}" class="btn btn-default btn-md">Cancel</a>
     </form>
 
 {% endblock %}

@@ -2,14 +2,12 @@
 {% load bootstrap_tags %}
 {% block content %}
 
+    <pre class="page-summary">Edit round</pre>
     <form method="POST">
-        <fieldset class="form-group">
-            <legend>Edit round</legend>
-            {% csrf_token %}
-            {{ form | as_bootstrap }}
-            <button type="submit" class="btn btn-custom">Save</button>
-            <a href="{% url 'all_rounds' %}" class="btn btn-default">Cancel</a>
-        </fieldset>
+        {% csrf_token %}
+        {{ form | as_bootstrap }}
+        <button type="submit" class="btn btn-custom btn-md">Save</button>
+        <a href="{% url 'all_rounds' %}" class="btn btn-default btn-md">Cancel</a>
     </form>
 
 {% endblock %}

@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700');
 
+body {
+    font-family: Arial;
+    padding-top: 100px;
+}
+
 a {
     text-decoration: none;
     color: white;
@@ -32,9 +37,15 @@ a {
     width: 150px;
 }
 
-body {
-    font-family: Arial;
-    padding-top: 100px;
+.btn-custom {
+    color: white;
+    background-color: rebeccapurple;
+    border-color: rebeccapurple;
+    width: 100px;
+}
+
+.address-comments {
+    font-weight: bold;
 }
 
 .navbar-default {
@@ -51,7 +62,7 @@ body {
     font-size: 30px;
 }
 
-.round-summary {
+.page-summary {
     background-color: #4b90e8;
     color: white;
     font-family: 'Roboto', sans-serif;
@@ -91,16 +102,6 @@ body {
 
 #data-list li:hover:not(.header) {
     background-color: #eee;
-}
-
-.btn-custom {
-    background-color: #468847;
-    color: white;
-    border-color: #468847;
-}
-
-.address-comments {
-    font-weight: bold;
 }
 
 footer {
