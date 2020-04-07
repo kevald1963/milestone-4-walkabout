@@ -1,8 +1,8 @@
 from django.db import models
 
+
 # Create your models here.
 class Organisation(models.Model):
-
     objects = models.Manager()
     
     name = models.CharField(max_length=50)

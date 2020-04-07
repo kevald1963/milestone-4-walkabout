@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from django.views import static
 from django.views.generic import RedirectView
+from home import urls as urls_home
 from accounts import urls as urls_accounts
 from organisation import urls as urls_organisation
-from home import urls as urls_home
+from product import urls as urls_product
 from round import urls as urls_round
+from django.views import static
 from .settings import MEDIA_ROOT
 
 
@@ -29,6 +30,7 @@ urlpatterns = [
     url(r'^$', RedirectView.as_view(url='home/')),
     url(r'^home/', include(urls_home)),
     url(r'^accounts/', include(urls_accounts)),
+    url(r'^product/', include(urls_product)),
     url(r'^organisation/', include(urls_organisation)),
     url(r'^round/', include(urls_round)),
     url(r'^media/(?P<path>.*)$', static.serve, {'document_root': MEDIA_ROOT}),
