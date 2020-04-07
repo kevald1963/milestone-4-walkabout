@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_forms_bootstrap',
+    'home',
     'accounts',
     'organisation',
     'round',
@@ -104,7 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTHENTICATION_BACKENDS = [
         "django.contrib.auth.backends.ModelBackend",
-        "accounts.backends.CaseInsensitiveAuth"
+        "accounts.backends.CaseInsensitiveAuth",
     ]
 
 # Internationalization

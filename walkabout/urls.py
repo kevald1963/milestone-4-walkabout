@@ -19,13 +19,15 @@ from django.views import static
 from django.views.generic import RedirectView
 from accounts import urls as urls_accounts
 from organisation import urls as urls_organisation
+from home import urls as urls_home
 from round import urls as urls_round
 from .settings import MEDIA_ROOT
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', RedirectView.as_view(url='organisation/')),
+    url(r'^$', RedirectView.as_view(url='home/')),
+    url(r'^home/', include(urls_home)),
     url(r'^accounts/', include(urls_accounts)),
     url(r'^organisation/', include(urls_organisation)),
     url(r'^round/', include(urls_round)),
