@@ -22,7 +22,11 @@
                     <form method="post" action="">
                         {% csrf_token %}
                         <div class="input-group">
-                            <input name="quantity" type="number" min="1" max="999" class="form-control" placeholder="Quantity">
+                            {% if product.price == 0 %}
+                                <input name="quantity" type="number" min="1" max="1" class="form-control" placeholder="Quantity">
+                            {% else %}
+                                <input name="quantity" type="number" min="1" max="50" class="form-control" placeholder="Quantity">
+                            {% endif %}
                             <span class="input-group-btn">
                                 <button class="btn btn-success btn-custom" type="submit">Add</button>
                             </span>

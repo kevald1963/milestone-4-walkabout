@@ -28,6 +28,20 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
+
+                    <!-- PRODUCTS -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-gift" aria-hidden="true"></i>
+                            <span> Products</span>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'all_products' %}">All Products</a></li>
+                            <li><a href="">New Product</a></li>
+                        </ul>
+                    </li>
+
                     <!-- ORGANISATION -->
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -69,9 +83,9 @@
                     <li>
                         <!-- Cart url to go here -->
                         <a href="#">
-                            <i class="fa fa-shipping-cart"></i> Cart
+                            <i class="fa fa-shopping-cart"></i> Cart
                             {% if product_count > 0 %}
-                            <label class="badge badge-warning">{{ product_count }}</label>
+                                <label class="badge badge-warning">{{ product_count }}</label>
                             {% endif %}
                         </a>
                     </li>
