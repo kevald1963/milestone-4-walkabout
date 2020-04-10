@@ -104,6 +104,14 @@ a {
     background-color: #eee;
 }
 
+.product-name, .product-price {
+    color: black;
+}
+
+.product-description {
+    width: 100%;
+}
+
 footer {
     margin-top: 40px;
     padding-top: 20px;

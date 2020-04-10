@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load product_extras %}
 {% block content %}
 
 <div class="container">
@@ -12,23 +13,24 @@
                     {% else %}
                         <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
                     {% endif %}
-                    <h3>{{ product.name }}</h3>
-                    <p class="product-description">{{ product.description }}</p>
+                    <h3 class="product-name">{{ product.name }}</h3>
+                    <textarea class="product-description" rows="5" cols="1">{{ product.description }}</textarea>
                     {% if product.price == 0 %}
-                        <h3>FREE</h3>
+                        <h3 class="product-price">FREE</h3>
                     {% else %}
-                        <h3>£{{ product.price }}</h3>
+                        <h3 class="product-price">£{{ product.price }}</h3>
                     {% endif %}
-                    <form method="post" action="">
+                    <form method="POST" action="">
                         {% csrf_token %}
                         <div class="input-group">
                             {% if product.price == 0 %}
-                                <input name="quantity" type="number" min="1" max="1" class="form-control" placeholder="Quantity">
+                                {% setvar "1" as max_quantity %}
                             {% else %}
-                                <input name="quantity" type="number" min="1" max="50" class="form-control" placeholder="Quantity">
+                                {% setvar "50" as max_quantity %}
                             {% endif %}
+                            <input name="quantity" type="number" min="1" max="{{ max_quantity }}" class="form-control" placeholder="Quantity">
                             <span class="input-group-btn">
-                                <button class="btn btn-success btn-custom" type="submit">Add</button>
+                                <button class="btn btn-custom" type="submit">Add</button>
                             </span>
                         </div>
                     </form>
