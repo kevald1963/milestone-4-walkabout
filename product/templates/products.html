@@ -14,21 +14,23 @@
                         <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
                     {% endif %}
                     <h3 class="product-name">{{ product.name }}</h3>
-                    <textarea class="product-description" rows="5" cols="1">{{ product.description }}</textarea>
+                    <textarea class="product-description" rows="5" cols="1" disabled>{{ product.description }}</textarea>
                     {% if product.price == 0 %}
                         <h3 class="product-price">FREE</h3>
                     {% else %}
                         <h3 class="product-price">£{{ product.price }}</h3>
                     {% endif %}
-                    <form method="POST" action="">
+                    <form method="POST" action="{% url 'add_to_cart' product.id %}">
                         {% csrf_token %}
                         <div class="input-group">
                             {% if product.price == 0 %}
                                 {% setvar "1" as max_quantity %}
+                                {% setvar 1 as placeholder_quantity %}
                             {% else %}
                                 {% setvar "50" as max_quantity %}
+                                {% setvar "Quantity" as placeholder_quantity %}
                             {% endif %}
-                            <input name="quantity" type="number" min="1" max="{{ max_quantity }}" class="form-control" placeholder="Quantity">
+                            <input name="quantity" type="number" min="1" max="{{ max_quantity }}" class="form-control" placeholder="{{ placeholder_quantity }}">
                             <span class="input-group-btn">
                                 <button class="btn btn-custom" type="submit">Add</button>
                             </span>

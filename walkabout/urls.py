@@ -20,6 +20,7 @@ from home import urls as urls_home
 from accounts import urls as urls_accounts
 from organisation import urls as urls_organisation
 from product import urls as urls_product
+from cart import urls as urls_cart
 from round import urls as urls_round
 from django.views import static
 from .settings import MEDIA_ROOT
@@ -31,6 +32,7 @@ urlpatterns = [
     url(r'^home/', include(urls_home)),
     url(r'^accounts/', include(urls_accounts)),
     url(r'^product/', include(urls_product)),
+    url(r'^cart/', include(urls_cart)),
     url(r'^organisation/', include(urls_organisation)),
     url(r'^round/', include(urls_round)),
     url(r'^media/(?P<path>.*)$', static.serve, {'document_root': MEDIA_ROOT}),
