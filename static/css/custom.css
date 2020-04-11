@@ -2,7 +2,8 @@
 
 body {
     font-family: Arial;
-    padding-top: 100px;
+    padding-top: 75px;
+    color: black;
 }
 
 a {
@@ -63,10 +64,15 @@ a {
 }
 
 .page-summary {
-    background-color: #4b90e8;
+    background-color: rebeccapurple;
     color: white;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
+}
+
+.page-summary-products {
+    margin-left: -5px;
+    margin-right: -5px;
 }
 
 #filter-input {
@@ -104,7 +110,16 @@ a {
     background-color: #eee;
 }
 
-.product-name, .product-price {
+/* Prevent anchor tags causing line breaks in text blocks. */
+.inline {
+    display: inline;
+    color: blue;
+}
+
+.product-name, .product-price, .product-pitch,
+.item-product-name, .item-product-price, .checkout-text,
+.checkout-total
+{
     color: black;
 }
 
