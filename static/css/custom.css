@@ -63,6 +63,7 @@ a:visited {
 
 .btn-custom:hover {
     background-color: purple;
+    color: white;
 }
 
 .address-comments {
