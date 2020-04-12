@@ -12,6 +12,22 @@ a {
     display: block;
 }
 
+a:visited {
+    color: yellow;
+}
+
+/* Prevent anchor tags causing line breaks in text blocks. */
+.inline {
+    display: inline;
+}
+.email-link {
+    color: rebeccapurple;
+}
+
+.email-link:visited {
+    color: blue;
+}
+
 .streets-assigned {
     color: black;
     font-size: 18px;
@@ -43,6 +59,10 @@ a {
     background-color: rebeccapurple;
     border-color: rebeccapurple;
     width: 100px;
+}
+
+.btn-custom:hover {
+    background-color: purple;
 }
 
 .address-comments {
@@ -108,12 +128,6 @@ a {
 
 #data-list li:hover:not(.header) {
     background-color: #eee;
-}
-
-/* Prevent anchor tags causing line breaks in text blocks. */
-.inline {
-    display: inline;
-    color: blue;
 }
 
 .product-name, .product-price, .product-pitch,

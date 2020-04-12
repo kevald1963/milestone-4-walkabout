@@ -120,6 +120,27 @@
     </script>
 
     <script>
+        // Disable or enable Add Product button if the value is set zero.
+        // Also alert user if max quantity exceeded for this product, as this script
+        // overrides the form validation for max quantity.
+        function SetDisableAttr(productNumber) {
+            var i = productNumber - 1
+            var inputValue = document.getElementsByName("quantity[]")[i].value;
+            var maxValue = document.getElementsByName("quantity[]")[i].max;
+            if (inputValue > 0) {
+                document.getElementsByName("add-btn[]")[i].disabled = false;
+            } else {
+                document.getElementsByName("add-btn[]")[i].disabled = true;
+            };
+            // Alert user if max quantity exceeded for this product.
+            if (inputValue > maxValue) {
+                alert("Maximum quantity for Product #" + productNumber + " is " + maxValue + ". Please check quantity required.");
+                document.getElementsByName("quantity[]")[i].value = maxValue;
+            };
+        };
+    </script>
+
+    <script>
         // Filter listed data by looping through all list items, and hiding those that don't match the search query.
         function filter() {
             var input, filter, ul, li, p, i, txtValue;
