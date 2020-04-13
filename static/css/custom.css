@@ -13,13 +13,14 @@ a {
 }
 
 a:visited {
-    color: yellow;
+    color: white;
 }
 
 /* Prevent anchor tags causing line breaks in text blocks. */
 .inline {
     display: inline;
 }
+
 .email-link {
     color: rebeccapurple;
 }
@@ -171,12 +172,12 @@ footer {
     background-color: #c67605;
 }
 
-.product {
-    background-size: contain;
-    background-position: center center;
-    background-repeat: no-repeat;
-    width: 200px;
-    height: 200px;
+.product-image {
+    display: block;
+    max-width: 200px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
     margin: 0 auto;
 }
 
