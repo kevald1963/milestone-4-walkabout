@@ -5,6 +5,9 @@
 {% block content %}
 
 <div class="container">
+    {% if cart_items %}
+        <p>To remove an item from the Cart set the quantity to zero and action Amend.</p>
+    {% endif %}
     <div class="row row-flex">
         {% if not cart_items %}
             <p>You don't have any items in your cart.</p>
@@ -24,7 +27,7 @@
                             <p class="item-product-price">Price each: £{{ item.product.price }}</p>
                         {% endif %}
                         <p>
-                            <form class="form-inline" method="post" action="{% url 'adjust_cart' item.id %}">
+                            <form class="form-inline" method="POST" action="{% url 'adjust_cart' item.id %}">
                                 {% csrf_token %}
                                 <div class="form-group">
                                     <label for="exampleInputAmount" class="sr-only">New Qty</label>
@@ -35,7 +38,7 @@
                                         {% else %}
                                             {% setvar 50 as max_quantity %}
                                         {% endif %}
-                                        <input name="quantity" type="number" min="0" max="{{ max_quantity }}" class="form-control">
+                                        <input name="quantity" type="number" min="0" max="{{ max_quantity }}" class="form-control" placeholder="Change quantity" required>
                                         <div class="input-group-addon">{{item.quantity}}</div>
                                     </div>
                                 </div>
@@ -45,7 +48,7 @@
                     </div>
                     <div>
                         {% if item.product.price == 0 %}
-                            <h4 class="checkout-text">Checkout to register your FREE subscription.</h4>
+                            <h4 class="checkout-text">Checkout to get your FREE subscription.</h4>
                         {% else %}
                             <h4 class="checkout-text">Checkout to buy your subscription.</h4>
                         {% endif %}
