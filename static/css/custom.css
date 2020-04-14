@@ -59,7 +59,8 @@ a:visited {
     color: white;
     background-color: rebeccapurple;
     border-color: rebeccapurple;
-    width: 100px;
+    display: inline-block;
+    /* width: 100px; */
 }
 
 .btn-custom:hover {
@@ -137,6 +138,8 @@ a:visited {
 .checkout-total
 {
     color: black;
+    font-family: "Roboto";
+    font-weight: 400;
 }
 
 .product-description {

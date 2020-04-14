@@ -6,7 +6,7 @@
 
 <div class="container">
     {% if cart_items %}
-        <p>To remove an item from the Cart set the quantity to zero and action Amend.</p>
+        <p>To remove an item from the Cart set the quantity to zero and click Amend.</p>
     {% endif %}
     <div class="row row-flex">
         {% if not cart_items %}
@@ -60,7 +60,8 @@
     <div class="row">
         <h4 class="checkout-total">Total: £{{ total }}</h4>
         <a href="#" class="btn btn-custom" role="button"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkout</a>
-        <a href="{% url 'empty_cart' %}" class="btn btn-custom" role="button">Empty Cart</a>
+        <a href="{% url 'empty_cart' %}" class="btn btn-custom" role="button">
+            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Empty Cart</a>
     </div>
 </div>
 

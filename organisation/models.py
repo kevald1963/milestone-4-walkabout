@@ -1,4 +1,5 @@
 from django.db import models
+from product.models import Product
 
 
 # Create your models here.
@@ -25,3 +26,19 @@ class Organisation(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Subscription(models.Model):
+    objects = models.Manager()
+
+    organisation = models.ForeignKey(Organisation, on_delete=models.PROTECT)
+    product_number = models.ForeignKey(Product, to_field="number", db_column="product_number", on_delete=models.PROTECT)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    subscription_count = models.SmallIntegerField()
+
+    class Meta:
+        ordering = ['organisation', 'product_number']
+
+    def __str__(self):
+        return 'Organisation: {}, Product number: #{}'.format(self.organisation, self.product_number)

@@ -13,9 +13,12 @@ def cart_contents(request):
     product_count = 0
 
     for id, quantity in cart.items():
+        print("quantity 3 = " + str(quantity))
         product = get_object_or_404(Product, pk=id)
-        total += quantity * product.price
-        product_count += quantity
-        cart_items.append({'id': id, 'quantity': quantity, 'product': product})
+        # If quantity is zero, don't put the product in the Cart.
+        if quantity > 0:
+            total += quantity * product.price
+            product_count += quantity
+            cart_items.append({'id': id, 'quantity': quantity, 'product': product})
 
     return {'cart_items': cart_items, 'total': total, 'product_count': product_count}

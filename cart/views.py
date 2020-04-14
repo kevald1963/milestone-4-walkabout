@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from product.models import Product
+from organisation.models import Subscription
 
 
 # Create your views here.
@@ -15,21 +16,33 @@ def add_to_cart(request, id):
     Add a quantity of the specified product to the cart.
     """
     product = Product.objects.get(id=id)
-    is_unique_product = product.is_unique_product
 
     cart = request.session.get('cart', {})
-    print("Cart = " + str(cart))
-    if is_unique_product:
-        cart.clear()
-
+    print("cart = " + str(cart))
     quantity = int(request.POST.get('quantity[]'))
+    print("quantity 1 = " + str(quantity))
+
+    # Check if Free subscription product already saved to database, as it can only be registered once per customer.
+    # If it is, then don't add product to Cart.
+    if product.is_subscription_product and product.price == 0:
+        subscription = Subscription.objects.all().filter(product_number=product.number)
+        # If customer already has this product then don't add it to Cart.
+        if subscription:
+            # do nothing
+            print("subscription = " + str(subscription))
+            quantity = 0
+        else:
+            quantity = 1
+
+    print("quantity 2 = " + str(quantity))
+
     if id in cart:
         cart[id] = int(cart[id]) + quantity
     else:
         cart[id] = cart.get(id, quantity)
 
     request.session['cart'] = cart
-    return redirect(reverse('view_cart'))
+    return redirect(reverse('all_products'))
 
 
 def adjust_cart(request, id):
