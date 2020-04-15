@@ -91,14 +91,16 @@
             </div>
         </div>
     </nav>
+
     {% if messages %}
-        <div class="alert alert-success">
-            <div class="messages">
-                {% for message in messages %}
-                    {{ message }}
-                {% endfor %}
+        {% for message in messages %}
+            <div class="alert alert-info alert-dismissible fade in " role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-        </div>
+        {% endfor %}
     {% endif %}
 
     <div class="container">
@@ -113,9 +115,11 @@
     </footer>
 
     <script>
-        // Add a tooltip to an image.
         $(document).ready(function(){
+            // Add a tooltip to an image.
             $('[data-toggle="tooltip"]').tooltip();
+            // Enable dismissal of a Bootstrap alert.
+            $('.alert').alert();
         });
     </script>
 
@@ -125,8 +129,8 @@
         // overrides the form validation for max quantity.
         function SetDisableAttr(productNumber) {
             var i = productNumber - 1
-            var inputValue = document.getElementsByName("quantity[]")[i].value;
-            var maxValue = document.getElementsByName("quantity[]")[i].max;
+            var inputValue = parseInt(document.getElementsByName("quantity[]")[i].value, 10);
+            var maxValue = parseInt(document.getElementsByName("quantity[]")[i].max, 10);
             if (inputValue > 0) {
                 document.getElementsByName("add-btn[]")[i].disabled = false;
             } else {
@@ -134,7 +138,7 @@
             };
             // Alert user if max quantity exceeded for this product.
             if (inputValue > maxValue) {
-                alert("Maximum quantity for Product #" + productNumber + " is " + maxValue + ". Please check quantity required.");
+                alert("Maximum quantity for Product #" + productNumber + " is " + maxValue + ". Please re-enter quantity required.");
                 document.getElementsByName("quantity[]")[i].value = maxValue;
             };
         };

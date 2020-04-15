@@ -40,9 +40,9 @@
                         {% csrf_token %}
                         <div class="input-group">
                             {% if product.price == 0 %}
-                                {% setvar "1" as max_quantity %}
+                                {% setvar 1 as max_quantity %}
                             {% else %}
-                                {% setvar "50" as max_quantity %}
+                                {% setvar 7 as max_quantity %}
                             {% endif %}
                             <input name="quantity[]" type="number" min="0" max="{{ max_quantity }}" oninput="SetDisableAttr({{ product.number }})" class="form-control" placeholder="Quantity" required>
                             <span class="input-group-btn">
