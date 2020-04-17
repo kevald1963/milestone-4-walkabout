@@ -39,12 +39,7 @@
                     <form method="POST" action="{% url 'add_to_cart' product.id %}">
                         {% csrf_token %}
                         <div class="input-group">
-                            {% if product.price == 0 %}
-                                {% setvar 1 as max_quantity %}
-                            {% else %}
-                                {% setvar 7 as max_quantity %}
-                            {% endif %}
-                            <input name="quantity[]" type="number" min="0" max="{{ max_quantity }}" oninput="SetDisableAttr({{ product.number }})" class="form-control" placeholder="Quantity" required>
+                            <input name="quantity[]" type="number" min="0" max="{{ product.max_product_quantity }}" oninput="SetDisableAttr({{ product.number }})" class="form-control" placeholder="Quantity" required>
                             <span class="input-group-btn">
                                 <!-- Inline style applied here to overcome problem of text colour appearing black after clicking  -->
                                 <!-- and returning to this page. Refreshing page or clicking elsewhere returns the text colour to -->

@@ -19,34 +19,31 @@ def add_to_cart(request, id):
     product = Product.objects.get(id=id)
 
     cart = request.session.get('cart', {})
-    print("cart = " + str(cart))
     quantity = int(request.POST.get('quantity[]'))
-    print("quantity 1 = " + str(quantity))
-    message = ''
+    max_product_quantity = int(product.max_product_quantity)
 
-    # Check if Free subscription product already saved to database, as it can only be registered once per customer.
-    # If it is, then don't add product to Cart.
-    if product.is_subscription_product and product.price == 0:
+    # Check if product with a single item quantity is already saved to database, as it can only be saved once
+    # per parent organisation account. If it is, then do not add product to Cart.
+    if max_product_quantity == 1:
         subscription = Subscription.objects.all().filter(product_number=product.number)
-        # If customer already has this product then don't add it to Cart.
+        # If customer already has this product then do not add it to Cart.
         if subscription:
-            # do nothing
-            print("subscription = " + str(subscription))
             quantity = 0
-            messages.add_message(request, messages.INFO, 'Product not added to cart - you own this product already!')
-        else:
-            quantity = 1
+            messages.add_message(request, messages.INFO,
+                                 'Product not added to Cart. This subscription is on your account already!')
 
-    print("quantity 2 = " + str(quantity))
-
-    # If product is already in cart, update the quantity, otherwise add the product to the
-    # cart with the selected quantity.
+    # If product is already in cart, update the quantity, else add the product to the cart with the
+    # selected quantity.
     if id in cart:
-        cart[id] = int(cart[id]) + quantity
-        messages.add_message(request, messages.INFO, 'Quantity for this product updated in cart.')
+        # If a single item product with the same id already exists in the cart then do not add it again.
+        if max_product_quantity == 1 and int(product.id) == int(id):
+            messages.add_message(request, messages.INFO, 'Product is already in Cart. Only one item of '
+                                                         'this product is allowed!')
+        else:
+            cart[id] = int(cart[id]) + quantity
     else:
-        cart[id] = cart.get(id, quantity)
-        messages.add_message(request, messages.INFO, 'Product added to cart.')
+        if quantity != 0:
+            cart[id] = cart.get(id, quantity)
 
     request.session['cart'] = cart
     return redirect(reverse('all_products'))

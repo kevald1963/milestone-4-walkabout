@@ -4,7 +4,7 @@ from product.models import Product
 
 def cart_contents(request):
     """
-    Ensures contents are available when rendering every page.
+    Ensure contents are available when rendering every page.
     """
     cart = request.session.get('cart', {})
 
@@ -13,9 +13,8 @@ def cart_contents(request):
     product_count = 0
 
     for id, quantity in cart.items():
-        print("quantity 3 = " + str(quantity))
         product = get_object_or_404(Product, pk=id)
-        # If quantity is zero, don't put the product in the Cart.
+        # If quantity is zero, do not put the product in the Cart.
         if quantity > 0:
             total += quantity * product.price
             product_count += quantity
