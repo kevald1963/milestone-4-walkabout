@@ -32,13 +32,13 @@ class Subscription(models.Model):
     objects = models.Manager()
 
     organisation = models.ForeignKey(Organisation, on_delete=models.PROTECT)
-    product_number = models.ForeignKey(Product, to_field="number", db_column="product_number", on_delete=models.PROTECT)
+    product = models.ForeignKey(Product, on_delete=models.PROTECT)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     subscription_count = models.SmallIntegerField()
 
     class Meta:
-        ordering = ['organisation', 'product_number']
+        ordering = ['organisation', 'product']
 
     def __str__(self):
-        return 'Organisation: {}, Product number: #{}'.format(self.organisation, self.product_number)
+        return 'Organisation: {}, Product number: #{}'.format(self.organisation, self.product)

@@ -5,6 +5,17 @@ from django.contrib import messages
 
 
 # Create your views here.
+def empty_cart(request):
+    """
+    Clear the Cart of all products.
+    """
+    cart = request.session.get('cart', {})
+    cart.clear()
+
+    request.session['cart'] = cart
+    return redirect(reverse('view_cart'))
+
+
 def view_cart(request):
     """
     A view that renders the cart contents page.
@@ -14,13 +25,14 @@ def view_cart(request):
 
 def add_to_cart(request, id):
     """
-    Add a quantity of the specified product to the cart.
+    Add a quantity of the specified product to the cart depending on product type.
     """
     product = Product.objects.get(id=id)
 
     cart = request.session.get('cart', {})
     quantity = int(request.POST.get('quantity[]'))
     max_product_quantity = int(product.max_product_quantity)
+    is_base_product = product.is_base_product
 
     # Check if product with a single item quantity is already saved to database, as it can only be saved once
     # per parent organisation account. If it is, then do not add product to Cart.
@@ -30,7 +42,28 @@ def add_to_cart(request, id):
         if subscription:
             quantity = 0
             messages.add_message(request, messages.INFO,
-                                 'Product not added to Cart. This subscription is on your account already!')
+                                 'Product not added to Cart. This subscription is already on your account!')
+    else:
+        if is_base_product:
+            subscription = Subscription.objects.select_related('product').get(product__is_base_product=True)
+            # If customer already has a subscription product with a lower number of users then do not add it to Cart,
+            # else put it in the Cart but indicate that product is an upgrade.
+            if subscription:
+                if subscription.product.number_of_users > product.number_of_users:
+                    messages.add_message(request, messages.INFO, 'Base product not added to Cart. You already have a '
+                                                                 + str(subscription.product.number_of_users) +
+                                                                 '-user subscription on your account! '
+                                                                 'Downgrades are not possible except through our '
+                                                                 'Sales Department. Please contact them on '
+                                                                 '0800 1234567.')
+                    quantity = 0
+                else:
+                    messages.add_message(request, messages.INFO, 'Base product upgrade to '
+                                                                 + str(product.number_of_users) +
+                                                                 '-users added to Cart. You currently '
+                                                                 'have a '
+                                                                 + str(subscription.product.number_of_users) +
+                                                                 '-user subscription on your account.')
 
     # If product is already in cart, update the quantity, else add the product to the cart with the
     # selected quantity.
@@ -60,17 +93,6 @@ def adjust_cart(request, id):
         cart[id] = quantity
     else:
         cart.pop(id)
-
-    request.session['cart'] = cart
-    return redirect(reverse('view_cart'))
-
-
-def empty_cart(request):
-    """
-    Clear the Cart of all products.
-    """
-    cart = request.session.get('cart', {})
-    cart.clear()
 
     request.session['cart'] = cart
     return redirect(reverse('view_cart'))
