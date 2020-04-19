@@ -53,13 +53,15 @@ def add_to_cart(request, id):
                     messages.add_message(request, messages.INFO, 'Base product not added to Cart. You already have a '
                                                                  + str(subscription.product.number_of_users) +
                                                                  '-user subscription on your account! '
-                                                                 'Downgrades are not possible except through our '
+                                                                 'Downgrades are only possible through our '
                                                                  'Sales Department. Please contact them on '
                                                                  '0800 1234567.')
                     quantity = 0
                 else:
+                    total_quantity = int(cart[id]) + quantity
+                    user_count = product.number_of_users * total_quantity
                     messages.add_message(request, messages.INFO, 'Base product upgrade to '
-                                                                 + str(product.number_of_users) +
+                                                                 + str(user_count) +
                                                                  '-users added to Cart. You currently '
                                                                  'have a '
                                                                  + str(subscription.product.number_of_users) +

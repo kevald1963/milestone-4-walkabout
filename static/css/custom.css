@@ -22,11 +22,11 @@ a:visited {
 }
 
 .email-link {
-    color: rebeccapurple;
+    color: black;
 }
 
 .email-link:visited {
-    color: blue;
+    color: rebeccapurple;
 }
 
 .streets-assigned {
@@ -138,8 +138,12 @@ a:visited {
 .checkout-total
 {
     color: black;
-    font-family: "Roboto";
+    font-family: "Roboto", sans-serif;
     font-weight: 400;
+}
+
+.product-pitch-highlighted {
+    padding: 5px;
 }
 
 .product-description {
