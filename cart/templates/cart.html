@@ -59,7 +59,7 @@
     </div>
     <div class="row">
         <h4 class="checkout-total">Total: £{{ total }}</h4>
-        <a href="#" class="btn btn-custom" role="button"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkout</a>
+        <a href="{% url 'checkout' %}" class="btn btn-custom" role="button"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkout</a>
         <a href="{% url 'empty_cart' %}" class="btn btn-custom" role="button">
             <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Empty Cart</a>
     </div>

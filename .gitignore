@@ -10,3 +10,4 @@ venv
 .idea
 stgp_org.json
 *.bat
+env.py 

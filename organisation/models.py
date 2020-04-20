@@ -6,22 +6,23 @@ from product.models import Product
 class Organisation(models.Model):
     objects = models.Manager()
     
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, verbose_name='Enter name of your organisation or your full name if not an '
+                                                        'organisation.')
     description = models.TextField()
-    contact = models.CharField(max_length=50, blank=True)
+    contact_name = models.CharField(max_length=50, blank=True)
     is_parent = models.BooleanField(verbose_name='Is parent organisation?', default=False)
     logo_text = models.CharField(max_length=15, blank=True)
     glyphicon_name = models.CharField(max_length=20, blank=True)
     image_path = models.TextField(blank=True)
     image = models.ImageField(upload_to='images', blank=True)
     image_caption = models.CharField(max_length=70, blank=True)
-    address_1 = models.CharField(max_length=40)
-    address_2 = models.CharField(max_length=40)
+    address_1 = models.CharField(max_length=40, blank=False)
+    address_2 = models.CharField(max_length=40, blank=False)
     address_3 = models.CharField(max_length=40, blank=True)
     address_4 = models.CharField(max_length=40, blank=True)
     post_code = models.CharField(max_length=10)
     email_address = models.EmailField(max_length=40)
-    home_number = models.CharField(max_length=14, blank=True)
+    landline_number = models.CharField(max_length=14, blank=True)
     mobile_number = models.CharField(max_length=14, blank=True)
 
     def __str__(self):
