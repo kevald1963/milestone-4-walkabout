@@ -60,7 +60,6 @@ a:visited {
     background-color: rebeccapurple;
     border-color: rebeccapurple;
     display: inline-block;
-    /* width: 100px; */
 }
 
 .btn-custom:hover {
@@ -72,11 +71,6 @@ a:visited {
     font-weight: bold;
 }
 
-.navbar-default {
-    background-color: #468847;
-    border-color: #468847;
-}
-
 .navbar {
     background-image: none;
 }
@@ -84,6 +78,35 @@ a:visited {
 .navbar-brand {
     font-family: 'Leckerli One';
     font-size: 30px;
+}
+
+.navbar-default {
+    background-color: #468847;
+    border-color: #468847;
+}
+
+.navbar-default .badge {
+    background-color: #f89406;
+    color: white;
+    padding-left: 9px;
+    padding-right: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+}
+
+.badge:hover {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.badge-warning {
+    background-color: #f89406;
+}
+
+.badge-warning:hover {
+    background-color: #c67605;
 }
 
 .page-summary {
@@ -133,9 +156,18 @@ a:visited {
     background-color: #eee;
 }
 
+.product-image {
+    display: block;
+    max-width: 200px;
+    max-height: 200px;
+    width: auto;
+    height: 200px;
+    margin: 0 auto;
+}
+
 .product-name, .product-price, .product-pitch,
 .item-product-name, .item-product-price, .checkout-text,
-.checkout-total
+.checkout-total, .product-total
 {
     color: black;
     font-family: "Roboto", sans-serif;
@@ -148,6 +180,11 @@ a:visited {
 
 .product-description {
     width: 100%;
+    min-height: 40px;
+}
+
+.product-total {
+    margin-top: 20px;
 }
 
 footer {
@@ -166,34 +203,11 @@ footer {
     padding-top: 20px;
 }
 
-.badge {
-    padding-left: 9px;
-    padding-right: 9px;
-    -webkit-border-radius: 9px;
-    -moz-border-radius: 9px;
-    border-radius: 9px;
-}
-
-.label-warning[href],
-.badge-warning[href] {
-    background-color: #c67605;
-}
-
-.product-image {
-    display: block;
-    max-width: 200px;
-    max-height: 200px;
-    width: auto;
-    height: 200px;
-    margin: 0 auto;
-}
-
 caption p {
     word-wrap: break-word;
 }
 
 .row.row-flex {
-    display: flex;
     flex-wrap: wrap;
     margin-top: 30px;
 }
@@ -204,10 +218,6 @@ caption p {
 }
 
 .panel-body {
-    height: 100%;
-    border: 1px solid #ddd;
-}
-
-.product-description {
-    min-height: 40px;
+    height: auto;
+    border: 2px solid #ddd;
 }

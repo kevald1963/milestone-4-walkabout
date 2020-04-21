@@ -1,12 +1,14 @@
 from django.shortcuts import get_object_or_404
-from product.models import Product
+from product.models import Product, Discount
 
 
 def cart_contents(request):
     """
     Ensure contents are available when rendering every page.
     """
+
     cart = request.session.get('cart', {})
+    discount = Discount.objects.get(code=1)
 
     cart_items = []
     total = 0
@@ -20,4 +22,4 @@ def cart_contents(request):
             product_count += quantity
             cart_items.append({'id': id, 'quantity': quantity, 'product': product})
 
-    return {'cart_items': cart_items, 'total': total, 'product_count': product_count}
+    return {'cart_items': cart_items, 'total': total, 'product_count': product_count, 'discount': discount}

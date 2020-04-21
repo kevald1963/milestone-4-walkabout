@@ -27,7 +27,7 @@
                     <div class="caption">
                         <h3 class="item-product-name">{{ item.product.name }}</h3>
                         <p>{{ item.product.description }}</p>
-                        <p class="product-pitch">{{ item.quantity }} x £{{ item.product.price }} = £{{ item.quantity|mul:item.product.price }}</p>
+                        <h4 class="product-pitch">Price: {{ item.quantity }} x £{{ item.product.price }} = £{{ item.quantity|mul:item.product.price }}</h4>
                     </div>
                 </div>
             </div>

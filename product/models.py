@@ -31,3 +31,21 @@ class Product(models.Model):
 
     def __str__(self):
         return 'Product number: #{}, Description: {}'.format(self.number, self.name)
+
+
+class Discount(models.Model):
+    """
+    Discounts for multiple product purchases and sales promotions.
+    """
+    objects = models.Manager()
+
+    code = models.SmallIntegerField(unique=True)
+    type = models.CharField(max_length=40, default='')
+    percent = models.SmallIntegerField(blank=False)
+
+    class Meta:
+        ordering = ['code', 'type']
+
+    def __str__(self):
+        return 'Discount code: #{}, Discount type: {}, Discount percentage: {}%'.\
+            format(self.code, self.type, self.percent)

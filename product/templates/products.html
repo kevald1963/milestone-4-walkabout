@@ -6,12 +6,13 @@
     <pre class="page-summary page-summary-products">Products</pre>
     <h4 class="product-pitch">
         Choose just ONE of base subscription products (1, 2 or 3) below. Select a quantity and click on the Add button
-        to add to the Cart. A 10% discount is applied for multiple paid subscription options. This will be shown in the
-        shopping Cart before purchase.
+        to add to the Cart. A {{ discount.percent }}% discount is applied to the total for multiple paid
+        subscription options. This will be shown in the shopping Cart before purchase.
     </h4>
     <h4 class="product-pitch-highlighted bg-primary">
-        Need need a longer subscription or a have a large number of users? Then please click <a href="#" class="inline
-        email-link">here</a> to email us, or phone us on 0800 1234567. We will happily negotiate a discount on our
+        Need need a longer subscription or a have a large number of users? Then please click
+        <a href="#" class="inline"><label class="badge badge-warning">here</label></a>
+        to email us, or phone us on 0800 1234567. We will happily negotiate a discount on our
         normal rates for you.
     </h4>
     <h4 class="product-pitch">
@@ -46,9 +47,11 @@
                         <div class="input-group">
                             <input name="quantity[]" type="number" min="0" max="{{ product.max_product_quantity }}" oninput="SetDisableAttr({{ product.number }})" class="form-control" placeholder="Quantity" required>
                             <span class="input-group-btn">
-                                <!-- Inline style applied here to overcome problem of text colour appearing black after clicking  -->
-                                <!-- and returning to this page. Refreshing page or clicking elsewhere returns the text colour to -->
-                                <!-- white again. Can't find solution on forums. Assuming it's a browser bug.                     -->
+                                <!--
+                                Inline style applied below to overcome problem of text colour appearing black after clicking
+                                and returning to this page. Refreshing page or clicking elsewhere returns the text colour to
+                                white again. Can't find solution on forums.
+                                -->
                                 <button name="add-btn[]" class="btn btn-custom" style="color:white;" type="submit" disabled>Add</button>
                             </span>
                         </div>
