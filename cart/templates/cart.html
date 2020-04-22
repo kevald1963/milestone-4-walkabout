@@ -58,9 +58,9 @@
         {% endif %}
     </div>
     <div>
-        <p class="checkout-total">Final subtotal = {{ total }}</p>
-        <p class="checkout-total">Discount @ {{ discount.percent }}% = {{ total|mul:0.10 }}</p>
-        <h3 class="checkout-total">Total to pay: £{{ total|mul:0.90 }}</h3>
+        <h4 class="checkout-total">Cart subtotal: £{{ subtotal }}</h4>
+        <h4 class="checkout-total">Discount @{{ percent }}% : £{{ discount_amount }}</h4>
+        <h3 class="checkout-total">Total to pay: £{{ discounted_total }}</h3>
         <a href="{% url 'checkout' %}" class="btn btn-custom" role="button">
             <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkout</a>
         <a href="{% url 'empty_cart' %}" class="btn btn-custom" role="button">

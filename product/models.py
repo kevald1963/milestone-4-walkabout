@@ -41,7 +41,7 @@ class Discount(models.Model):
 
     code = models.SmallIntegerField(unique=True)
     type = models.CharField(max_length=40, default='')
-    percent = models.SmallIntegerField(blank=False)
+    percent = models.DecimalField(max_digits=5, decimal_places=2, blank=False)
 
     class Meta:
         ordering = ['code', 'type']
