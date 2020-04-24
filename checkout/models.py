@@ -8,14 +8,12 @@ class Order(models.Model):
 
     name = models.CharField(max_length=50, blank=False, verbose_name='Name of your organisation or your full '
                                                                      'name if not an organisation.')
-    contact_name = models.CharField(max_length=50, blank=False)
     address_1 = models.CharField(max_length=40, blank=False)
     address_2 = models.CharField(max_length=40, blank=False)
     address_3 = models.CharField(max_length=40, blank=True)
-    address_4 = models.CharField(max_length=40, blank=True)
+    town_or_city = models.CharField(max_length=40, blank=True)
     post_code = models.CharField(max_length=10)
     email_address = models.EmailField(max_length=40)
-    landline_number = models.CharField(max_length=14, blank=True)
     mobile_number = models.CharField(max_length=14, blank=False)
     date = models.DateField(blank=True)
 
