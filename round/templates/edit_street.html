@@ -7,7 +7,7 @@
         {% csrf_token %}
         {{ form | as_bootstrap }}
         <button type="submit" class="btn btn-custom">Save</button>
-        <a href="{% url 'all_streets' %}" class="btn btn-default">Cancel</a>
+        <a href="{% url 'all_streets' %}" class="btn btn-custom">Cancel</a>
     </form>
 
 {% endblock %}

@@ -60,20 +60,16 @@ def add_to_cart(request, id):
                                                                  '0800 1234567.')
                     quantity = 0
                 else:
-                    # Otherwise put it in the Cart but indicate that product is an upgrade.
-                    # print('cart[id] (view 1) = ' + str(cart[id]))
-                    print('quantity (view 1) = ' + str(quantity))
-                    if id in cart:
-                        total_quantity = int(cart[id]) + quantity
-                    else:
+                    # Otherwise put subscription in the Cart but indicate that product is an upgrade.
+                    if id not in cart:
                         total_quantity = quantity
-                    user_count = product.number_of_users * total_quantity
-                    messages.add_message(request, messages.INFO, 'Base product upgrade to '
-                                                                 + str(user_count) +
-                                                                 '-users added to Cart. You currently '
-                                                                 'have a '
-                                                                 + str(subscription.product.number_of_users) +
-                                                                 '-user subscription on your account.')
+                        user_count = product.number_of_users * total_quantity
+                        messages.add_message(request, messages.INFO, 'Base product upgrade to '
+                                                                     + str(user_count) +
+                                                                     '-users added to Cart. You currently '
+                                                                     'have a '
+                                                                     + str(subscription.product.number_of_users) +
+                                                                     '-user subscription on your account.')
     if id in cart:
         # If product is already in cart..
         if max_product_quantity == 1 and int(product.id) == int(id):
@@ -81,7 +77,7 @@ def add_to_cart(request, id):
             messages.add_message(request, messages.INFO, 'Product is already in Cart. Only one item of '
                                                          'this product is allowed!')
         else:
-            # Otherwise, UPDATE the quantity.of the product in the Cart.
+            # Otherwise, UPDATE the quantity of the product in the Cart.
             cart[id] = int(cart[id]) + quantity
     else:
         # Otherwise ADD the product to the Cart along with the quantity selected.

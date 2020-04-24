@@ -26,11 +26,11 @@ def cart_contents(request):
                 discount_applicable = True
 
     if discount_applicable:
-        discount_amount = round(subtotal * (percent/100),2)
-        discounted_total = round(subtotal - discount_amount, 2)
+        discount_amount = round(subtotal * (percent/100), 2)
     else:
         discount_amount = round(0, 2)
-        discounted_total = round(subtotal, 2)
 
-    return {'cart_items': cart_items, 'subtotal': subtotal, 'product_count': product_count,
-            'percent': percent, 'discount_amount': discount_amount, 'discounted_total': discounted_total}
+    total = subtotal - discount_amount
+
+    return {'cart_items': cart_items, 'subtotal': subtotal, 'total': total, 'product_count': product_count,
+            'percent': percent, 'discount_amount': discount_amount}

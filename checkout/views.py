@@ -15,7 +15,9 @@ stripe.api_key = settings.STRIPE_SECRET
 
 @login_required()
 def checkout(request):
+    print("Got to here - at least!")
     if request.method == "POST":
+        print("Got to here - method = POST!")
         order_form = OrderForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
 
@@ -47,15 +49,16 @@ def checkout(request):
                 messages.error(request, "Your card was declined!")
 
             if customer.paid:
-                messages.error(request, "You have successfully paid")
+                messages.error(request, "You have successfully paid.")
                 request.session['cart'] = {}
                 return redirect(reverse('products'))
             else:
-                messages.error(request, "Unable to take payment")
+                messages.error(request, "Unable to take payment.")
         else:
             print(payment_form.errors)
             messages.error(request, "We were unable to take a payment with that card!")
     else:
+        print("Got to here - method = " + request.method)
         payment_form = MakePaymentForm()
         order_form = OrderForm()
 

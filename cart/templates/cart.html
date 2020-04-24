@@ -58,14 +58,14 @@
         {% endif %}
     </div>
     <div>
-        {% if subtotal != 0 %}
+        {% if total != 0 %}
             <h4 class="checkout-total">Cart subtotal: £{{ subtotal }}</h4>
             {% if discount_amount != 0 %}
                 <h4 class="checkout-total">Discount @{{ percent }}% : £{{ discount_amount }}</h4>
             {% else %}
                 <h4 class="checkout-total">Single item purchase - no discount applied.</h4>
             {% endif %}
-            <h3 class="checkout-total">Total to pay: £{{ discounted_total }}</h3>
+            <h3 class="checkout-total">Total to pay: £{{ total }}</h3>
             <a href="{% url 'checkout' %}" class="btn btn-custom" role="button">
                 <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkout</a>
             <a href="{% url 'empty_cart' %}" class="btn btn-custom" role="button">

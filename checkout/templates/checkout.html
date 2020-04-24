@@ -14,7 +14,7 @@
 {% endblock head_js %}
 
 {% block content %}
-    <h3 class="product-pitch">Review your purchases</h3>
+    <p class="product-pitch">Please review your order and pay.</p>
     <div class="row row-flex">
         {% for item in cart_items %}
             <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-default">
@@ -34,14 +34,14 @@
         {% endfor %}
     </div>
     <div>
-        {% if subtotal != 0 %}
+        {% if total != 0 %}
             <h4 class="checkout-total">Cart subtotal: £{{ subtotal }}</h4>
             {% if discount_amount != 0 %}
                 <h4 class="checkout-total">Discount @{{ percent }}% : £{{ discount_amount }}</h4>
             {% else %}
                 <h4 class="checkout-total">Single item purchase - no discount applied.</h4>
             {% endif %}
-            <h3 class="checkout-total">Total to pay: £{{ discounted_total }}</h3>
+            <h3 class="checkout-total">Total to pay: £{{ total }}</h3>
             <a href="{% url 'empty_cart' %}" class="btn btn-custom" role="button">
                 <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Empty Cart</a>
         {% else %}
@@ -50,8 +50,7 @@
         {% endif %}
     </div>
 
-    <form role="form" method="post" id="payment-form" action="{% url 'checkout' %}">
-        {% csrf_token %}
+    <form method="POST" role="form" id="payment-form" action="{% url 'checkout' %}">
         <h3 class="checkout-total">Payment Details</h3>
 
         <div id="credit-card-errors" style="display: none;">
@@ -66,10 +65,15 @@
             {{ payment_form | as_bootstrap }}
         </div>
 
+        {% csrf_token %}
         <div class="form-group col-md-12">
-            <button type="submit" id="submit_payment_btn" name="commit" class="btn btn-custom">
-                <span class="glyphicon glyphicon-ok"></span> Pay Now
-            </button>
+            <!--
+            Inline style applied below to overcome problem of text colour appearing black after clicking
+            and returning to this page. Refreshing page or clicking elsewhere returns the text colour to
+            white again. Can't find solution on forums.
+            -->
+            <button type="submit" id="submit_payment_btn" name="commit" class="btn btn-custom" style="color:white;">
+                <span class="glyphicon glyphicon-ok"></span> Pay Now</button>
         </div>
     </form>
 {% endblock %}
