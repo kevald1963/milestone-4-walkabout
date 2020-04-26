@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% load bootstrap_tags %}
+
+{% block content %}
+    <h3 class="product-pitch">Welcome to Walkabout!</h3>
+    <h2 class="product-pitch">Thank you for your order.</h2>
+
+    <form method="POST" action="{% url 'save_details' %}">
+        <h3 class="checkout-total">Payment Details</h3>
+
+        {% csrf_token %}
+        <div class="form-group col-md-6">
+            {{ order_form | as_bootstrap }}
+        </div>
+
+
+        <div class="col-md-12">
+            <!--
+            Inline style applied below to overcome problem of text colour appearing black after clicking
+            and returning to this page. Refreshing page or clicking elsewhere returns the text colour to
+            white again. Can't find solution on forums.
+            -->
+            <button type="submit" id="submit_payment_btn" name="commit" class="btn btn-custom" style="color:white;">
+                <span class="glyphicon glyphicon-ok"></span> Save</button>
+        </div>
+    </form>
+{% endblock %}

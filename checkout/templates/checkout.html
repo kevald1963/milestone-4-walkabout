@@ -14,6 +14,9 @@
 {% endblock head_js %}
 
 {% block content %}
+{% if not cart_items %}
+    <p>You don't have any items in your cart.</p>
+{% else %}
     <p class="product-pitch">Please review your order and enter your payment details if everything is correct.</p>
     <div class="row row-flex">
         {% for item in cart_items %}
@@ -33,6 +36,7 @@
             </div>
         {% endfor %}
     </div>
+{% endif %}
     <div>
         {% if total != 0 %}
             <h4 class="checkout-total">Cart subtotal: £{{ subtotal }}</h4>
@@ -50,6 +54,7 @@
         {% endif %}
     </div>
 
+{% if cart_items %}
     <form method="POST" role="form" id="payment-form" action="{% url 'checkout' %}">
         <h3 class="checkout-total">Payment Details</h3>
 
@@ -76,4 +81,5 @@
                 <span class="glyphicon glyphicon-ok"></span> Pay Now</button>
         </div>
     </form>
+{% endif %}
 {% endblock %}

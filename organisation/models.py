@@ -1,3 +1,5 @@
+from django.db.models import ForeignKey
+from django.contrib.auth.models import User
 from django.db import models
 from product.models import Product
 
@@ -10,6 +12,7 @@ class Organisation(models.Model):
                                                         'organisation.')
     description = models.TextField()
     contact_name = models.CharField(max_length=50, blank=True)
+    user = ForeignKey(User, null=True)
     is_parent = models.BooleanField(verbose_name='Is parent organisation?', default=False)
     logo_text = models.CharField(max_length=15, blank=True)
     glyphicon_name = models.CharField(max_length=20, blank=True)
@@ -19,7 +22,7 @@ class Organisation(models.Model):
     address_1 = models.CharField(max_length=40, blank=False)
     address_2 = models.CharField(max_length=40, blank=False)
     address_3 = models.CharField(max_length=40, blank=True)
-    address_4 = models.CharField(max_length=40, blank=True)
+    town_or_city = models.CharField(max_length=40, blank=True)
     post_code = models.CharField(max_length=10)
     email_address = models.EmailField(max_length=40)
     landline_number = models.CharField(max_length=14, blank=True)

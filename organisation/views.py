@@ -19,7 +19,7 @@ def all_organisations(request):
 def organisation_detail(request, pk):
     """
     A view that returns a single organisation's details based on its primary key
-    and renders it to the 'oraanisation_detail.html' template.
+    and renders it to the 'organisation_detail.html' template.
     Returns a 404 error if the organisation is not found.
     """
     organisation = get_object_or_404(Organisation, pk=pk)

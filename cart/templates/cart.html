@@ -31,28 +31,30 @@
                             {% endif %}
                             <form class="form-inline" method="POST" action="{% url 'adjust_cart' item.id %}">
                                 {% csrf_token %}
-                                <div class="form-group">
+                                <div class="form-group row">
                                     <label for="exampleInputAmount" class="sr-only">New Qty</label>
-                                    <div class="input-group">
-                                        {% if item.product.price == 0 %}
-                                            {% setvar 1 as max_quantity %}
-                                        {% else %}
-                                            {% setvar 50 as max_quantity %}
-                                        {% endif %}
-                                        <input name="quantity" type="number" min="0" max="{{ max_quantity }}" class="form-control" placeholder="Change quantity" required>
-                                        <div class="input-group-addon">{{item.quantity}}</div>
+                                    <div class="col-xs-12">
+                                        <div class="input-group" style="min-width:100%;" >
+                                            {% if item.product.price == 0 %}
+                                                {% setvar 1 as max_quantity %}
+                                            {% else %}
+                                                {% setvar 50 as max_quantity %}
+                                            {% endif %}
+                                            <input name="quantity" type="number" min="0" max="{{ max_quantity }}" class="form-control" placeholder="Change quantity" required>
+                                            <div class="input-group-addon">{{item.quantity}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <button type="submit" class="btn btn-custom btn-amend"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Amend</button>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-custom"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Amend</button>
                             </form>
                             <h4 class="product-total">Subtotal: {{ item.quantity }} x £{{ item.product.price }} = £{{ item.quantity|mul:item.product.price }}</h4>
                         </div>
                     </div>
-                    <div>
-                        {% if item.product.price == 0 %}
-                            <h4 class="checkout-text">Checkout to get your FREE subscription.</h4>
-                        {% endif %}
-                    </div>
+                    {% if item.product.price == 0 %}
+                        <h4 class="checkout-text">Checkout to get your FREE subscription.</h4>
+                    {% endif %}
                 </div>
             {% endfor %}
         {% endif %}

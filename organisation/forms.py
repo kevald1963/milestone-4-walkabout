@@ -18,7 +18,7 @@ class EditOrganisationForm(forms.ModelForm):
             'address_1',
             'address_2',
             'address_3',
-            'address_4',
+            'town_or_city',
             'post_code',
             'email_address',
             'landline_number',

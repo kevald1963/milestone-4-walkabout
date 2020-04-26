@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import ForeignKey
+from django.contrib.auth.models import User
 from product.models import Product
 
 
@@ -6,8 +8,9 @@ from product.models import Product
 class Order(models.Model):
     objects = models.Manager()
 
-    name = models.CharField(max_length=50, blank=False, verbose_name='Name of your organisation or your full '
+    name = models.CharField(max_length=50, blank=False, verbose_name='Name of your organisation or full '
                                                                      'name if not an organisation.')
+    user = ForeignKey(User, null=True)
     address_1 = models.CharField(max_length=40, blank=False)
     address_2 = models.CharField(max_length=40, blank=False)
     address_3 = models.CharField(max_length=40, blank=True)

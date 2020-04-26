@@ -67,6 +67,10 @@ a:visited {
     color: white;
 }
 
+.btn-amend {
+    margin-top: 10px;
+}
+
 .address-comments {
     font-weight: bold;
 }
@@ -221,3 +225,6 @@ caption p {
     height: auto;
     border: 2px solid #ddd;
 }
+
+/* Media queries */
+
