@@ -10,3 +10,7 @@ venv
 .idea
 stgp_org.json
 *.bat
+.png
+.jpg
+static/
+media/
