@@ -35,7 +35,7 @@ def add_to_cart(request, id):
     is_base_product = product.is_base_product
 
     if max_product_quantity == 1:
-        # Check if product with a single item quantity is already saved to subscription table in databasee,
+        # Check if product with a single item quantity is already saved to subscription table in database,
         # as it can only be saved once per parent organisation account.
         subscription = Subscription.objects.select_related('product').filter(product=id)
 

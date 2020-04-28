@@ -1,4 +1,6 @@
+from django.contrib import messages
 from django.shortcuts import get_object_or_404
+from django.core.exceptions import ObjectDoesNotExist
 from product.models import Product, Discount
 from decimal import *
 
@@ -9,7 +11,11 @@ def cart_contents(request):
     """
 
     cart = request.session.get('cart', {})
-    percent = Discount.objects.values_list('percent', flat=True).get(code=1)
+    try:
+        percent = Discount.objects.values_list('percent', flat=True).get(code=1)
+    except ObjectDoesNotExist:
+        messages.error(request, "Error: Discount rate not found. Complementary 12.50% discount applied instead.")
+        percent = 12.5
     cart_items = []
     subtotal = Decimal(0)
     discount_applicable = False
@@ -17,6 +23,7 @@ def cart_contents(request):
 
     for id, quantity in cart.items():
         product = get_object_or_404(Product, pk=id)
+
         # If quantity is zero, do not put the product in the Cart.
         if quantity > 0:
             subtotal += quantity * product.price

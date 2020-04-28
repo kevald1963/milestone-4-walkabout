@@ -12,10 +12,10 @@ from product.models import Product
 from .forms import MakePaymentForm, OrderForm
 from .models import OrderLineItem, Order
 
-# Create your views here.
 stripe.api_key = settings.STRIPE_SECRET
 
 
+# Create your views here.
 @login_required()
 def checkout(request):
     """
@@ -57,8 +57,8 @@ def checkout(request):
                 if customer.paid:
                     try:
                         # Check if organisation exists for this user.
-                        organisation = Organisation.objects.select_related('user').get\
-                                (user__is_superuser=True, is_parent=True)
+                        organisation = \
+                            Organisation.objects.select_related('user').get(user__is_superuser=True, is_parent=True)
                     except ObjectDoesNotExist:
                         organisation = None
 
@@ -96,7 +96,6 @@ def checkout(request):
 
 
 def save_details(request):
-
     if request.method == "POST":
         """ Process form -  still to do."""
     else:

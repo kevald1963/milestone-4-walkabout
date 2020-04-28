@@ -1,0 +1,1 @@
+web: gunicorn walkabout.wsgi:application
