@@ -6,8 +6,8 @@ class Product(models.Model):
     """
     NOTES:
     If a product is marked as a single use product then it means that it can only be combined with a
-    non-single use product. Two or more subscriptions cannot be combined as it would be difficult to
-    keep track of the number of users of each.
+    non-single use product. Two or more different subscriptions types cannot be combined as it would be
+    difficult to keep track of the number of users of each.
     """
     objects = models.Manager()
 
@@ -18,7 +18,7 @@ class Product(models.Model):
     is_upgrade_product = models.BooleanField(verbose_name='Is an upgrade product?', default=False)
     is_data_product = models.BooleanField(verbose_name='Is a data product?', default=False)
     max_product_quantity = models.SmallIntegerField(default=0)
-    number_of_users = models.SmallIntegerField(default=0)
+    number_of_devices = models.SmallIntegerField(default=0)
     number_of_subscription_months = models.SmallIntegerField(default=0)
     description = models.TextField()
     price = models.DecimalField(max_digits=6, decimal_places=2)

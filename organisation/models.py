@@ -8,7 +8,7 @@ from product.models import Product
 class Organisation(models.Model):
     objects = models.Manager()
     
-    name = models.CharField(max_length=50, verbose_name='Enter name of your organisation or your full name if not an '
+    name = models.CharField(max_length=50, verbose_name='Enter name of your organisation or full name if not an '
                                                         'organisation.')
     description = models.TextField()
     contact_name = models.CharField(max_length=50, blank=True)

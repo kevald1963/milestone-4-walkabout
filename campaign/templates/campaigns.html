@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container"></div>
+    <pre class="page-summary">Campaigns</pre>
+
+START HERE!!
+
+    {% if not rounds %}
+        <p>No rounds created yet. These can be created from the Rounds menu above.</p>
+    {% else %}
+        <div class="filter" title="Search image from freepnglogos.com">
+            <input id="filter-input" onkeyup="filterRounds()" placeholder="Filter by round name.." type="text">
+        </div>
+        <ul id="data-list">
+            {% for round in rounds %}
+                <div class="row">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-12">
+                        <li>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6">
+                                    <p>{{ round.name }} ({{ round.description }})</p>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="row">
+                                        <!-- Display a horizontal button group for sm, md and lg devices. -->
+                                        <!-- Contains EDIT, DELETE and VIEW STREETS buttons -->
+                                        <div class="hidden-xs col-sm-12 col-md-12 col-lg-12">
+                                            <div class="btn-group" role="group" aria-label="Horizontal button group for Edit Round, Delete Round and View Streets (of this Round).">
+                                                <span class="btn link-btn-purple btn-md"><a href="{% url 'edit_round' round.id %}">Edit</a></span>
+                                                <span class="btn link-btn-red btn-md"><a href="{% url 'delete_round' round.id %}">Delete</a></span>
+                                                <span class="btn link-btn-light-blue btn-md"><a href="{% url 'attached_streets' round.id %}">View streets</a></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                </div>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+
+{% endblock %}
