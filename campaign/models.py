@@ -8,6 +8,9 @@ from round.models import Round
 
 # Create your models here.
 class CampaignChoice(Enum):
+    """
+    Enumerate list for campaign type in Campaign model.
+    """
     LE = "Leafleting"
     CA = "Canvassing"
     SU = "Surveying"

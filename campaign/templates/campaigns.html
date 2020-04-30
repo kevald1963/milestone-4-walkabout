@@ -1,25 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="container"></div>
+<div class="container">
     <pre class="page-summary">Campaigns</pre>
-
-START HERE!!
-
     {% if not campaigns %}
         <p>No campaign created yet. These can be created from the campaign menu above.</p>
     {% else %}
         <div class="filter" title="Search image from freepnglogos.com">
-            <input id="filter-input" onkeyup="filtercampaigns()" placeholder="Filter by campaign name.." type="text">
+            <input id="filter-input" onkeyup="filter()" placeholder="Filter by campaign name.." type="text">
         </div>
         <ul id="data-list">
             {% for campaign in campaigns %}
-                <div class="row">
-                    <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-12">
-                        <li>
+                <li>
+                    <div class="row">
+                        <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-12">
                             <div class="row">
                                 <div class="col-xs-12 col-md-6">
-                                    <p>{{ campaign.name }} ({{ campaign.description }})</p>
+                                    <p>{{ campaign.name }}</p>
+                                    <p>{{ campaign.description }}</p>
                                 </div>
                                 <div class="col-xs-12 col-md-6">
                                     <div class="row">
@@ -34,9 +32,9 @@ START HERE!!
                                     </div>
                                 </div>
                             </div>
-                        </li>
+                        </div>
                     </div>
-                </div>
+                </li>
             {% endfor %}
         </ul>
     {% endif %}

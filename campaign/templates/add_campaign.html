@@ -2,12 +2,12 @@
 {% load bootstrap_tags %}
 {% block content %}
 
-    <pre class="page-summary">Edit round</pre>
+    <pre class="page-summary">Add campaign</pre>
     <form method="POST">
         {% csrf_token %}
         {{ form | as_bootstrap }}
         <button type="submit" class="btn btn-custom">Save</button>
-        <a href="{% url 'all_rounds' %}" class="btn btn-custom">Cancel</a>
+        <a href="{% url 'all_campaigns' %}" class="btn btn-custom">Cancel</a>
     </form>
 
 {% endblock %}
