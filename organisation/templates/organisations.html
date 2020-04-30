@@ -1,34 +1,45 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="container"></div>
-    {% for organisation in organisations %}
-        <div class="row">
-            <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-12 display panel panel-default">
-                <div class="panel-body">
-                    <h3>{{ organisation.name }}</h3>
-                    <p class="organisation-description">{{ organisation.description|truncatewords:40 }}</p>
-                    <p><a href="{% url 'organisation_detail' organisation.id %}" class="btn btn-default">Read more</a></p>
+<div class="container">
+    <pre class="page-summary">Organisations</pre>
+    {% if not organisations %}
+        <p>No organisations created yet. These can be created from the Organisations menu above.</p>
+    {% else %}
+        <div class="filter" title="Search image from freepnglogos.com">
+            <input id="filter-input" onkeyup="filter()" placeholder="Filter by organisation name.." type="text">
+        </div>
+        <ul id="data-list">
+            {% for organisation in organisations %}
+                <li>
                     <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <img src="{{ MEDIA_URL }}{{ organisation.image }}" alt="{{ organisation.image_caption }}" title="{{ organisation.image_caption }}" width="100%" height="auto"/>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-12">
+                            <h3 style="color: black; margin-top: 0px;">{{ organisation.name }}</h3>
+                            <p>{{ organisation.description|truncatewords:40 }}</p>
+                            <p><a href="{% url 'organisation_detail' organisation.id %}" class="btn btn-custom">Read more</a></p>
                             <div class="row">
-                                <!-- EDIT and DELETE buttons -->
-                                <div class="col-xs-12">
-                                    <button type="button" class="btn link-btn-purple btn-md"><a href="{% url 'edit_organisation' organisation.id %}">Edit</a></button>
+                                <div class="col-xs-12 col-md-6">
+                                    <img src="{{ MEDIA_URL }}{{ organisation.image }}" alt="{{ organisation.image_caption }}" title="{{ organisation.image_caption }}" width="100%" height="auto"/>
                                 </div>
-                                <div class="col-xs-12">
-                                    <button type="button" class="btn link-btn-red btn-md"><a href="{% url 'delete_organisation' organisation.id %}">Delete</a></button>
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="row">
+                                        <!-- EDIT and DELETE buttons -->
+                                        <!-- Display a horizontal button group for sm, md and lg devices. -->
+                                        <div class="hidden-xs col-sm-12 col-md-12 col-lg-12">
+                                            <div class="btn-group" role="group" aria-label="Horizontal button group for Edit Organisation and Delete Organisation.">
+                                                <button type="button" class="btn link-btn-purple"><a href="{% url 'edit_organisation' organisation.id %}">Edit</a></button>
+                                                <button type="button" class="btn link-btn-red btn-md"><a href="{% url 'delete_organisation' organisation.id %}">Delete</a></button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div> 
-    {% endfor %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 </div>
 
 {% endblock %}

@@ -1,25 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
 
+<div class="container">
     <div class="row">
-        <div class="col-sm-10 col-md-9">
+        <div class="col-sm-12 col-md-6">
             {% if organisation.image %}
-                <img class="" src="/media/{{ organisation.image }}">
+                <img src="{{ MEDIA_URL }}{{ organisation.image }}" alt="{{ organisation.image_caption }}" title="{{ organisation.image_caption }}" width="100%" height="auto"/>
             {% endif %}
-            <h3>{{ organisation.name }}</h3>
-            <div class="row">
-                <div class="col-xs-9">
-                    <p>{{ organisation.description }}</p>
-                    <p>Contact: {{ organisation.contact }}</p>
-                    <p>Email: {{ organisation.email_address }}</p>
-                    <p>Home: {{ organisation.home_number }}</p>
-                    <p>Mobile: {{ organisation.mobile_number }}</p>
-                    <a href="{% url 'all_organisations' %}" class="btn btn-custom">Cancel</a>
-                    <a href="{% url 'edit_organisation' organisation.id %}" class="btn btn-custom">Edit</a>
-                    <hr>
-                </div>
-            </div>
+        </div>
+        <div class="col-xs-12">
+            <h3 style="color: black;">{{ organisation.name }}</h3>
+            <p>{{ organisation.description }}</p>
+            <p>Contact: {{ organisation.contact_name }}</p>
+            <p>Email: {{ organisation.email_address }}</p>
+            <p>Home: {{ organisation.landline_number }}</p>
+            <p>Mobile: {{ organisation.mobile_number }}</p>
+            <a href="{% url 'all_organisations' %}" class="btn btn-custom">Back</a>
+            <a href="{% url 'edit_organisation' organisation.id %}" class="btn btn-custom">Edit</a>
         </div>
     </div>
+</div>
 
 {% endblock %}

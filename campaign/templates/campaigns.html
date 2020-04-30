@@ -6,30 +6,29 @@
 
 START HERE!!
 
-    {% if not rounds %}
-        <p>No rounds created yet. These can be created from the Rounds menu above.</p>
+    {% if not campaigns %}
+        <p>No campaign created yet. These can be created from the campaign menu above.</p>
     {% else %}
         <div class="filter" title="Search image from freepnglogos.com">
-            <input id="filter-input" onkeyup="filterRounds()" placeholder="Filter by round name.." type="text">
+            <input id="filter-input" onkeyup="filtercampaigns()" placeholder="Filter by campaign name.." type="text">
         </div>
         <ul id="data-list">
-            {% for round in rounds %}
+            {% for campaign in campaigns %}
                 <div class="row">
                     <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-12">
                         <li>
                             <div class="row">
                                 <div class="col-xs-12 col-md-6">
-                                    <p>{{ round.name }} ({{ round.description }})</p>
+                                    <p>{{ campaign.name }} ({{ campaign.description }})</p>
                                 </div>
                                 <div class="col-xs-12 col-md-6">
                                     <div class="row">
                                         <!-- Display a horizontal button group for sm, md and lg devices. -->
                                         <!-- Contains EDIT, DELETE and VIEW STREETS buttons -->
                                         <div class="hidden-xs col-sm-12 col-md-12 col-lg-12">
-                                            <div class="btn-group" role="group" aria-label="Horizontal button group for Edit Round, Delete Round and View Streets (of this Round).">
-                                                <span class="btn link-btn-purple btn-md"><a href="{% url 'edit_round' round.id %}">Edit</a></span>
-                                                <span class="btn link-btn-red btn-md"><a href="{% url 'delete_round' round.id %}">Delete</a></span>
-                                                <span class="btn link-btn-light-blue btn-md"><a href="{% url 'attached_streets' round.id %}">View streets</a></span>
+                                            <div class="btn-group" role="group" aria-label="Horizontal button group for Edit campaign, Delete campaign and View Streets (of this campaign).">
+                                                <span class="btn link-btn-purple btn-md"><a href="">Edit</a></span>
+                                                <span class="btn link-btn-red btn-md"><a href="">Delete</a></span>
                                             </div>
                                         </div>
                                     </div>
