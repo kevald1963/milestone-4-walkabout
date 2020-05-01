@@ -50,11 +50,11 @@ def add_to_cart(request, id):
             subscription = Subscription.objects.select_related('product').get(product__is_base_product=True)
             if subscription:
                 if subscription.product.number_of_users > product.number_of_users:
-                    # If customer already has a subscription product with a lower number of users then do
-                    # not add it to Cart.
+                    # If customer already has a subscription product with a lower number of devices then
+                    # do not add it to Cart.
                     messages.add_message(request, messages.INFO, 'Base product not added to Cart. You already have a '
-                                                                 + str(subscription.product.number_of_users) +
-                                                                 '-user subscription on your account! '
+                                                                 + str(subscription.product.number_of_devices) +
+                                                                 '-device subscription on your account! '
                                                                  'Downgrades are only possible through our '
                                                                  'Sales Department. Please contact them on '
                                                                  '0800 1234567.')
@@ -66,10 +66,10 @@ def add_to_cart(request, id):
                         user_count = product.number_of_users * total_quantity
                         messages.add_message(request, messages.INFO, 'Base product upgrade to '
                                                                      + str(user_count) +
-                                                                     '-users added to Cart. You currently '
+                                                                     '-devices added to Cart. You currently '
                                                                      'have a '
-                                                                     + str(subscription.product.number_of_users) +
-                                                                     '-user subscription on your account.')
+                                                                     + str(subscription.product.number_of_devices) +
+                                                                     '-device subscription on your account.')
     if id in cart:
         # If product is already in cart..
         if max_product_quantity == 1 and int(product.id) == int(id):

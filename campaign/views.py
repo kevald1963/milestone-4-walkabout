@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic.edit import DeleteView
+from django.core.urlresolvers import reverse_lazy
 from .forms import EditCampaignForm
 from .models import Campaign
 
@@ -17,7 +19,7 @@ def create_or_edit_campaign(request, pk=None):
     A view to create or edit a campaign depending on whether its
     primary key is null or not.
     """
-    campaign = get_object_or_404(Round, pk=pk) if pk else None
+    campaign = get_object_or_404(Campaign, pk=pk) if pk else None
     if request.method == 'POST':
         form = EditCampaignForm(request.POST, instance=campaign)
         if form.is_valid():
@@ -34,3 +36,12 @@ def create_or_edit_campaign(request, pk=None):
         operation_type = 'edit'
 
     return render(request, operation_type + '_campaign.html', {'form': form})
+
+
+class CampaignDelete(DeleteView):
+    """
+    Delete the campaign and return to Campaigns page after delete confirmation.
+    """
+    model = Campaign
+    template_name = 'campaign_confirm_delete.html'
+    success_url = reverse_lazy('all_campaigns')

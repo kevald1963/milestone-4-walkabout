@@ -40,7 +40,9 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="{% url 'all_products' %}">All Products</a></li>
-                            <li><a href="">New Product</a></li>
+                            {% if user.is_superuser %}
+                                <li><a href="">New Product</a></li>
+                            {% endif %}
                         </ul>
                     </li>
 

@@ -14,7 +14,7 @@ def cart_contents(request):
     try:
         percent = Discount.objects.values_list('percent', flat=True).get(code=1)
     except ObjectDoesNotExist:
-        messages.error(request, "Error: Discount rate not found. Complementary 12.50% discount applied instead.")
+        messages.error(request, "Error: Discount rate not found. Complementary 12.50% discount applied.")
         percent = 12.5
     cart_items = []
     subtotal = Decimal(0)

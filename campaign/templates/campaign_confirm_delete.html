@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <pre class="page-summary">Delete street</pre>
+    <pre class="page-summary">Delete campaign</pre>
     <form method="POST">
         {% csrf_token %}
         <p><strong>Name: </strong>{{ object.name }}</p>
-        <p><strong>Post Code: </strong>{{ object.post_code }}</p>
+        <p><strong>Description: </strong>{{ object.description }}</p>
         <hr>
-        <p>Are you sure you want to delete this street?</p>
+        <p>Are you sure you want to delete this campaign?</p>
         <input type="submit" value="Confirm" class="btn btn-custom"/>
-        <a href="{% url 'all_streets' %}" class="btn btn-custom">Cancel</a>
+        <a href="{% url 'all_campaigns' %}" class="btn btn-custom">Cancel</a>
     </form>
 
 {% endblock %}

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from .models import Product, Discount
+from utils.decorators import superuser_only
 
 
 # Create your views here.
