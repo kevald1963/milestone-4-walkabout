@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <pre class="page-summary">Delete product</pre>
+    <form method="POST">
+        {% csrf_token %}
+        <p><strong>Name: </strong>{{ object.name }}</p>
+        <p><strong>Description: </strong>{{ object.description }}</p>
+        <hr>
+        <p>Are you sure you want to delete this product?</p>
+        <input type="submit" value="Confirm" class="btn btn-custom"/>
+        <a href="{% url 'all_products' %}" class="btn btn-custom">Cancel</a>
+    </form>
+
+{% endblock %}

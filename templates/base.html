@@ -41,7 +41,8 @@
                         <ul class="dropdown-menu">
                             <li><a href="{% url 'all_products' %}">All Products</a></li>
                             {% if user.is_superuser %}
-                                <li><a href="">New Product</a></li>
+                                <!-- Limit creation of new products to superusers only. -->
+                                <li><a href="{% url 'new_product' %}">New Product</a></li>
                             {% endif %}
                         </ul>
                     </li>
