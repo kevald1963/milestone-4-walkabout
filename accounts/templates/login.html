@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% load bootstrap_tags %}
 {% block content %}
+
+    <pre class="page-summary">Please login</pre>
     <form method="post" action="{% url 'login' %}?next={{ next }}" class="accountform">
-        <fieldset class="form-group">
-            <legend>Login</legend>
-            {% csrf_token %}
-            {{ user_form | as_bootstrap }}
-             <p>Forgot password? Click <a href="{% url 'password_reset' %}" class="inline email-link">here</a>.</p>
-            <button type="submit" class="btn btn-custom">Login</button>
-        </fieldset>
+        <p>Forgot password? Click <a href="{% url 'password_reset' %}" class="inline email-link">here</a>.</p>
+        {% csrf_token %}
+        {{ user_form | as_bootstrap }}
+        <button type="submit" class="btn btn-custom">Login</button>
     </form>
+
 {% endblock %}
