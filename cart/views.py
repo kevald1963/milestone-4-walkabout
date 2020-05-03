@@ -49,7 +49,7 @@ def add_to_cart(request, id):
         if is_base_product:
             subscription = Subscription.objects.select_related('product').get(product__is_base_product=True)
             if subscription:
-                if subscription.product.number_of_users > product.number_of_users:
+                if subscription.product.number_of_devices > product.number_of_devices:
                     # If customer already has a subscription product with a lower number of devices then
                     # do not add it to Cart.
                     messages.add_message(request, messages.INFO, 'Base product not added to Cart. You already have a '
@@ -63,9 +63,9 @@ def add_to_cart(request, id):
                     # Otherwise put subscription in the Cart but indicate that product is an upgrade.
                     if id not in cart:
                         total_quantity = quantity
-                        user_count = product.number_of_users * total_quantity
+                        devices_count = product.number_of_devices * total_quantity
                         messages.add_message(request, messages.INFO, 'Base product upgrade to '
-                                                                     + str(user_count) +
+                                                                     + str(devices_count) +
                                                                      '-devices added to Cart. You currently '
                                                                      'have a '
                                                                      + str(subscription.product.number_of_devices) +
