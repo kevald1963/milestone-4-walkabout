@@ -28,14 +28,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Walkabout</a>
+                {% if user.is_authenticated %}
+                    <a class="navbar-brand" href="/"><i class="fa fa-home hidden-xs" aria-hidden="true"></i> Home</a>
+                {% else %}
+                    <a class="navbar-brand-home" href="/"><i class="fa fa-home hidden-xs" aria-hidden="true"></i> Home</a>
+                {% endif %}
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
 
                     <!-- PRODUCTS -->
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-gift hidden-xs" aria-hidden="true"></i>
                             <span> Products</span>
                             <span class="caret"></span>
@@ -105,13 +109,13 @@
                         </a>
                     </li>
 
-                    <!-- PROFILE / REGISTER & LOGIN / LOGOUT -->
+                    <!-- PROFILE / REGISTER & SIGN IN / SIGN OUT -->
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'profile' %}"><i class="fa fa-user"></i> Profile [{{ user }}]</a></li>
-                        <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Log Out</a></li>
+                        <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Sign Out</a></li>
                     {%  else %}
                         <li><a href="{% url 'register' %}"><i class="fa fa-user-plus"></i> Register</a></li>
-                        <li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Log In</a></li>
+                        <li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Sign In</a></li>
                     {% endif %}
 
                 </ul>
@@ -135,12 +139,6 @@
         {% endblock %}
     </div>
     
-    <footer>
-        <div class="container">
-            <p></p>
-        </div>
-    </footer>
-
     <script>
         $(document).ready(function(){
             // Add a tooltip to an image.

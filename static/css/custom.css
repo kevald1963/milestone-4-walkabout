@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700');
+
 body {
     font-family: Arial;
     padding-top: 75px;
@@ -14,6 +16,7 @@ a:visited {
     color: white;
 }
 
+/* Prevent anchor tags causing line breaks in text blocks. */
 .inline {
     display: inline;
 }
@@ -76,7 +79,7 @@ a:visited {
 
 .navbar-brand {
     font-family: 'Leckerli One';
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .navbar-default {
@@ -106,6 +109,17 @@ a:visited {
 
 .badge-warning:hover {
     background-color: #c67605;
+}
+.brand-name {
+    font-family: 'Leckerli One';
+    font-size: 50px;
+    color: rebeccapurple;
+}
+.brand-pitch {
+    color: rebeccapurple;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: black;
 }
 
 .page-summary {
@@ -143,7 +157,7 @@ a:visited {
 
 #data-list li {
     border: 1px solid #ddd;
-    margin-top: -1px;
+    margin-top: -1px; /* Prevent double borders */
     background-color: #f6f6f6;
     padding: 10px;
     text-decoration: none;
@@ -227,3 +241,5 @@ caption p {
     height: auto;
     border: 2px solid #ddd;
 }
+
+/* Media queries */
