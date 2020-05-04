@@ -19,7 +19,7 @@ a:visited {
 }
 
 .email-link {
-    color: black;
+    color: rebeccapurple;
 }
 
 .email-link:visited {
@@ -192,14 +192,16 @@ a:visited {
 .product-total {
     margin-top: 20px;
 }
-
+/*
 footer {
     margin-top: 40px;
     padding-top: 20px;
     padding-bottom: 20px;
     border-top: 1px solid #ededed;
     color: #A9A9A9;
+    color: red;
 }
+*/
 
 .icon-bar {
     background-color: #fff;
