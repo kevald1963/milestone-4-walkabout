@@ -28,23 +28,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                {% if user.is_authenticated %}
-                    <a class="navbar-brand" href="/"><i class="fa fa-home hidden-xs" aria-hidden="true"></i> Home</a>
-                {% else %}
-                    <a class="navbar-brand-home" href="/"><i class="fa fa-home hidden-xs" aria-hidden="true"></i> Home</a>
-                {% endif %}
+                <a class="menu-home" href="/"><i class="fa fa-home" aria-hidden="true"></i></a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
 
                     <!-- PRODUCTS -->
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <a href="#" class="dropdown-toggle menu-other" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-gift hidden-xs" aria-hidden="true"></i>
                             <span> Products</span>
                             <span class="caret"></span>
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu menu-dropdown">
                             <li><a href="{% url 'all_products' %}">All Products</a></li>
                             {% if user.is_superuser %}
                                 <!-- Limit creation of new products to superusers only. -->
@@ -56,7 +52,7 @@
                     <!-- ORGANISATIONS -->
                     {% if user.is_authenticated %}
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <a href="#" class="dropdown-toggle menu-other" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-sitemap hidden-xs" aria-hidden="true"></i>
                                 <span> Organisations</span>
                                 <span class="caret"></span>

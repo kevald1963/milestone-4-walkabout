@@ -12,7 +12,7 @@ def logout(request):
     A view that logs the user out and redirects back to the index page.
     """
     auth.logout(request)
-    messages.success(request, 'You have successfully logged out')
+    messages.success(request, 'You are logged out.')
     return redirect(reverse('index'))
 
 
@@ -28,15 +28,14 @@ def login(request):
 
             if user:
                 auth.login(request, user)
-                messages.error(request, "You have successfully logged in")
 
-                if request.GET and request.GET['next'] !='':
+                if request.GET and request.GET['next'] != '':
                     next = request.GET['next']
                     return HttpResponseRedirect(next)
                 else:
                     return redirect(reverse('index'))
             else:
-                user_form.add_error(None, "Your username or password are incorrect")
+                user_form.add_error(None, "Your username or password are incorrect.")
     else:
         user_form = UserLoginForm()
 
