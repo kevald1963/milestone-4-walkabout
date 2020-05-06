@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700');
 
 body {
-    font-family: 'Roboto', sans-serif;
-    padding-top: 75px;
+    font-family: 'Roboto';
+    font-size: 18px;
+    margin-top: 75px;
     color: black;
 }
 
@@ -62,6 +63,7 @@ a:visited {
 .btn-custom {
     color: white;
     background-color: rebeccapurple;
+    background-color: #6d41e8;
     border-color: rebeccapurple;
     display: inline-block;
 }
@@ -113,18 +115,12 @@ a:visited {
 }
 
 .menu-home {
-    font-family: 'Leckerli One';
-    font-size: 40px;
+    font-size: 30px;
 }
 
 .menu-other {
-    font-family: 'Leckerli One';
-    font-size: 20px;
-}
-
-.menu-dropdown {
-    font-family: 'Leckerli One';
     font-size: 18px;
+    font-weight: 400;
 }
 
 .brand-text-large {
@@ -207,11 +203,13 @@ a:visited {
 .checkout-total, .product-total
 {
     color: black;
-    font-family: "Roboto", sans-serif;
+    font-family: "Roboto";
+    font-size: 20px;
     font-weight: 400;
 }
 
 .product-pitch-highlighted {
+    border-radius: 3px;
     padding: 5px;
 }
 
@@ -260,3 +258,21 @@ caption p {
 }
 
 /* Media queries */
+@media only screen and (max-width: 290px) {
+    .brand-text-large {
+        font-size: 34px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .menu-home {
+        margin-left: 15px;
+        font-size: 34px;
+    }
+    body {
+        margin-top: 50px;
+    }
+    body pre {
+        margin-top: 15px;
+    }
+}

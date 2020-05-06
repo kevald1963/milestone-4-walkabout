@@ -40,7 +40,7 @@
                             <span> Products</span>
                             <span class="caret"></span>
                         </a>
-                        <ul class="dropdown-menu menu-dropdown">
+                        <ul class="dropdown-menu">
                             <li><a href="{% url 'all_products' %}">All Products</a></li>
                             {% if user.is_superuser %}
                                 <!-- Limit creation of new products to superusers only. -->
@@ -49,71 +49,47 @@
                         </ul>
                     </li>
 
-                    <!-- ORGANISATIONS -->
-                    {% if user.is_authenticated %}
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle menu-other" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-sitemap hidden-xs" aria-hidden="true"></i>
-                                <span> Organisations</span>
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{% url 'all_organisations' %}">All</a></li>
-                                <li><a href="{% url 'new_organisation' %}">New</a></li>
-                            </ul>
-                        </li>
-                    {% endif %}
-
-                    <!-- CAMPAIGNS -->
-                    {% if user.is_authenticated %}
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-flag hidden-xs" aria-hidden="true"></i>
-                                <span> Campaigns</span>
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{% url 'all_campaigns' %}">All Campaigns</a></li>
-                                <li><a href="{% url 'new_campaign' %}">New Campaign</a></li>
-                            </ul>
-                        </li>
-                    {% endif %}
-
-                    <!-- ROUNDS -->
-                    {% if user.is_authenticated %}
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-road hidden-xs" aria-hidden="true"></i>
-                                <span> Rounds</span>
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{% url 'all_rounds' %}">All Rounds</a></li>
-                                <li><a href="{% url 'new_round' %}">New Round</a></li>
-                                <li><a href="{% url 'all_streets' %}">All Streets</a></li>
-                                <li><a href="{% url 'new_street' %}">New Street</a></li>
-                            </ul>
-                        </li>
-                    {% endif %}
+                    <!-- MY ACCOUNT -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle menu-other" data-toggle="dropdown" role="button"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-sitemap hidden-xs" aria-hidden="true"></i>
+                            <span> My Account</span>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'all_organisations' %}">My Organisations</a></li>
+                            <li><a href="{% url 'all_campaigns' %}">My Campaigns</a></li>
+                            <li><a href="{% url 'all_rounds' %}">My Rounds</a></li>
+                            <li><a href="{% url 'all_streets' %}">My Streets</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{% url 'new_organisation' %}">New Organisation</a></li>
+                            <li><a href="{% url 'new_campaign' %}">New Campaign</a></li>
+                            <li><a href="{% url 'new_round' %}">New Round</a></li>
+                            <li><a href="{% url 'new_street' %}">New Street</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{% url 'profile' %}" class="dropdown-toggle">
+                                <i class="fa fa-user"></i> Profile [{{ user }}]</a></li>
+                            <li><a href="{% url 'logout' %}" class="dropdown-toggle">
+                                <i class="fa fa-sign-out"></i> Sign Out</a></li>
+                        {%  else %}
+                            <li><a href="{% url 'register' %}" class="dropdown-toggle">
+                                <i class="fa fa-user-plus"></i> Register</a></li>
+                            <li><a href="{% url 'login' %}" class="dropdown-toggle">
+                                <i class="fa fa-sign-in"></i> Sign In</a></li>
+                        {% endif %}
+                        </ul>
+                    </li>
 
                     <!-- SHOPPING CART -->
                     <li>
-                        <a href="{% url 'view_cart' %}"><i class="fa fa-shopping-cart"></i> Cart
+                        <a href="{% url 'view_cart' %}" class="menu-other"><i class="fa fa-shopping-cart"></i> Cart
                             {% if product_count > 0 %}
                                 <label class="badge badge-warning">{{ product_count }}</label>
                             {% endif %}
                         </a>
                     </li>
-
-                    <!-- PROFILE / REGISTER & SIGN IN / SIGN OUT -->
-                    {% if user.is_authenticated %}
-                        <li><a href="{% url 'profile' %}"><i class="fa fa-user"></i> Profile [{{ user }}]</a></li>
-                        <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Sign Out</a></li>
-                    {%  else %}
-                        <li><a href="{% url 'register' %}"><i class="fa fa-user-plus"></i> Register</a></li>
-                        <li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Sign In</a></li>
-                    {% endif %}
-
                 </ul>
             </div>
         </div>
