@@ -8,8 +8,9 @@
         <p><strong>Post Code: </strong>{{ object.post_code }}</p>
         <hr>
         <p>Are you sure you want to delete this street?</p>
-        <input type="submit" value="Confirm" class="btn btn-custom"/>
-        <a href="{% url 'all_streets' %}" class="btn btn-custom">Cancel</a>
+        <input type="hidden" name="next" value="{{ request.GET.next }}">
+        <input type="submit" value="Confirm" class="btn btn-custom" style="color: white;"/>
+        <a href="{{ request.GET.next }}" class="btn btn-custom" style="color: white;">Cancel</a>
     </form>
 
 {% endblock %}
