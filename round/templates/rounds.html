@@ -4,8 +4,13 @@
 <div class="container">
     <pre class="page-summary">Rounds</pre>
     {% if not rounds %}
-        <p>No rounds created yet. These can be created from the Rounds menu above.</p>
+        <p>
+            No rounds created yet. Click
+            <a href="{% url 'new_round' %}" class="inline page-link">here</a>
+            here to create a new one.
+        </p>
     {% else %}
+        <span class="btn link-btn-purple btn-md"><a href="{% url 'all_streets' %}">All streets</a></span>
         <div class="filter" title="Search image from freepnglogos.com">
             <input id="filter-input" onkeyup="filter()" placeholder="Filter by round name.." type="text">
         </div>
@@ -26,7 +31,7 @@
                                             <div class="btn-group" role="group" aria-label="Horizontal button group for Edit Round, Delete Round and View Streets (of this Round).">
                                                 <span class="btn link-btn-purple btn-md"><a href="{% url 'edit_round' round.id %}">Edit</a></span>
                                                 <span class="btn link-btn-red btn-md"><a href="{% url 'delete_round' round.id %}">Delete</a></span>
-                                                <span class="btn link-btn-light-blue btn-md"><a href="{% url 'attached_streets' round.id %}">View streets</a></span>
+                                                <span class="btn link-btn-light-blue btn-md"><a href="{% url 'all_streets' %}">Linked streets</a></span>
                                             </div>
                                         </div>
                                     </div>

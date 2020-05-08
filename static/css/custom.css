@@ -2,7 +2,8 @@
 
 body {
     font-family: 'Roboto';
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: 400;
     margin-top: 75px;
     color: black;
 }
@@ -22,12 +23,12 @@ a:visited {
     display: inline;
 }
 
-.email-link {
-    color: rebeccapurple;
+.page-link {
+    color: #6d41e8;
 }
 
-.email-link:visited {
-    color: rebeccapurple;
+.page-link:visited {
+    color: #6d41e8;
 }
 
 .text-muted {
@@ -41,7 +42,8 @@ a:visited {
 
 .link-btn-purple {
     color: white;
-    background-color: rebeccapurple;
+    background-color: #6d41e8;
+    margin-bottom: 10px;
 }
 
 .link-btn-red {
@@ -54,6 +56,11 @@ a:visited {
     background-color: #4b90e8;
 }
 
+.link-btn-orange {
+    color: white;
+    background-color: #f48d07;
+}
+
 .link-btn-red-free {
     color: white;
     background-color: red;
@@ -62,10 +69,10 @@ a:visited {
 
 .btn-custom {
     color: white;
-    background-color: rebeccapurple;
     background-color: #6d41e8;
-    border-color: rebeccapurple;
+    border-color: #6d41e8;
     display: inline-block;
+    margin-bottom: 10px;
 }
 
 .btn-custom:hover {

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.edit import DeleteView
 from django.core.urlresolvers import reverse_lazy
+from django.db import transaction
 from .forms import EditRoundForm, EditStreetForm, EditAddressForm
 from .models import Round, Street, Address
 
@@ -51,8 +52,8 @@ def all_streets(request):
     """
     Get all the streets from the database, ordered by name.
     """
-    streets = Street.objects.all().order_by('name')
-
+    streets = Street.objects.all().order_by('round', 'name')
+    print("streets = " + str(streets))
     return render(request, 'streets.html', {'streets': streets})
 
 
@@ -62,6 +63,8 @@ def create_or_edit_street(request, pk=None):
     primary key is null or not.
     """
     street = get_object_or_404(Street, pk=pk) if pk else None
+    print("Round = " + str(street))
+    round_id = 1
     if request.method == 'POST':
         form = EditStreetForm(request.POST, instance=street)
         if form.is_valid():
@@ -111,10 +114,13 @@ def create_addresses(request, pk):
     # Create a record for each new address and save to the database.
     street = Street.objects.get(id=pk)
     comments = ""
+    door_start = street.door_number_start
     door_end = street.door_number_end + 1
-    for door_number in range(1, door_end):
-        address = Address(door_number=door_number, name=street, comments=comments)
-        address.save()
+
+    # Create all the addresses in one go.
+    with transaction.atomic():
+        for door_number in range(door_start, door_end):
+            Address.objects.create(door_number=door_number, name=street, comments=comments)
 
     # Select the addresses just saved to display in template.
     addresses = Address.objects.select_related('name').filter(name=pk).order_by('door_number')

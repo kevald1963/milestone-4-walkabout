@@ -59,10 +59,9 @@
                         </a>
                         <ul class="dropdown-menu">
                         {% if user.is_authenticated %}
-                            <li><a href="{% url 'all_organisations' %}">My Organisations</a></li>
-                            <li><a href="{% url 'all_campaigns' %}">My Campaigns</a></li>
-                            <li><a href="{% url 'all_rounds' %}">My Rounds</a></li>
-                            <li><a href="{% url 'all_streets' %}">My Streets</a></li>
+                            <li><a href="{% url 'all_organisations' %}">Organisations</a></li>
+                            <li><a href="{% url 'all_campaigns' %}">Campaigns</a></li>
+                            <li><a href="{% url 'all_rounds' %}">Rounds</a></li>
                             <li class="divider"></li>
                             <li><a href="{% url 'new_organisation' %}">New Organisation</a></li>
                             <li><a href="{% url 'new_campaign' %}">New Campaign</a></li>
