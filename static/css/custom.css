@@ -61,9 +61,17 @@ a:visited {
     background-color: #f48d07;
 }
 
-.link-btn-red-free {
+.link-btn-free {
     color: white;
     background-color: red;
+    font-size: 24px;
+    margin-top: 20px;
+    margin-right: 5px;
+}
+
+.link-btn-paid {
+    color: white;
+    background-color: black;
     font-size: 24px;
     margin-top: 20px;
 }
@@ -165,7 +173,8 @@ p.brand-benefits  {
     font-weight: 400;
     margin-top: 20px;
 }
-.org-highlight {
+
+.highlight {
     color: red;
 }
 
@@ -257,12 +266,19 @@ p.brand-benefits  {
     margin-top: 20px;
 }
 
+.footer-title {
+    font-size: 18px;
+    color: white;
+}
+
 footer {
-    margin-top: 40px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-top: 1px solid #ededed;
-    color: #A9A9A9;
+    background-color: #6d41e8;
+    color: white;
 }
 
 .icon-bar {
