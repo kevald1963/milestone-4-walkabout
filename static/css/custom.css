@@ -65,6 +65,7 @@ a:visited {
     color: white;
     background-color: red;
     font-size: 24px;
+    margin-top: 20px;
 }
 
 .btn-custom {
@@ -130,15 +131,42 @@ a:visited {
     font-weight: 400;
 }
 
-.brand-text-large {
+.brand-header {
     font-family: 'Leckerli One';
     font-size: 50px;
-    color: rebeccapurple;
+    color: red;
+    margin-bottom: 30px;
 }
+
+.brand-explanation {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: black;
+    margin-top: 50px;
+}
+
 .brand-pitch {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     color: black;
+}
+
+ul.brand-benefits  {
+    list-style-type: square;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 20px;
+}
+
+p.brand-benefits  {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 20px;
+}
+.org-highlight {
+    color: red;
 }
 
 .page-summary {
