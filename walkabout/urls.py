@@ -42,7 +42,7 @@ urlpatterns = [
     url(r'^campaign/', include(urls_campaign)),
     url(r'^round/', include(urls_round)),
 ]
-if "DATABASE_URL" not in os.environ:
+if settings.DEBUG:
     print("URLS configured to serve static and media files locally.")
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

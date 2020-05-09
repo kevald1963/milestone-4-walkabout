@@ -140,8 +140,8 @@ USE_TZ = True
 
 AWS_STORAGE_BUCKET_NAME = 'walkabout-app'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-if "DATABASE_URL" in os.environ:
-    print("Production DB found, so serving static and media files from AWS S3.")
+if not DEBUG:
+    print("DEBUG is False, so serving static and media files from AWS S3.")
     AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
     AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
     AWS_STORAGE_BUCKET_NAME = 'walkabout-app'
@@ -153,7 +153,7 @@ if "DATABASE_URL" in os.environ:
     STATICFILES_STORAGE = 'custom_storages.StaticStorage'
     DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
 else:
-    print("DATABASE_URL not found, so serving static and media files locally.")
+    print("DEBUG is True, so serving static and media files locally.")
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
