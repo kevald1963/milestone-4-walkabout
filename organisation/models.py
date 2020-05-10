@@ -12,7 +12,6 @@ class Organisation(models.Model):
                                                         'organisation.')
     description = models.TextField()
     contact_name = models.CharField(max_length=50, blank=True)
-    user = ForeignKey(User, null=True)
     is_parent = models.BooleanField(verbose_name='Is parent organisation?', default=False)
     logo_text = models.CharField(max_length=15, blank=True)
     glyphicon_name = models.CharField(max_length=20, blank=True)
@@ -27,6 +26,7 @@ class Organisation(models.Model):
     email_address = models.EmailField(max_length=40)
     landline_number = models.CharField(max_length=14, blank=True)
     mobile_number = models.CharField(max_length=14, blank=True)
+    updated_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.name
