@@ -11,7 +11,6 @@ class EditCampaignForm(forms.ModelForm):
             'campaign_lead',
             'organisation',
             'campaign_type',
-            'round',
             'active_date',
             'inactive_date',
         )

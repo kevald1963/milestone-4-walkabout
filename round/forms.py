@@ -8,6 +8,7 @@ class EditRoundForm(forms.ModelForm):
         fields = (
             'name',
             'description',
+            'campaign'
         )
 
 
