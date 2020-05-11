@@ -3,13 +3,13 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-12 col-md-6">
+        <div class="col-sm-12 col-md-6 organisation-image">
             {% if organisation.image %}
                 <img src="{{ MEDIA_URL }}{{ organisation.image }}" alt="{{ organisation.image_caption }}" title="{{ organisation.image_caption }}" width="100%" height="auto"/>
             {% endif %}
         </div>
         <div class="col-xs-12">
-            <h3 style="color: black;">{{ organisation.name }}</h3>
+            <h3>{{ organisation.name }}</h3>
             <p>{{ organisation.description }}</p>
             <p>Contact: {{ organisation.contact_name }}</p>
             <p>Email: {{ organisation.email_address }}</p>

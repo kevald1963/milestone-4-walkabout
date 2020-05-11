@@ -13,20 +13,21 @@
             {% for organisation in organisations %}
                 <li>
                     <div class="row">
-                        <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-12">
-                            <h3 style="color: black; margin-top: 0px;">{{ organisation.name }}</h3>
+                        <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-12 col-md-12">
+                            <h3 class="no-top-margin">{{ organisation.name }}</h3>
                             <p>{{ organisation.description|truncatewords:40 }}</p>
-                            <p><a href="{% url 'organisation_detail' organisation.id %}" class="btn btn-custom">Read more</a></p>
+                            <p><a href="{% url 'organisation_detail' organisation.id %}" class="btn btn-custom"
+                                  style="color:white;">Read more</a></p>
                             <div class="row">
                                 <div class="col-xs-12 col-md-6">
-                                    <img src="{{ MEDIA_URL }}{{ organisation.image }}" alt="{{ organisation.image_caption }}" title="{{ organisation.image_caption }}" width="100%" height="auto"/>
+                                    <img src="{{ MEDIA_URL }}{{ organisation.image }}" alt="{{ organisation.image_caption }}"
+                                         title="{{ organisation.image_caption }}" width="100%" height="auto"/>
                                 </div>
                                 <div class="col-xs-12 col-md-6">
                                     <div class="row">
                                         <!-- EDIT and DELETE buttons -->
-                                        <!-- Display a horizontal button group for sm, md and lg devices. -->
-                                        <div class="hidden-xs col-sm-12 col-md-12 col-lg-12">
-                                            <div class="btn-group" role="group" aria-label="Horizontal button group for Edit Organisation and Delete Organisation.">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <div class="btn-group btn-group-org" role="group" aria-label="Horizontal button group for Edit Organisation and Delete Organisation.">
                                                 <button type="button" class="btn link-btn-purple"><a href="{% url 'edit_organisation' organisation.id %}">Edit</a></button>
                                                 <button type="button" class="btn link-btn-red btn-md"><a href="{% url 'delete_organisation' organisation.id %}">Delete</a></button>
                                             </div>

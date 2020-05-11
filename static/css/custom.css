@@ -18,6 +18,14 @@ a:visited {
     color: white;
 }
 
+h3 {
+    color: black;
+}
+
+h3.no-top-margin {
+    margin-top: 0;
+}
+
 /* Prevent anchor tags causing line breaks in text blocks. */
 .inline {
     display: inline;
@@ -234,6 +242,10 @@ p.brand-benefits  {
     margin: 0 auto;
 }
 
+.organisation-image {
+    margin-top: 15px;
+}
+
 .organisation-summary {
     color: black;
     font-family: "Roboto", sans-serif;
@@ -323,6 +335,12 @@ caption p {
         margin-top: 50px;
     }
     body pre {
+        margin-top: 15px;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .btn-group-org {
         margin-top: 15px;
     }
 }
