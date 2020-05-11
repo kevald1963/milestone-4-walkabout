@@ -14,3 +14,4 @@ venv
 static/
 media/
 staticfiles/
+git_list.txt
