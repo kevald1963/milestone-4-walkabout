@@ -3,13 +3,11 @@
 {% block content %}
 
     <form method="POST">
-        <fieldset class="form-group">
-            <legend>Add organisation</legend>
-            {% csrf_token %}
-            {{ form | as_bootstrap }}
-            <button type="submit" class="btn btn-custom">Save</button>
-            <a href="{% url 'all_organisations' %}" class="btn btn-custom">Cancel</a>
-        </fieldset>
+        <pre class="page-summary">Add organisation</pre>
+        {% csrf_token %}
+        {{ form | as_bootstrap }}
+        <button type="submit" class="btn btn-custom">Save</button>
+        <a href="{% url 'all_organisations' %}" class="btn btn-custom">Cancel</a>
     </form>
 
 {% endblock %}

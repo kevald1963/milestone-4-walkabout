@@ -2,10 +2,10 @@
 {% block content %}
 
     <form method="POST">
-        <legend>Organisation Delete</legend>
+        <pre class="page-summary">Organisation Delete</pre>
         {% csrf_token %}
-        <p><strong>Organisation name:</strong> {{ object.name }}</p>
-        </p><strong>Description:</strong> {{ object.description }}</p>
+        <p><strong>Organisation:</strong> {{ object.name }}</p>
+        </p>Description: {{ object.description }}</p>
         <hr>
         <p>Are you sure you want to delete this organisation?</p>
         <input type="submit" value="Confirm" class="btn btn-custom"/>
