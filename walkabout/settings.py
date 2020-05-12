@@ -90,7 +90,7 @@ if "DATABASE_URL" in os.environ:
     print("Working in Production with Postgres DB.")
     DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
 else:
-    print("Working in Development with Using SQLite DB as DATABASE_URL not found. .")
+    print("Working in Development with SQLite DB as DATABASE_URL not found.")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
