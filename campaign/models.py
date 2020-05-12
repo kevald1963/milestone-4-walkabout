@@ -26,16 +26,17 @@ class Campaign(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
     campaign_lead = models.CharField(max_length=50, blank=True)
-    user = ForeignKey(User, null=True, on_delete=models.PROTECT)
     organisation = ForeignKey(Organisation, null=True, on_delete=models.PROTECT)
     campaign_type = models.CharField(max_length=20, choices=[(tag.name, tag.value)
-                                                             for tag in CampaignChoice], default='LE')
+                                                             for tag in CampaignChoice], default='LEAF')
+    rounds = models.ManyToManyField('round.Round')
     active_date = models.DateField()
     inactive_date = models.DateField(null=True, blank=True)
+    updated_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     class Meta:
         ordering = ['pk', 'active_date', 'campaign_type', 'name']
 
     def __str__(self):
-        return 'Start date: {}, Campaign ID: {}, Name: {}, Description: {}'.\
-            format(self.active_date, str(self.pk), self.name, self.description)
+        return 'Campaign ID: {}, Start date: {}, Name: {}, Description: {}'.\
+            format(str(self.pk), self.active_date, self.name, self.description)

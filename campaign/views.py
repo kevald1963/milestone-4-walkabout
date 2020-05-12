@@ -10,7 +10,7 @@ def all_campaigns(request):
     """
     Get all the campaigns from the database, ordered by active date
     """
-    campaigns = Campaign.objects.all().order_by('active_date')
+    campaigns = Campaign.objects.all().order_by('id')
     return render(request, 'campaigns.html', {'campaigns': campaigns})
 
 
