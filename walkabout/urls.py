@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-import os
+
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic import RedirectView
@@ -42,7 +42,7 @@ urlpatterns = [
     url(r'^campaign/', include(urls_campaign)),
     url(r'^round/', include(urls_round)),
 ]
-if settings.DEBUG:
-    print("URLS configured to serve static and media files locally.")
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# if settings.DEBUG:
+#     print("URLS configured to serve static and media files locally.")
+#     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -20,11 +20,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY') or '!o1fqt4lxp*qg3j@!1d_n=3eltokksnb44@(*lia54-hoa+^-u'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'walkabout-app.herokuapp.com']
 
@@ -140,22 +140,22 @@ USE_TZ = True
 
 AWS_STORAGE_BUCKET_NAME = 'walkabout-app'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-if not DEBUG:
-    print("DEBUG is False, so serving static and media files from AWS S3.")
-    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-    AWS_STORAGE_BUCKET_NAME = 'walkabout-app'
-    AWS_DEFAULT_ACL = 'public-read'
-    AWS_S3_REGION_NAME = 'eu-west-2'
-    AWS_S3_OBJECT_PARAMETERS = {'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT', 'CacheControl': 'max-age=94608000'}
-    AWS_LOCATION = 'static'
-    STATIC_URL = f'{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
-    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
-    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
-else:
-    print("DEBUG is True, so serving static and media files locally.")
-    STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# if not DEBUG:
+print("DEBUG is False, so serving static and media files from AWS S3.")
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = 'walkabout-app'
+AWS_DEFAULT_ACL = 'public-read'
+AWS_S3_REGION_NAME = 'eu-west-2'
+AWS_S3_OBJECT_PARAMETERS = {'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT', 'CacheControl': 'max-age=94608000'}
+AWS_LOCATION = 'static'
+STATIC_URL = f'{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+# else:
+print("DEBUG is True, so serving static and media files locally.")
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 STATICFILES_LOCATION = 'static'
