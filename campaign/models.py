@@ -1,4 +1,3 @@
-from django.db.models import ForeignKey
 from django.contrib.auth.models import User
 from django.db import models
 from enum import Enum
@@ -26,7 +25,7 @@ class Campaign(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
     campaign_lead = models.CharField(max_length=50, blank=True)
-    organisation = ForeignKey(Organisation, null=True, on_delete=models.PROTECT)
+    organisation = models.ForeignKey(Organisation, null=True, on_delete=models.PROTECT)
     campaign_type = models.CharField(max_length=20, choices=[(tag.name, tag.value)
                                                              for tag in CampaignChoice], default='LEAF')
     rounds = models.ManyToManyField('round.Round')
