@@ -31,7 +31,6 @@ class Campaign(models.Model):
     rounds = models.ManyToManyField('round.Round')
     active_date = models.DateField()
     inactive_date = models.DateField(null=True, blank=True)
-    updated_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     class Meta:
         ordering = ['pk', 'active_date', 'campaign_type', 'name']
