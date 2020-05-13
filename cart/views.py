@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, reverse
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
 from product.models import Product
 from organisation.models import Subscription
-from django.contrib import messages
 
 
 # Create your views here.
@@ -33,13 +34,18 @@ def add_to_cart(request, id):
     quantity = int(request.POST.get('quantity[]'))
     max_product_quantity = int(product.max_product_quantity)
     is_base_product = product.is_base_product
-
+    # ====================================================================================================
+    # Products can either be BASE or DATA products. A data product cannot be bought without purchasing a
+    # base product first. The same base product cannot be bought twice, however it can be upgraded to one
+    # with a higher number of devices / longer subscription duration. Downgrades are possible but are not
+    # handled by the system. Customers are referred to Sales Team instead.
+    # ====================================================================================================
     if max_product_quantity == 1:
         # Check if product with a single item quantity is already saved to subscription table in database,
         # as it can only be saved once per parent organisation account.
         subscription = Subscription.objects.select_related('product').filter(product=id)
 
-        # If customer already has this product then do not add it to Cart.
+        # If customer already has this product then do not add it to Cart, but tell customer why!
         if subscription:
             quantity = 0
             messages.add_message(request, messages.INFO,
@@ -47,29 +53,35 @@ def add_to_cart(request, id):
     else:
         # Otherwise, check if the Cart product is a base product.
         if is_base_product:
-            subscription = Subscription.objects.select_related('product').get(product__is_base_product=True)
-            if subscription:
-                if subscription.product.number_of_devices > product.number_of_devices:
-                    # If customer already has a subscription product with a lower number of devices then
-                    # do not add it to Cart.
-                    messages.add_message(request, messages.INFO, 'Base product not added to Cart. You already have a '
-                                                                 + str(subscription.product.number_of_devices) +
-                                                                 '-device subscription on your account! '
-                                                                 'Downgrades are only possible through our '
-                                                                 'Sales Department. Please contact them on '
-                                                                 '0800 1234567.')
-                    quantity = 0
-                else:
-                    # Otherwise put subscription in the Cart but indicate that product is an upgrade.
-                    if id not in cart:
-                        total_quantity = quantity
-                        devices_count = product.number_of_devices * total_quantity
-                        messages.add_message(request, messages.INFO, 'Base product upgrade to '
-                                                                     + str(devices_count) +
-                                                                     '-devices added to Cart. You currently '
-                                                                     'have a '
+            try:
+                subscription = Subscription.objects.select_related('product').get(product__is_base_product=True)
+                if subscription:
+                    if subscription.product.number_of_devices > product.number_of_devices:
+                        # If customer already has a subscription product with a lower number of devices then
+                        # do not add it to Cart.
+                        messages.add_message(request, messages.INFO, 'Base product not added to Cart. You already have '
+                                                                     'a '
                                                                      + str(subscription.product.number_of_devices) +
-                                                                     '-device subscription on your account.')
+                                                                     '-device subscription on your account! '
+                                                                     'Downgrades are only possible through our '
+                                                                     'Sales Department. Please contact them on '
+                                                                     '0800 1234567.')
+                        quantity = 0
+                    else:
+                        # Otherwise put subscription in the Cart but indicate that product is an upgrade.
+                        if id not in cart:
+                            total_quantity = quantity
+                            devices_count = product.number_of_devices * total_quantity
+                            messages.add_message(request, messages.INFO, 'Base product upgrade to '
+                                                                         + str(devices_count) +
+                                                                         '-devices added to Cart. You currently '
+                                                                         'have a '
+                                                                         + str(subscription.product.number_of_devices) +
+                                                                         '-device subscription on your account.')
+            except ObjectDoesNotExist:
+                # if no subscription found, then add to the Cart and inform user.
+                messages.error(request, "Base subscription product added to Cart.")
+
     if id in cart:
         # If product is already in cart..
         if max_product_quantity == 1 and int(product.id) == int(id):
