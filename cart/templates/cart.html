@@ -10,15 +10,15 @@
     {% if cart_items %}
         <p class="product-pitch">To remove an item from the Cart change the quantity to zero and click Amend.</p>
     {% endif %}
-    <div class="row row-flex">
-        {% if not cart_items %}
-            <p>You don't have any items in your cart.</p>
-        {% else %}
-            {% for item in cart_items %}
+    {% if not cart_items %}
+        <p>You don't have any items in your cart.</p>
+    {% else %}
+        {% for item in cart_items %}
+            <div class="row row-flex">
                 <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-default">
                     <div class="panel-body">
                         {% if item.product.image_path %}
-                            <div><img class="product-image"src="{{ item.product.image_path }}" alt="{{ item.product.image_caption }}"></div>
+                            <div><img class="product-image" src="{{ item.product.image_path }}" alt="{{ item.product.image_caption }}"></div>
                         {% else %}
                             <div class="product-image" style="background-image: url('{{ MEDIA_URL }}{{ item.product.image }}')"></div>
                         {% endif %}
@@ -32,7 +32,7 @@
                             <form class="form-inline" method="POST" action="{% url 'adjust_cart' item.id %}">
                                 {% csrf_token %}
                                 <div class="form-group row">
-                                    <label for="exampleInputAmount" class="sr-only">New Qty</label>
+                                    <label class="sr-only">New Qty</label>
                                     <div class="col-xs-12">
                                         <div class="input-group" style="min-width:100%;" >
                                             {% if item.product.price == 0 %}
@@ -41,7 +41,7 @@
                                                 {% setvar 50 as max_quantity %}
                                             {% endif %}
                                             <input name="quantity" type="number" min="0" max="{{ max_quantity }}" class="form-control" placeholder="Change quantity" required>
-                                            <div class="input-group-addon">{{item.quantity}}</div>
+                                            <div class="input-group-addon">{{ item.quantity }}</div>
                                         </div>
                                     </div>
                                     <div class="col-xs-12">
@@ -56,9 +56,9 @@
                         <h4 class="checkout-text">Checkout to get your FREE subscription.</h4>
                     {% endif %}
                 </div>
-            {% endfor %}
-        {% endif %}
-    </div>
+            </div>
+        {% endfor %}
+    {% endif %}
     <div>
         {% if total != 0 %}
             <h4 class="checkout-total">Cart subtotal: £{{ subtotal }}</h4>
