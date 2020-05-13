@@ -12,29 +12,29 @@
         <p class="streets-assigned">Addresses on this street:</p>
         <ul id="data-list">
             {% for address in addresses %}
-                <div class="row">
-                    <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-12">
-                        <li>
-                            <div class="row">
-                                <div class="col-xs-12 col-md-6">
-                                    <p>{{ address.door_number }} {{ address.name }}</p>
-                                    <p class="address-comments">{{ address.comments }}</p>
-                                </div>
-                                <div class="col-xs-12 col-md-6">
-                                    <div class="row">
-                                        <!-- Display a horizontal button group for sm, md and lg devices. -->
-                                        <div class="hidden-xs col-sm-12 col-md-12 col-lg-12">
-                                            <div class="btn-group" role="group" aria-label="Horizontal button group for Edit Comments and Delete Comments.">
-                                                <span class="btn link-btn-purple btn-md"><a href="{% url 'edit_address' street.id address.id %}">Edit comments</a></span>
-                                                <span class="btn link-btn-red btn-md"><a href="#">Delete comments</a></span>
+                <li>
+                    <div class="row">
+                        <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-12">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6">
+                                        <p>{{ address.door_number }} {{ address.name }}</p>
+                                        <p class="address-comments">{{ address.comments }}</p>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="row">
+                                            <!-- Display a horizontal button group for sm, md and lg devices. -->
+                                            <div class="hidden-xs col-sm-12 col-md-12 col-lg-12">
+                                                <div class="btn-group" role="group" aria-label="Horizontal button group for Edit Comments and Delete Comments.">
+                                                    <span class="btn link-btn-purple btn-md"><a href="{% url 'edit_address' street.id address.id %}">Edit comments</a></span>
+                                                    <span class="btn link-btn-red btn-md"><a href="#">Delete comments</a></span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
+                        </div>
                     </div>
-                </div>
+                </li>
             {% endfor %}
         </ul>
     {% endif %}
