@@ -17,6 +17,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     {% block head_js %}
     {% endblock head_js %}
+
+    <style>
+    .blue {
+        background-color: blue;
+    }
+    .green {
+        background-color: green;
+    }
+    </style>
+
 </head>
 <body>
     <nav class="navbar navbar-masthead navbar-default navbar-fixed-top">
@@ -111,7 +121,7 @@
     </div>
     
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             // Add a tooltip to an image.
             $('[data-toggle="tooltip"]').tooltip();
             // Enable dismissal of a Bootstrap alert.
@@ -152,13 +162,29 @@
             for (i = 0; i < li.length; i++) {
                 p = li[i].getElementsByTagName("p")[0];
                 txtValue = p.textContent || p.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                if (txtValuetoUpperCase().indexOf(filter) > -1) {
                     li[i].style.display = "";
                 } else {
                     li[i].style.display = "none";
                 }
             }
         };
+    </script>
+
+    <script>
+        // Change horizontal button group to vertical when screen width 452px or less.
+        $(document).ready(function() {
+            function toggleButtonGroup(x) {
+                if (x.matches) { // If media query matches
+                    $(".btn-group").toggleClass("btn-group-vertical");
+                } else {
+                    $(".btn-group-vertical").toggleClass("btn-group");
+                }
+            }
+            var x = window.matchMedia("(max-width: 452px)");
+            toggleButtonGroup(x); // Call listener function at run time.
+            x.addListener(toggleButtonGroup); // Attach listener function on state changes
+        });
     </script>
 
 </body>
