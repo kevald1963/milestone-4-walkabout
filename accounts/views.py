@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
+from django.contrib.auth.models import Group
 from django.contrib import messages, auth
 from django.core.urlresolvers import reverse
 from .forms import UserLoginForm, UserRegistrationForm
@@ -46,9 +47,18 @@ def login(request):
 @login_required
 def profile(request):
     """
-    A view that displays the profile page of a logged in user.
+    A view that displays the profile page of a logged in user with 
+    group that user belongs to.
     """
-    return render(request, 'profile.html')
+    # Filter the Group model for current logged in user instance.
+    groups = Group.objects.filter(user=request.user)
+
+    # Print to console for debug/checking
+    for g in groups:
+        # This should print all group names for the user.
+        print(g.name)
+
+    return render(request, 'profile.html', {'groups': groups})
 
 
 def register(request):

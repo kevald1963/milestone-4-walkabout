@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <p>You are logged in as {{ user.email }} </p>
-    <p>Your user name is {{ user.username }} </p>
-
+    <pre class="page-summary">User Profile</pre>
+    <p>You are logged in as <strong>{{ user.email }}</strong></p>
+    <p>Your user name is  <strong>{{ user.username }}</strong></p>
+    <p>The group you belong to is
+        <strong>
+            {% for group in groups %}
+                {{ group.name }}
+            {% endfor %}
+        </strong>
+    </p>
 {% endblock %}
