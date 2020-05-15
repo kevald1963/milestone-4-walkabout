@@ -61,6 +61,8 @@
                         <ul class="dropdown-menu">
                             {% if user.is_authenticated %}
                                 {% if request.session.group == 'Administrators' %}
+                                    <li><a href="">My Campaigns</a></li>
+                                    <li class="divider"></li>
                                     <li><a href="{% url 'all_organisations' %}">Organisations</a></li>
                                     <li><a href="{% url 'all_campaigns' %}">Campaigns</a></li>
                                     <li><a href="{% url 'all_rounds' %}">Rounds</a></li>

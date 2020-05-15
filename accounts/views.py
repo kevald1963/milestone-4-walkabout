@@ -32,12 +32,10 @@ def login(request):
                 if "group" in request.session:
                     del request.session["group"]
 
-                # Set a session to user's group. There should only be one..for now.
+                # Set session to user's group. There should only be one..for now.
                 group = Group.objects.filter(user=request.user).values_list('name', flat=True)
-                print("Group = " + group[0])
-
                 request.session["group"] = group[0]
-                print("Session group = " + str(request.session["group"]))
+
                 if request.GET and request.GET['next'] != '':
                     next = request.GET['next']
                     return HttpResponseRedirect(next)

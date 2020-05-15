@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <pre class="page-summary">My Dashboard</pre>
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-12">
+            <p>Campaigns:</p>
+            <select multiple class="form-control">
+                {% for campaign in campaigns %}
+                    <option>{{ campaign.id }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
