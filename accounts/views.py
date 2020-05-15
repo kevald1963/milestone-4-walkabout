@@ -26,10 +26,18 @@ def login(request):
         if user_form.is_valid():
             user = auth.authenticate(request.POST['username_or_email'],
                                      password=request.POST['password'])
-
             if user:
                 auth.login(request, user)
+                # Clear an item from the session.
+                if "group" in request.session:
+                    del request.session["group"]
 
+                # Set a session to user's group. There should only be one..for now.
+                group = Group.objects.filter(user=request.user).values_list('name', flat=True)
+                print("Group = " + group[0])
+
+                request.session["group"] = group[0]
+                print("Session group = " + str(request.session["group"]))
                 if request.GET and request.GET['next'] != '':
                     next = request.GET['next']
                     return HttpResponseRedirect(next)
@@ -52,11 +60,6 @@ def profile(request):
     """
     # Filter the Group model for current logged in user instance.
     groups = Group.objects.filter(user=request.user)
-
-    # Print to console for debug/checking
-    for g in groups:
-        # This should print all group names for the user.
-        print(g.name)
 
     return render(request, 'profile.html', {'groups': groups})
 

@@ -4,8 +4,8 @@
 
     <pre class="page-summary">Please login</pre>
     <form method="post" action="{% url 'login' %}?next={{ next }}" class="accountform">
-        <p>Forgot password? Click <a href="{% url 'password_reset' %}" class="inline email-link">here</a>.</p>
         {% csrf_token %}
+        <p>Forgot password? Click <a href="{% url 'password_reset' %}" class="inline page-link">here</a>.</p>
         {{ user_form | as_bootstrap }}
         <button type="submit" class="btn btn-custom">Login</button>
     </form>
