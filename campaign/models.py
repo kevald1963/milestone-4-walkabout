@@ -1,7 +1,7 @@
-from django.contrib.auth.models import User
 from django.db import models
 from enum import Enum
 from organisation.models import Organisation
+from round.models import Round
 
 
 # Create your models here.
@@ -22,13 +22,13 @@ class Campaign(models.Model):
     """
     objects = models.Manager()
 
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=45)
     description = models.TextField()
     campaign_lead = models.CharField(max_length=50, blank=True)
     organisation = models.ForeignKey(Organisation, null=True, on_delete=models.PROTECT)
     campaign_type = models.CharField(max_length=20, choices=[(tag.name, tag.value)
                                                              for tag in CampaignChoice], default='LEAF')
-    rounds = models.ManyToManyField('round.Round')
+    rounds = models.ManyToManyField(Round)
     active_date = models.DateField()
     inactive_date = models.DateField(null=True, blank=True)
 

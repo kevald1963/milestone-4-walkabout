@@ -61,6 +61,7 @@
                         <ul class="dropdown-menu">
                             {% if user.is_authenticated %}
                                 {% if request.session.group == 'Administrators' %}
+                                    <li><a href="{% url 'dashboard' %}">My Dashboard</a></li>
                                     <li><a href="">My Campaigns</a></li>
                                     <li class="divider"></li>
                                     <li><a href="{% url 'all_organisations' %}">Organisations</a></li>
@@ -77,6 +78,7 @@
                                     <li><a href="{% url 'logout' %}" class="dropdown-toggle">
                                         <i class="fa fa-sign-out"></i> Sign Out</a></li>
                                 {%  else %}
+                                    <li><a href="{% url 'dashboard' %}">My Dashboard</a></li>
                                     <li><a href="">My Campaigns</a></li>
                                     <li><a href="">My Rounds</a></li>
                                     <li class="divider"></li>
@@ -129,6 +131,8 @@
             $('[data-toggle="tooltip"]').tooltip();
             // Enable dismissal of a Bootstrap alert.
             $('.alert').alert();
+            // Enable Bootstrap collapsible.
+            $('.collapse').collapse()
         });
     </script>
 

@@ -160,7 +160,7 @@ h3.no-top-margin {
     margin-top: 50px;
 }
 
-.brand-pitch {
+.brand-pitch, option-list {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     color: black;
@@ -310,12 +310,12 @@ caption p {
 
 .panel-default {
     border-color: transparent;
-    padding: 0 10px;
+    /* padding: 0 10px; */
 }
 
 .panel-body {
     height: auto;
-    border: 2px solid #ddd;
+    border: 1px solid #ddd;
 }
 
 /* Media queries */
