@@ -33,12 +33,7 @@ def create_or_edit_product(request, pk=None):
     else:
         form = EditProductForm(instance=product)
 
-    if product is None:
-        # If no data found then invoke page to add product.
-        operation_type = 'add'
-    else:
-        # Otherwise invoke page to edit product.
-        operation_type = 'edit'
+    operation_type = 'edit' if product else 'add'
 
     return render(request, operation_type + '_product.html', {'form': form})
 
