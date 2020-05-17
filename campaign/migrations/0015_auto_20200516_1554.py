@@ -3,7 +3,6 @@
 from __future__ import unicode_literals
 
 from django.db import migrations
-import smart_selects.db_fields
 
 
 class Migration(migrations.Migration):
@@ -13,9 +12,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='campaign',
-            name='rounds',
-            field=smart_selects.db_fields.ChainedManyToManyField(auto_choose=True, chained_field='name', chained_model_field='name', horizontal=True, to='round.Round'),
-        ),
     ]

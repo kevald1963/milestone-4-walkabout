@@ -41,7 +41,6 @@ urlpatterns = [
     url(r'^organisation/', include(urls_organisation)),
     url(r'^campaign/', include(urls_campaign)),
     url(r'^round/', include(urls_round)),
-    url(r'^chaining/', include('smart_selects.urls')),
 ]
 # if settings.DEBUG:
 #     print("URLS configured to serve static and media files locally.")
