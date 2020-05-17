@@ -27,7 +27,7 @@ class Campaign(models.Model):
     campaign_lead = models.CharField(max_length=50, blank=True)
     organisation = models.ForeignKey(Organisation, null=True, on_delete=models.PROTECT)
     campaign_type = models.CharField(max_length=20, choices=[(tag.name, tag.value)
-                                                             for tag in CampaignChoice], default='LEAF')
+                                                             for tag in CampaignChoice], default='LEAFLET')
     rounds = models.ManyToManyField(Round)
     active_date = models.DateField()
     inactive_date = models.DateField(null=True, blank=True)
@@ -36,5 +36,5 @@ class Campaign(models.Model):
         ordering = ['pk', 'active_date', 'campaign_type', 'name']
 
     def __str__(self):
-        return 'Campaign ID: {}, Start date: {}, Name: {}, Description: {}'.\
-            format(str(self.pk), self.active_date, self.name, self.description)
+        return 'Campaign ID: {}, Start date: {}, Name: {}, Description: {}, Type: {}'.\
+            format(str(self.pk), self.active_date, self.name, self.description, self.campaign_type)

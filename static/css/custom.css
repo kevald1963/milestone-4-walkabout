@@ -96,7 +96,11 @@ h3.no-top-margin {
     color: white;
 }
 
-.btn-amend {
+.btn-panel-list {
+    margin-top: 5px;
+}
+
+.btn-amend, .panel-text {
     margin-top: 10px;
 }
 
@@ -309,13 +313,13 @@ caption p {
 }
 
 .panel-default {
-    border-color: transparent;
-    /* padding: 0 10px; */
+    border: 1px solid #ddd;
 }
 
-.panel-body {
+.panel-body, .list-group {
     height: auto;
     border: 1px solid #ddd;
+    padding-left: 10px;
 }
 
 /* Media queries */

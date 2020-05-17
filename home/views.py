@@ -15,5 +15,8 @@ def dashboard(request):
     A view that displays the dashboard page. The dashboard shows the campaign tasks
     assigned to each Agent.
     """
-    new_campaigns = Campaign.objects.all().filter(inactive_date__isnull=True).order_by('id')
-    return render(request, "dashboard.html",  {'new_campaigns': new_campaigns})
+    # Select all active campaigns with attached rounds
+    campaigns = Campaign.objects.all().filter(inactive_date__isnull=True).order_by('id')
+    print('campaigns = ' + str(campaigns))
+
+    return render(request, "dashboard.html",  {'campaigns': campaigns})
