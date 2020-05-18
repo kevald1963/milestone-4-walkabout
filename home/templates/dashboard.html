@@ -10,14 +10,35 @@
                 {% for campaign in campaigns %}
                 <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="heading{{ forloop.counter }}">
-                        <h4 class="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}">
-                                Campaign No: {{ campaign.id }},
-                                Name: {{ campaign.name }},
-                                Description: {{ campaign.description }},
-                                Type: {{ campaign.campaign_type }}
-                            </a>
-                        </h4>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}">
+                                        Campaign No: {{ campaign.id }},
+                                        Name: {{ campaign.name }},
+                                        Description: {{ campaign.description }},
+                                        Type: {{ campaign.campaign_type }}
+                                    </a>
+                                </h4>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="btn-group">
+                                    <button type="button" style="color:white;"
+                                        class="btn btn-custom btn-panel-list dropdown-toggle"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Assigned Users <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        {% for user in campaign.assigned_users.all %}
+                                            <li><a href="#">{{ user }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <a href="{% url 'assign_user_to_campaign' campaign.id %}"
+                                    class="btn btn-custom btn-panel-list"
+                                    style="color:white;">Assign me to this Campaign</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse in" role="tabpanel">
@@ -28,7 +49,16 @@
                                     <p>Round: {{ round }}</p>
                                 </div>
                                 <div class="col-xs-12 col-md-8">
-                                    <button class="btn btn-custom btn-sm btn-panel-list">Assign me to this Round</button>
+                                    <button type="button" style="color:white;"
+                                        class="btn btn-custom btn-sm btn-panel-list dropdown-toggle"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        View Streets <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        {% for user in campaign.assigned_users.all %}
+                                            <li><a href="#">{{ user }}</a></li>
+                                        {% endfor %}
+                                    </ul>
                                 </div>
                             </div>
                         {% endfor %}

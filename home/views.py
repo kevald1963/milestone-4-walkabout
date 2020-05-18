@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
+from django.contrib import messages
 from campaign.models import Campaign
 
 
@@ -17,6 +18,16 @@ def dashboard(request):
     """
     # Select all active campaigns with attached rounds
     campaigns = Campaign.objects.all().filter(inactive_date__isnull=True).order_by('id')
-    print('campaigns = ' + str(campaigns))
 
     return render(request, "dashboard.html",  {'campaigns': campaigns})
+
+
+def assign_user_to_campaign(request, pk):
+    """
+    A view that assigns a user to a campaign.
+    """
+    campaign = Campaign.objects.get(pk=pk)
+    campaign.assigned_users.add(request.user)
+
+    messages.add_message(request, messages.INFO, 'User ' + str(request.user) + ' added to Campaign.')
+    return redirect(reverse('dashboard'))

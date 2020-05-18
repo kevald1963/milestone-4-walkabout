@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from enum import Enum
 from organisation.models import Organisation
@@ -31,6 +32,7 @@ class Campaign(models.Model):
     rounds = models.ManyToManyField(Round)
     active_date = models.DateField()
     inactive_date = models.DateField(null=True, blank=True)
+    assigned_users = models.ManyToManyField(User)
 
     class Meta:
         ordering = ['pk', 'active_date', 'campaign_type', 'name']
