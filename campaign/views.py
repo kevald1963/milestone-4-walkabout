@@ -28,12 +28,8 @@ def create_or_edit_campaign(request, pk=None):
     else:
         form = EditCampaignForm(instance=campaign)
 
-    if campaign is None:
-        # If no data found then invoke page to add campaign.
-        operation_type = 'add'
-    else:
-        # Otherwise invoke page to edit campaign.
-        operation_type = 'edit'
+    # If data found then invoke page to edit campaign, otherwise invoke page to add campaign.
+    operation_type = 'edit' if campaign else 'add'
 
     return render(request, operation_type + '_campaign.html', {'form': form})
 

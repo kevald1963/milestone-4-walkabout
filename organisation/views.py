@@ -41,12 +41,8 @@ def create_or_edit_organisation(request, pk=None):
     else:
         form = EditOrganisationForm(instance=organisation)
 
-    if organisation is None:
-        # If no data found then invoke page to add organisation.
-        operation_type = "add"
-    else:
-        # Otherwise invoke page to edit organisation.
-        operation_type = "edit"
+    # If data found then invoke page to edit organisation, otherwise invoke page to add organisation.
+    operation_type = 'edit' if organisation else 'add'
 
     return render(request, operation_type + '_organisation.html', {'form': form})
 

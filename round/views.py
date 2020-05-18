@@ -29,12 +29,8 @@ def create_or_edit_round(request, pk=None):
     else:
         form = EditRoundForm(instance=round)
 
-    if round is None:
-        # If no data found then invoke page to add round.
-        operation_type = 'add'
-    else:
-        # Otherwise invoke page to edit round.
-        operation_type = 'edit'
+    # If data found then invoke page to edit round, otherwise invoke page to add round.
+    operation_type = 'edit' if round else 'add'
 
     return render(request, operation_type + '_round.html', {'form': form})
 
@@ -72,12 +68,8 @@ def create_or_edit_street(request, pk=None):
     else:
         form = EditStreetForm(instance=street)
 
-    if street is None:
-        # If no data found then invoke page to add street.
-        operation_type = 'add'
-    else:
-        # Otherwise invoke page to edit street.
-        operation_type = 'edit'
+    # If data found then invoke page to edit street, otherwise invoke page to add street.
+    operation_type = 'edit' if street else 'add'
 
     return render(request, operation_type + '_street.html', {'form': form})
 
