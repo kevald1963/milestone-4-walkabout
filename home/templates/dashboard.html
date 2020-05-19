@@ -20,6 +20,9 @@
                                         Type: {{ campaign.campaign_type }}
                                     </a>
                                 </h4>
+                                {% if user in campaign.assigned_users.all %}
+                                    <pre class="dashboard-panel">You are assigned to this campaign.</pre>
+                                {% endif %}
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <!-- USER ASSIGNED TO CAMPAIGN DROPDOWN BUTTON -->
@@ -35,13 +38,17 @@
                                         {% endfor %}
                                     </ul>
                                 </div>
-                                {% if user in campaign.assigned_users.all %}
-                                    You are assigned to this campaign.
-                                {% else %}
+                                {% if user not in campaign.assigned_users.all %}
                                     <!-- ASSIGN USER TO CAMPAIGN BUTTON -->
                                     <a href="{% url 'assign_user_to_campaign' campaign.id %}"
                                         class="btn link-btn-orange btn-panel-list"
                                         style="color:white;">Assign me to this Campaign
+                                    </a>
+                                {% else %}
+                                    <!-- START CAMPAIGN BUTTON -->
+                                    <a href="{% url 'start_campaign' campaign.id %}"
+                                        class="btn link-btn-orange btn-panel-list"
+                                        style="color:white;">Start Campaign
                                     </a>
                                 {% endif %}
                             </div>
@@ -70,10 +77,8 @@
                                         {% endfor %}
                                     </ul>
                                     <!-- STREET DETAILS BUTTON -->
-                                    <!--
-                                         Limit access to Linked Streets page to Administrators only
-                                         as it allows creation and deletion of streets.
-                                    -->
+                                    <!-- Limit access to Linked Streets page to Administrators only
+                                         as it allows creation and deletion of streets. -->
                                     {% if request.session.group == 'Administrators' %}
                                         <a href="{% url 'linked_streets' round.id %}" class="btn link-btn-orange btn-panel-list"
                                             style="color:white;">Street Details

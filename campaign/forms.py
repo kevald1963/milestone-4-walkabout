@@ -13,6 +13,7 @@ class EditCampaignForm(forms.ModelForm):
             'organisation',
             'campaign_type',
             'rounds',
+            'assigned_users',
             'active_date',
             'inactive_date',
         )

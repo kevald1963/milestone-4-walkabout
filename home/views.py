@@ -31,5 +31,15 @@ def assign_user_to_campaign(request, pk):
     campaign = Campaign.objects.get(pk=pk)
     campaign.assigned_users.add(request.user)
 
-    messages.add_message(request, messages.INFO, 'User ' + str(request.user) + ' added to Campaign.')
+    messages.add_message(request, messages.INFO, 'User ' + str(request.user) +
+                         ' added to Campaign: ' + str(campaign))
     return redirect(reverse('dashboard'))
+
+
+def start_campaign(request, pk):
+    """
+    A view that assigns a user to a campaign.
+    """
+    campaigns = Campaign.objects.all().filter(inactive_date__isnull=True).order_by('id')
+
+    return render(request, "dashboard.html",  {'campaigns': campaigns})
