@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <pre class="page-summary">My Campaign Rounds</pre>
+    <p>Campaign: {{ campaign }}</p>
+    <span class="btn btn-custom"><a href="{% url 'all_streets' %}">All streets</a></span>
+    <div class="filter" title="Search image from freepnglogos.com">
+        <input id="filter-input" onkeyup="filter()" placeholder="Filter by round name.." type="text">
+    </div>
+    <ul id="data-list">
+        {% for round in campaign.rounds.all %}
+            <li>
+                <div class="row">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-12">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <p>{{ round.name }} ({{ round.description }})</p>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="row">
+                                    <!-- Display a horizontal button group for sm, md and lg devices. -->
+                                    <div class="hidden-xs col-sm-12 col-md-12 col-lg-12">
+                                        <div class="btn-group" role="group" aria-label="Horizontal button group.">
+                                            <span class="btn link-btn-orange btn-md"><a href="{% url 'linked_streets' round.id %}">Linked streets</a></span>
+                                        </div>
+                                    </div>
+                                    <!-- Display a vertical button group for xs devices. -->
+                                    <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+                                        <div class="btn-group-vertical" role="group" aria-label="Vertical button group.">
+                                            <span class="btn link-btn-orange btn-md"><a href="{% url 'linked_streets' round.id %}">Linked streets</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

@@ -36,10 +36,10 @@ def assign_user_to_campaign(request, pk):
     return redirect(reverse('dashboard'))
 
 
-def start_campaign(request, pk):
+def campaign_tasks(request, pk):
     """
-    A view that assigns a user to a campaign.
+    A view that gets the relevant data to physically start the campaign.
     """
-    campaigns = Campaign.objects.all().filter(inactive_date__isnull=True).order_by('id')
-
-    return render(request, "dashboard.html",  {'campaigns': campaigns})
+    campaign = Campaign.objects.get(pk=pk)
+    print(campaign)
+    return render(request, "campaign_tasks.html",  {'campaign': campaign})
