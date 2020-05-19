@@ -48,6 +48,10 @@ h3.no-top-margin {
     font-size: 18px;
 }
 
+.btn-group > .btn:first-child {
+    margin-left: 5px;
+}
+
 .link-btn-purple {
     color: white;
     background-color: #6d41e8;
@@ -98,6 +102,7 @@ h3.no-top-margin {
 
 .btn-panel-list {
     margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .btn-amend, .panel-text {

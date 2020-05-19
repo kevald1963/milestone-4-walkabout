@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
 from campaign.models import Campaign
+from round.models import Street
 
 
 # Create your views here.
@@ -18,8 +19,9 @@ def dashboard(request):
     """
     # Select all active campaigns with attached rounds
     campaigns = Campaign.objects.all().filter(inactive_date__isnull=True).order_by('id')
+    streets = Street.objects.all().order_by('round', 'name')
 
-    return render(request, "dashboard.html",  {'campaigns': campaigns})
+    return render(request, "dashboard.html",  {'campaigns': campaigns, 'streets': streets})
 
 
 def assign_user_to_campaign(request, pk):
