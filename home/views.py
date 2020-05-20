@@ -36,10 +36,9 @@ def assign_user_to_campaign(request, pk):
     return redirect(reverse('dashboard'))
 
 
-def campaign_tasks(request, pk):
+def start_tasks(request, pk):
     """
-    A view that gets the relevant data to physically start the campaign.
+    A view that gets the campaign and round data to physically start the campaign.
     """
     campaign = Campaign.objects.get(pk=pk)
-    print(campaign)
-    return render(request, "campaign_tasks.html",  {'campaign': campaign})
+    return render(request, "start_tasks.html",  {'campaign': campaign})

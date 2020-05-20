@@ -25,7 +25,7 @@
                                 {% endif %}
                             </div>
                             <div class="col-xs-12 col-md-6">
-                                <!-- USER ASSIGNED TO CAMPAIGN DROPDOWN BUTTON -->
+                                <!-- USERS ASSIGNED TO CAMPAIGN DROPDOWN BUTTON -->
                                 <div class="btn-group">
                                     <button type="button" style="color:white;"
                                         class="btn link-btn-purple btn-panel-list dropdown-toggle"
@@ -46,7 +46,7 @@
                                     </a>
                                 {% else %}
                                     <!-- START CAMPAIGN BUTTON -->
-                                    <a href="{% url 'campaign_tasks' campaign.id %}"
+                                    <a href="{% url 'start_tasks' campaign.id %}"
                                         class="btn link-btn-orange btn-panel-list"
                                         style="color:white;">Start Campaign
                                     </a>
@@ -77,9 +77,9 @@
                                         {% endfor %}
                                     </ul>
                                     <!-- STREET DETAILS BUTTON -->
-                                    <!-- Limit access to Linked Streets page to Administrators only
-                                         as it allows creation and deletion of streets. -->
                                     {% if request.session.group == 'Administrators' %}
+                                        <!-- Limit access to Linked Streets page to Administrators only
+                                             as it allows creation and deletion of streets. -->
                                         <a href="{% url 'linked_streets' round.id %}" class="btn link-btn-orange btn-panel-list"
                                             style="color:white;">Street Details
                                         </a>

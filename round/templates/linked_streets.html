@@ -27,21 +27,29 @@
                                 <!-- Display a horizontal button group for sm, md and lg devices. -->
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <div class="btn-group" role="group"
-                                         aria-label="Button group for Edit Street, Delete Street,
-                                         View Addresses and Create Addresses">
-                                        <span class="btn link-btn-purple btn-md">
-                                            <a href="{% url 'edit_street' street.id %}?next={{ request.path|urlencode }}">Edit</a>
-                                        </span>
-                                        <span class="btn link-btn-red btn-md">
-                                            <a href="{% url 'delete_street' street.id %}?next={{ request.path|urlencode }}">Delete</a>
-                                        </span>
-                                        <span class="btn link-btn-light-blue btn-md">
-                                            <a href="{% url 'view_addresses' street.id %}">View Addresses</a>
-                                        </span>
-                                        <span class="btn link-btn-orange btn-md">
-                                            <a href="{% url 'create_addresses' street.id %}">Create Addresses</a>
-                                        </span>
-                                     </div>
+                                        aria-label="Button group for Edit Street, Delete Street,
+                                        View Addresses and Create Addresses according to user permissions.">
+                                        {% if request.session.group == 'Administrators' %}
+                                            <!-- Limit access to editing and deletion of streets, and creation of
+                                                 addresses to Administrators only. -->
+                                            <span class="btn link-btn-purple">
+                                                <a href="{% url 'edit_street' street.id %}?next={{ request.path|urlencode }}">Edit</a>
+                                            </span>
+                                            <span class="btn link-btn-red">
+                                                <a href="{% url 'delete_street' street.id %}?next={{ request.path|urlencode }}">Delete</a>
+                                            </span>
+                                            <span class="btn link-btn-light-blue">
+                                                <a href="{% url 'view_addresses' street.id %}">View Addresses</a>
+                                            </span>
+                                            <span class="btn link-btn-orange">
+                                                <a href="{% url 'create_addresses' street.id %}">Create Addresses</a>
+                                            </span>
+                                        {% else %}
+                                            <span class="btn link-btn-light-blue">
+                                                <a href="{% url 'view_addresses' street.id %}">View Addresses</a>
+                                            </span>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
