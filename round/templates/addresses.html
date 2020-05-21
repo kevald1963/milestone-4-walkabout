@@ -25,8 +25,13 @@
                                             <!-- Display a horizontal button group for sm, md and lg devices. -->
                                             <div class="hidden-xs col-sm-12 col-md-12 col-lg-12">
                                                 <div class="btn-group" role="group" aria-label="Horizontal button group for Edit Comments and Delete Comments.">
-                                                    <span class="btn link-btn-purple btn-md"><a href="{% url 'edit_address' street.id address.id %}">Edit comments</a></span>
-                                                    <span class="btn link-btn-red btn-md"><a href="#">Delete comments</a></span>
+                                                    {% if request.session.group == 'Administrators' %}
+                                                        <!-- Limit access to deleting addresses to Administrators only. -->
+                                                        <span class="btn link-btn-purple"><a href="{% url 'edit_address' street.id address.id %}">Edit Comments</a></span>
+                                                        <span class="btn link-btn-red"><a href="{% url 'delete_address' address.id %}?next={{ request.path|urlencode }}">Delete Address</a></span>
+                                                    {% else %}
+                                                        <span class="btn link-btn-purple"><a href="{% url 'edit_address' street.id address.id %}">Edit Comments</a></span>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>

@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views.generic.edit import DeleteView
 from django.core.urlresolvers import reverse_lazy
 from django.db import transaction
@@ -37,7 +37,7 @@ def create_or_edit_round(request, pk=None):
 
 class RoundDelete(DeleteView):
     """
-    Delete the round and return to Rounds page after delete confirmation.
+    Delete a round and return to Rounds page after delete confirmation.
     """
     model = Round
     template_name = 'round_confirm_delete.html'
@@ -76,7 +76,7 @@ def create_or_edit_street(request, pk=None):
 
 class StreetDelete(DeleteView):
     """
-    Delete the street and return to previous page after delete confirmation.
+    Delete a street and return to previous page after delete confirmation.
     """
     model = Street
     template_name = 'street_confirm_delete.html'
@@ -142,3 +142,16 @@ def edit_address(request, pk, pk2):
         form = EditAddressForm(instance=address)
 
     return render(request, 'edit_address.html', {'street': street, 'address': address, 'form': form})
+
+
+class AddressDelete(DeleteView):
+    """
+    Delete an Address and return to previous page after delete confirmation.
+    """
+    model = Address
+    template_name = 'address_confirm_delete.html'
+
+    # Return back to page previous page.
+    def get_success_url(self):
+        return reverse_lazy('view_addresses', kwargs={'pk': self.object.name_id})
+
