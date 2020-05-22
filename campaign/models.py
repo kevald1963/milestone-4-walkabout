@@ -29,8 +29,8 @@ class Campaign(models.Model):
     organisation = models.ForeignKey(Organisation, null=True, on_delete=models.PROTECT)
     campaign_type = models.CharField(max_length=20, choices=[(tag.name, tag.value)
                                                              for tag in CampaignChoice], default='LEAFLET')
-    rounds = models.ManyToManyField(Round)
-    assigned_users = models.ManyToManyField(User)
+    rounds = models.ManyToManyField(Round, blank=True)
+    assigned_users = models.ManyToManyField(User, blank=True)
     active_date = models.DateField()
     inactive_date = models.DateField(null=True, blank=True)
 
