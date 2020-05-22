@@ -23,7 +23,7 @@ class Campaign(models.Model):
     """
     objects = models.Manager()
 
-    name = models.CharField(max_length=45)
+    name = models.CharField(max_length=40)
     description = models.TextField()
     campaign_lead = models.CharField(max_length=50, blank=True)
     organisation = models.ForeignKey(Organisation, null=True, on_delete=models.PROTECT)
