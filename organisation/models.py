@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from django.db import models
 from product.models import Product
 
@@ -25,7 +24,6 @@ class Organisation(models.Model):
     email_address = models.EmailField(max_length=40)
     landline_number = models.CharField(max_length=14, blank=True)
     mobile_number = models.CharField(max_length=14, blank=True)
-    # updated_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.name
