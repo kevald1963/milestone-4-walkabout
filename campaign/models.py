@@ -35,8 +35,8 @@ class Campaign(models.Model):
     inactive_date = models.DateField(null=True, blank=True)
 
     class Meta:
-        ordering = ['pk', 'active_date', 'campaign_type', 'name']
+        ordering = ['name', 'active_date','campaign_type', ]
 
     def __str__(self):
-        return 'Campaign ID: {}, Start date: {}, Name: {}, Description: {}, Type: {}'.\
-            format(str(self.pk), self.active_date, self.name, self.description, self.campaign_type)
+        return 'Name: {}, Start date: {}, Description: {}, Type: {}'.\
+            format(self.name, self.active_date, self.description, self.campaign_type)
