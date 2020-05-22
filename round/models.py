@@ -5,8 +5,8 @@ from django.db import models
 class Round(models.Model):
     objects = models.Manager()
 
-    name = models.CharField(max_length=40)
-    description = models.CharField(max_length=60, blank=True)
+    name = models.CharField(max_length=30)
+    description = models.CharField(max_length=50, blank=True)
 
     class Meta:
         ordering = ['name']
@@ -18,7 +18,7 @@ class Round(models.Model):
 class Street(models.Model):
     objects = models.Manager()
 
-    name = models.CharField(max_length=40)
+    name = models.CharField(max_length=30)
     comments = models.TextField(blank=True)
     door_number_start = models.SmallIntegerField()
     door_number_end = models.SmallIntegerField()
