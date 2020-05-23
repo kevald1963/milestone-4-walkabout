@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth.models import Group
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.contrib import messages, auth
 from django.core.urlresolvers import reverse
 from .forms import UserLoginForm, UserRegistrationForm
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
-
+import traceback
+import logging
 
 # Create your views here.
 def logout(request):
@@ -28,19 +30,31 @@ def login(request):
                                      password=request.POST['password'])
             if user:
                 auth.login(request, user)
-                # Clear an item from the session.
+                # Clear existing group from the session.
                 if "group" in request.session:
                     del request.session["group"]
 
-                # Set session to user's group. There should only be one..for now.
-                group = Group.objects.filter(user=request.user).values_list('name', flat=True)
-                request.session["group"] = group[0]
+                # Set session to user's group. There should only be one group per user..for now!
+                try:
+                    group = Group.objects.filter(user=request.user).values_list('name', flat=True)
+                    print(group)
+                    request.session["group"] = group[0]
 
-                if request.GET and request.GET['next'] != '':
-                    next = request.GET['next']
-                    return HttpResponseRedirect(next)
-                else:
-                    return redirect(reverse('index'))
+                    if request.GET and request.GET['next'] != '':
+                        next = request.GET['next']
+                        return HttpResponseRedirect(next)
+                    else:
+                        return redirect(reverse('index'))
+                except ObjectDoesNotExist:
+                    messages.error(request, "User's group has not been found. "
+                                            "Please contact your Administrator to set one up.")
+                except MultipleObjectsReturned:
+                    messages.error(request, "User's group has not been found. "
+                                            "Please contact your Administrator to set one up.")
+                except Exception as e:
+                    logging.error(traceback.format_exc())
+                    messages.error(request, "Sorry, couldn't sign you in. "
+                                            "Please contact your Administrator.")
             else:
                 user_form.add_error(None, "Your username or password are incorrect.")
     else:
