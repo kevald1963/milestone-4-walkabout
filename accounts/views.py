@@ -9,6 +9,9 @@ from django.contrib.auth.decorators import login_required
 import traceback
 import logging
 
+DEFAULT_USER_GROUP = 'Agents'
+
+
 # Create your views here.
 def logout(request):
     """
@@ -37,23 +40,29 @@ def login(request):
                 # Set session to user's group. There should only be one group per user..for now!
                 try:
                     group = Group.objects.filter(user=request.user).values_list('name', flat=True)
-                    print(group)
-                    request.session["group"] = group[0]
+                    if not group:
+                        request.session["group"] = DEFAULT_USER_GROUP
+                        messages.error(request, "Your user group has not been found so you have been "
+                                                "assigned, for this session, to the [ "
+                                                + DEFAULT_USER_GROUP + " ] group. "
+                                                "Please contact your Administrator to set up a permanent one for you.")
+
+                    else:
+                        request.session["group"] = group[0]
+                        if group[1]:
+                            messages.error(request, "Too many groups have been found for your user, so you have been "
+                                                    "assigned, for this session, to the first one found: [ "
+                                                    + group[0] + " ]. "
+                                                    "Please contact your Administrator to place you in just one.")
 
                     if request.GET and request.GET['next'] != '':
                         next = request.GET['next']
                         return HttpResponseRedirect(next)
                     else:
                         return redirect(reverse('index'))
-                except ObjectDoesNotExist:
-                    messages.error(request, "User's group has not been found. "
-                                            "Please contact your Administrator to set one up.")
-                except MultipleObjectsReturned:
-                    messages.error(request, "User's group has not been found. "
-                                            "Please contact your Administrator to set one up.")
                 except Exception as e:
                     logging.error(traceback.format_exc())
-                    messages.error(request, "Sorry, couldn't sign you in. "
+                    messages.error(request, "Sorry, a technical problem was logged when signing you in. "
                                             "Please contact your Administrator.")
             else:
                 user_form.add_error(None, "Your username or password are incorrect.")
