@@ -17,7 +17,7 @@ def logout(request):
     A view that logs the user out and redirects back to the index page.
     """
     auth.logout(request)
-    messages.success(request, 'You are logged out.')
+    messages.success(request, 'You are signed out.')
     return redirect(reverse('index'))
 
 
@@ -48,7 +48,7 @@ def login(request):
 
                     else:
                         request.session["group"] = group[0]
-                        if group[1]:
+                        if len(group) > 1:
                             messages.error(request, "Too many groups have been found for your user, so you have been "
                                                     "assigned, for this session, to the first one found: [ "
                                                     + group[0] + " ]. "
@@ -59,7 +59,7 @@ def login(request):
                         return HttpResponseRedirect(next)
                     else:
                         return redirect(reverse('index'))
-                except Exception as e:
+                except Exception:
                     logging.error(traceback.format_exc())
                     messages.error(request, "Sorry, a technical problem was logged when signing you in. "
                                             "Please contact your Administrator.")
@@ -75,10 +75,10 @@ def login(request):
 @login_required
 def profile(request):
     """
-    A view that displays the profile page of a logged in user with 
+    A view that displays the profile page of a signed in user with
     group that user belongs to.
     """
-    # Filter the Group model for current logged in user instance.
+    # Filter the Group model for current signed in user instance.
     groups = Group.objects.filter(user=request.user)
 
     return render(request, 'profile.html', {'groups': groups})
