@@ -254,8 +254,8 @@ p.brand-benefits  {
     display: block;
     max-width: 200px;
     max-height: 200px;
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 200px;
     margin: 0 auto;
 }
 
@@ -326,14 +326,26 @@ caption p {
     margin-top: 30px;
 }
 
-.panel-default {
+.dashboard-panel-default {
     border: 1px solid #ddd;
+    padding: 0;
+    background-color: WhiteSmoke;
 }
 
-.panel-body, .list-group {
+.list-group {
     height: auto;
     border: 1px solid #ddd;
     padding-left: 10px;
+}
+
+.panel-default {
+    border-color: transparent;
+    padding: 0 10px;
+}
+
+.panel-body {
+    height: auto;
+    border: 2px solid #ddd;
 }
 
 /* Media queries */

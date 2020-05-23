@@ -34,8 +34,6 @@
                         <div><img class="product-image" src="{{ product.image_path }}" alt="{{ product.image_caption }}"></div>
                     {% else %}
                         <div><img class="product-image" src="{{ MEDIA_URL }}{{ product.image }}" alt="{{ product.image_caption }}"></div>
-
-                    <!--                        <div class="product-image" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>-->
                     {% endif %}
                     <h3 class="product-name">{{ product.name }}</h3>
                     <textarea class="product-description" rows="5" cols="1" disabled>{{ product.description }}</textarea>
@@ -47,12 +45,13 @@
                     <form method="POST" action="{% url 'add_to_cart' product.id %}">
                         {% csrf_token %}
                         <div class="input-group">
-                            <input name="quantity[]" type="number" min="0" max="{{ product.max_product_quantity }}" oninput="SetDisableAttr({{ product.number }})" class="form-control" placeholder="Quantity" required>
+                            <input name="quantity[]" type="number" min="0" max="{{ product.max_product_quantity }}"
+                                   oninput="SetDisableAttr({{ product.number }})" class="form-control" placeholder="Quantity" required>
                             <span class="input-group-btn">
                                 <!--
                                 Inline style applied below to overcome problem of text colour appearing black after clicking
                                 and returning to this page. Refreshing page or clicking elsewhere returns the text colour to
-                                white again. Can't find solution on forums.
+                                white again. Can't find solution using local css file or on Internet forums.
                                 -->
                                 <button name="add-btn[]" class="btn btn-custom" style="color:white;" type="submit" disabled>Add</button>
                             </span>
