@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth.models import Group
-from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.contrib import messages, auth
 from django.core.urlresolvers import reverse
 from .forms import UserLoginForm, UserRegistrationForm
