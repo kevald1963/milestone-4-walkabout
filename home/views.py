@@ -33,6 +33,7 @@ def assign_user_to_campaign(request, pk):
 
     messages.add_message(request, messages.INFO, 'User ' + str(request.user) +
                          ' added to Campaign: ' + str(campaign))
+
     return redirect(reverse('dashboard'))
 
 
@@ -41,4 +42,4 @@ def start_tasks(request, pk):
     A view that gets the campaign and round data to physically start the campaign.
     """
     campaign = Campaign.objects.get(pk=pk)
-    return render(request, "start_tasks.html",  {'campaign': campaign})
+    return render(request, "start_tasks.html", {'campaign': campaign})

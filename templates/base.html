@@ -60,7 +60,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             {% if user.is_authenticated %}
-                                {% if request.session.group == 'Administrators' %}
+                                {% if request.session.group == 'Administrator' %}
                                     <li><a href="{% url 'dashboard' %}">My Dashboard</a></li>
                                     <li><a href="">My Campaigns</a></li>
                                     <li class="divider"></li>
