@@ -4,7 +4,7 @@
 
     <pre class="page-summary">Create an account</pre>
     <form method="post" action="{% url 'register' %}" class="accountform">
-        <p>Already got an account? <a href="{% url 'login' %}" class="inline email-link">Sign In</a></p>
+        <p>Already got an account? <a href="{% url 'login' %}" class="inline page-link">Sign In</a></p>
         {% csrf_token %}
         {{ user_form | as_bootstrap }}
         <button type="submit" class="btn btn-custom">Create account</button>
