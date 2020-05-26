@@ -17,13 +17,13 @@ class Organisation(models.Model):
     image = models.ImageField(upload_to='images', blank=True)
     image_caption = models.CharField(max_length=70, blank=True)
     address_1 = models.CharField(max_length=40, blank=False)
-    address_2 = models.CharField(max_length=40, blank=False)
+    address_2 = models.CharField(max_length=40, blank=True)
     address_3 = models.CharField(max_length=40, blank=True)
-    town_or_city = models.CharField(max_length=40, blank=True)
+    town_or_city = models.CharField(max_length=40, blank=False)
     post_code = models.CharField(max_length=10)
     email_address = models.EmailField(max_length=40)
     landline_number = models.CharField(max_length=14, blank=True)
-    mobile_number = models.CharField(max_length=14, blank=True)
+    mobile_number = models.CharField(max_length=14, blank=False)
 
     def __str__(self):
         return self.name

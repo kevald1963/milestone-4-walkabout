@@ -49,12 +49,14 @@
             {% endif %}
         {% endif %}
         <h3 class="checkout-total">Total to pay: £{{ total }}</h3>
-        <a href="{% url 'empty_cart' %}" class="btn btn-custom" role="button">
-            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Empty Cart</a>
     {% else %}
-        <a href="{% url 'all_products' %}" class="btn btn-custom" role="button">
-            <span class="glyphicon glyphicon-gift" aria-hidden="true"></span> Continue Shopping</a>
+        <h3 class="checkout-total">Total to pay: £{{ total }}.</h3>
+        <p>Nothing to pay, but please complete order form to register this product.</p>
     {% endif %}
+    <a href="{% url 'empty_cart' %}" class="btn btn-custom" role="button">
+        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Empty Cart</a>
+    <a href="{% url 'all_products' %}" class="btn btn-custom" role="button">
+        <span class="glyphicon glyphicon-gift" aria-hidden="true"></span> Continue Shopping</a>
 </div>
 
 {% if cart_items %}

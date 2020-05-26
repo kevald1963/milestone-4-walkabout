@@ -4,4 +4,5 @@ from .views import checkout
 
 urlpatterns = [
     url(r'^$', checkout, name='checkout'),
+    # url(r'^(?P<total>\d+)$', checkout, name='checkout'),
 ]

@@ -13,8 +13,8 @@
     {% if not cart_items %}
         <p>You don't have any items in your cart.</p>
     {% else %}
-        {% for item in cart_items %}
-            <div class="row row-flex">
+        <div class="row row-flex">
+            {% for item in cart_items %}
                 <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-default">
                     <div class="panel-body">
                         {% if item.product.image_path %}
@@ -52,30 +52,30 @@
                             <h4 class="product-total">Subtotal: {{ item.quantity }} x £{{ item.product.price }} = £{{ item.quantity|mul:item.product.price }}</h4>
                         </div>
                     </div>
-                    {% if item.product.price == 0 %}
-                        <h4 class="checkout-text">Checkout to get your FREE subscription.</h4>
-                    {% endif %}
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     {% endif %}
 
     <div>
-            <h4 class="checkout-total">Cart subtotal: £{{ subtotal }}</h4>
-            {% if discount_amount != 0 %}
-                <h4 class="checkout-total">Discount @{{ percent }}% : £{{ discount_amount }}</h4>
-            {% else %}
-                {% if total != 0 %}
-                    <h4 class="checkout-total">Single item purchase - no discount applied.</h4>
-                {% endif %}
+        <h4 class="checkout-total">Cart subtotal: £{{ subtotal }}</h4>
+        {% if discount_amount != 0 %}
+            <h4 class="checkout-total">Discount @{{ percent }}% : £{{ discount_amount }}</h4>
+        {% else %}
+            {% if total != 0 %}
+                <h4 class="checkout-total">Single item purchase - no discount applied.</h4>
             {% endif %}
-            <h3 class="checkout-total">Total to pay: £{{ total }}</h3>
-            <a href="{% url 'checkout' %}" class="btn btn-custom" role="button">
-                <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkout</a>
-            <a href="{% url 'empty_cart' %}" class="btn btn-custom" role="button">
-                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Empty Cart</a>
-            <a href="{% url 'all_products' %}" class="btn btn-custom" role="button">
-                <span class="glyphicon glyphicon-gift" aria-hidden="true"></span> Continue Shopping</a>
+        {% endif %}
+        <h3 class="checkout-total">Total to pay: £{{ total }}</h3>
+        {% if total == 0 %}
+            <h4 class="checkout-text">Checkout to get your FREE subscription.</h4>
+        {% endif %}
+        <a href="{% url 'checkout' %}" class="btn btn-custom" role="button" style="color: white;">
+            <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkout</a>
+        <a href="{% url 'empty_cart' %}" class="btn btn-custom" role="button">
+            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Empty Cart</a>
+        <a href="{% url 'all_products' %}" class="btn btn-custom" role="button">
+            <span class="glyphicon glyphicon-gift" aria-hidden="true"></span> Continue Shopping</a>
     </div>
 </div>
 

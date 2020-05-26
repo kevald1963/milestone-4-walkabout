@@ -10,18 +10,16 @@ class Order(models.Model):
 
     name = models.CharField(max_length=50, blank=False, verbose_name='Name of your organisation or full '
                                                                      'name if not an organisation.')
-    user = ForeignKey(User, null=True)
     address_1 = models.CharField(max_length=40, blank=False)
-    address_2 = models.CharField(max_length=40, blank=False)
+    address_2 = models.CharField(max_length=40, blank=True)
     address_3 = models.CharField(max_length=40, blank=True)
-    town_or_city = models.CharField(max_length=40, blank=True)
-    post_code = models.CharField(max_length=10)
-    email_address = models.EmailField(max_length=40)
+    town_or_city = models.CharField(max_length=40, blank=False)
+    post_code = models.CharField(max_length=10, blank=False)
+    email_address = models.EmailField(max_length=40, blank=False)
     mobile_number = models.CharField(max_length=14, blank=False)
-    date = models.DateField(blank=True)
 
     def __str__(self):
-        return "{}-{}".format(self.date, self.name)
+        return "{}".format(self.name)
 
 
 class OrderLineItem(models.Model):

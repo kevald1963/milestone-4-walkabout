@@ -78,8 +78,6 @@
                                     <li><a href="{% url 'logout' %}" class="dropdown-toggle">
                                         <i class="fa fa-sign-out"></i> Sign Out</a></li>
                                 {%  else %}
-                                    <li><a href="{% url 'dashboard' %}">My Dashboard</a></li>
-                                    <li class="divider"></li>
                                     <li><a href="{% url 'profile' %}" class="dropdown-toggle">
                                         <i class="fa fa-user"></i> Profile [{{ user }}]</a></li>
                                     <li><a href="{% url 'logout' %}" class="dropdown-toggle">
@@ -167,29 +165,13 @@
             for (i = 0; i < li.length; i++) {
                 p = li[i].getElementsByTagName("p")[0];
                 txtValue = p.textContent || p.innerText;
-                if (txtValuetoUpperCase().indexOf(filter) > -1) {
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
                     li[i].style.display = "";
                 } else {
                     li[i].style.display = "none";
                 }
             }
         };
-    </script>
-
-    <script>
-        // Change horizontal button group to vertical when screen width 452px or less.
-        $(document).ready(function() {
-            function toggleButtonGroup(x) {
-                if (x.matches) { // If media query matches
-                    $(".btn-group").toggleClass("btn-group-vertical");
-                } else {
-                    $(".btn-group-vertical").toggleClass("btn-group");
-                }
-            }
-            var x = window.matchMedia("(max-width: 452px)");
-            toggleButtonGroup(x); // Call listener function at run time.
-            x.addListener(toggleButtonGroup); // Attach listener function on state changes
-        });
     </script>
 
 </body>

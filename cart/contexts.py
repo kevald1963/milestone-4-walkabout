@@ -9,6 +9,10 @@ def cart_contents(request):
     """
     Ensure contents are available when rendering every page.
     """
+    cart_items = []
+    subtotal = Decimal(0)
+    discount_applicable = False
+    product_count = 0
 
     cart = request.session.get('cart', {})
     try:
@@ -16,10 +20,6 @@ def cart_contents(request):
     except ObjectDoesNotExist:
         messages.error(request, "Error: Discount rate not found. Complementary 12.50% discount applied.")
         percent = 12.5
-    cart_items = []
-    subtotal = Decimal(0)
-    discount_applicable = False
-    product_count = 0
 
     for id, quantity in cart.items():
         product = get_object_or_404(Product, pk=id)
@@ -37,7 +37,7 @@ def cart_contents(request):
     else:
         discount_amount = round(0, 2)
 
-    total = subtotal - discount_amount
+    total = Decimal(subtotal - discount_amount)
 
     return {'cart_items': cart_items, 'subtotal': subtotal, 'total': total, 'product_count': product_count,
             'percent': percent, 'discount_amount': discount_amount}

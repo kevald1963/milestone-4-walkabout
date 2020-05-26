@@ -40,6 +40,7 @@ def assign_user_to_campaign(request, pk):
 def start_tasks(request, pk):
     """
     A view that gets the campaign and round data to physically start the campaign.
+    Called from the Dashboard page.
     """
     campaign = Campaign.objects.get(pk=pk)
     return render(request, "start_tasks.html", {'campaign': campaign})
