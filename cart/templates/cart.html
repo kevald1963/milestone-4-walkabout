@@ -70,8 +70,13 @@
         {% if total == 0 %}
             <h4 class="checkout-text">Checkout to get your FREE subscription.</h4>
         {% endif %}
-        <a href="{% url 'checkout' %}" class="btn btn-custom" role="button" style="color: white;">
-            <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkout</a>
+        {% if total == 0 %}
+            <a href="{% url 'checkout_free' %}" class="btn btn-custom" role="button" style="color: white;">
+                <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkout</a>
+        {% else %}
+            <a href="{% url 'checkout_paid' %}" class="btn btn-custom" role="button" style="color: white;">
+                <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkout</a>
+        {% endif %}
         <a href="{% url 'empty_cart' %}" class="btn btn-custom" role="button">
             <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Empty Cart</a>
         <a href="{% url 'all_products' %}" class="btn btn-custom" role="button">

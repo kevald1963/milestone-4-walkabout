@@ -1,6 +1,4 @@
 from django.db import models
-from django.db.models import ForeignKey
-from django.contrib.auth.models import User
 from product.models import Product
 
 
@@ -17,6 +15,7 @@ class Order(models.Model):
     post_code = models.CharField(max_length=10, blank=False)
     email_address = models.EmailField(max_length=40, blank=False)
     mobile_number = models.CharField(max_length=14, blank=False)
+    date = models.DateTimeField(null=True)
 
     def __str__(self):
         return "{}".format(self.name)

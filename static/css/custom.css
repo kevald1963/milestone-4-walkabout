@@ -280,6 +280,15 @@ p.brand-benefits  {
     font-weight: 400;
 }
 
+.product-link {
+    color: yellow;
+    font-weight: bold;
+}
+
+product-link:visited {
+    color: yellow;
+}
+
 .product-pitch-highlighted {
     border-radius: 3px;
     padding: 5px;
