@@ -97,6 +97,7 @@ h3.no-top-margin {
 
 .btn-custom:hover {
     background-color: purple;
+    border-color: purple;
     color: white;
 }
 

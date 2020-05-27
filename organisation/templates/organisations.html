@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="container">
     <pre class="page-summary">Organisations</pre>
     {% if not organisations %}
         <p>No organisations created yet. These can be created from the menu above.</p>
@@ -9,15 +8,17 @@
         <div class="filter" title="Search image from freepnglogos.com">
             <input id="filter-input" onkeyup="filter()" placeholder="Filter by organisation name.." type="text">
         </div>
+        <p><a href="{% url 'new_organisation' %}" class="btn btn-custom" style="color:white;">Add Organisation</a></p>
         <ul id="data-list">
             {% for organisation in organisations %}
                 <li>
                     <div class="row">
                         <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-12 col-md-12">
                             <h3 class="no-top-margin">{{ organisation.name }}</h3>
-                            <p>{{ organisation.description|truncatewords:40 }}</p>
+                            <p>{{ organisation.description|truncatewords:35 }}</p>
+                            <!-- READ MORE button -->
                             <p><a href="{% url 'organisation_detail' organisation.id %}" class="btn btn-custom"
-                                  style="color:white;">Read more</a></p>
+                                  style="color:white;">Read More</a></p>
                             <div class="row">
                                 <div class="col-xs-12 col-md-6">
                                     <img src="{{ MEDIA_URL }}{{ organisation.image }}" alt="{{ organisation.image_caption }}"
@@ -41,6 +42,5 @@
             {% endfor %}
         </ul>
     {% endif %}
-</div>
 
 {% endblock %}
