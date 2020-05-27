@@ -51,6 +51,7 @@ def add_to_cart(request, id):
         subscription = Subscription.objects.select_related('product').filter(product=id)
 
         # If customer already has this product then do not add it to Cart, but tell customer why!
+        # Set quantity to zero.
         if subscription:
             quantity = 0
             messages.add_message(request, messages.INFO,
@@ -58,7 +59,7 @@ def add_to_cart(request, id):
     else:
         if is_base_product:
             # =================================================================================
-            # if the Cart product is a base product, then see if a subscription for it already
+            # If the Cart product is a base product, then see if a subscription for it already
             # exists.
             # =================================================================================
             try:
@@ -67,8 +68,9 @@ def add_to_cart(request, id):
                     if subscription.product.number_of_devices > product.number_of_devices:
                         # =====================================================================================
                         # If customer already owns a subscription product with a higher number of devices then
-                        # do not add this product to the Cart.
+                        # do not add this product to the Cart. Set quantity to zero.
                         # =====================================================================================
+                        quantity = 0
                         messages.add_message(request, messages.INFO, 'Base product not added to Cart. You already have '
                                                                      'a '
                                                                      + str(subscription.product.number_of_devices) +
@@ -76,7 +78,6 @@ def add_to_cart(request, id):
                                                                      'Downgrades are only possible through our '
                                                                      'Sales Department. Please contact them on '
                                                                      '0800 1234567.')
-                        quantity = 0
                     else:
                         # Otherwise put subscription in the Cart but indicate that product is an upgrade.
                         if id not in cart:
@@ -94,20 +95,21 @@ def add_to_cart(request, id):
         else:
             if is_data_product:
                 # =================================================================================
-                # if the Cart product is a data product, then check if a subscription for a base
+                # If the Cart product is a data product, then check if a subscription for a base
                 # product already exists.
                 # =================================================================================
                 try:
                     Subscription.objects.select_related('product').get(product__is_base_product=True)
                 except ObjectDoesNotExist:
                     # ========================================================================================
-                    # if no subscription found, then check if a base item already in the Cart. If not in cart
+                    # If no subscription found, then check if a base item already in the Cart. If not in cart
                     #  either then inform user they will also need to add a base product.
                     # ========================================================================================
-                    for id, quantity in cart.items():
-                        product = Product.objects.get(id=id)
+                    for new_id, qty in cart.items():
+                        product = Product.objects.get(id=new_id)
                         if not product.is_base_product:
-                            messages.error(request, "This is a data product. Please add a base product to go with it.")
+                            messages.error(request, "Please add a base product to go with this data product. "
+                                                    "You have no base product registered on system.")
 
     if id in cart:
         # If product is already in cart..

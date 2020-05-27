@@ -43,6 +43,7 @@ def checkout_paid(request):
         payment_form = MakePaymentForm(request.POST)
 
         if payment_form.is_valid():
+            card_error = False
 
             cart = request.session.get('cart', {})
             total = 0
@@ -59,39 +60,47 @@ def checkout_paid(request):
                 )
             except stripe.error.CardError:
                 messages.error(request, "Your card was declined!")
+                card_error = True
             except Exception:
-                messages.error(request, "An error occurred, couldn't process your request.")
+                messages.error(request, "Sorry, a payment error occurred so we couldn't take payment.")
+                card_error = True
         else:
             print(payment_form.errors)
             messages.error(request, "We were unable to take a payment with that card!")
+            card_error = True
 
-        if order_form.is_valid():
-            order = order_form.save(commit=False)
-            order.date = timezone.now()
-            order.save()
+        if not card_error:
+            if order_form.is_valid():
+                order = order_form.save(commit=False)
+                order.date = timezone.now()
+                order.save()
 
-            cart = request.session.get('cart', {})
-            for id, quantity in cart.items():
-                product = get_object_or_404(Product, pk=id)
-                order_line_item = OrderLineItem(
-                    order=order,
-                    product=product,
-                    quantity=quantity
-                )
-                order_line_item.save()
+                cart = request.session.get('cart', {})
+                for id, quantity in cart.items():
+                    product = get_object_or_404(Product, pk=id)
+                    order_line_item = OrderLineItem(
+                        order=order,
+                        product=product,
+                        quantity=quantity
+                    )
+                    order_line_item.save()
 
-            create_organisation(order)
-            upgrade_user(request)
+                create_organisation(order)
+                upgrade_user(request)
 
-            messages.error(request, "You have successfully paid.")
+                messages.error(request, "You have successfully paid. Thank you for your order!")
 
-            # Empty the Cart now that the subscription has been successfully taken out.
-            request.session['cart'] = {}
-            return redirect(reverse('all_products'))
+                # Empty the Cart now that the subscription has been successfully taken out.
+                request.session['cart'] = {}
+                return redirect(reverse('all_products'))
+            else:
+                print(order_form.errors)
+                messages.error(request, "Sorry, there is an unexpected technical problem with your order. "
+                                        "Please contact us on 0000 1234567 so we can take your order manually.")
         else:
-            print(order_form.errors)
-            messages.error(request, "Sorry, there is an unexpected technical problem with your order. "
-                                    "Please contact us on 0000 1234567 so we can take your order manually.")
+            messages.error(request, "Please check your card details below are correct. If you still cannot make a "
+                                    "payment then contact us on 0000 1234567 so we can take your order manually.")
+
     else:
         order_form = OrderForm()
         payment_form = MakePaymentForm()
@@ -181,14 +190,15 @@ def upgrade_user(request):
     status is conferred as a result of a first purchase of a
     base product. Administrator status is set by adding the user to the 'Administrator' group.
     """
+
     existing_admin_group = Group.objects.get(name='Administrator')
 
     if existing_admin_group:
         # ===========================================================================================
         # If Administrator group exists on Group table then check for any groups the user belongs to.
         # Only add user to the Administrator group if they don't belong to any group whatsoever, as
-        # it's undesirable to upgrade an Agent to an Administrator, as it may cause security problems
-        #  An existing Administrators can upgrade the user manually, if they wish.
+        # we don't want to upgrade an Agent to an Administrator, as it may cause security problems.
+        # An existing Administrators can upgrade the user manually, if necessary.
         # ===========================================================================================
         user_group = Group.objects.filter(user=request.user).values_list('name', flat=True)
         if not user_group:
@@ -214,4 +224,9 @@ def upgrade_user(request):
             this_user = User.objects.get(username=request.user)
             this_user.group.add(new_group)
 
-        return 0
+    # Finally set the user to staff status flag so they can access the Django administration system.
+    this_user = User.objects.get(username=request.user)
+    this_user.is_staff = True
+    this_user.save()
+
+    return
