@@ -20,26 +20,28 @@ from django.views.generic import RedirectView
 from django.conf.urls.static import static
 from django.conf import settings
 
-from home import urls as urls_home
 from accounts import urls as urls_accounts
-from organisation import urls as urls_organisation
-from product import urls as urls_product
 from campaign import urls as urls_campaign
 from cart import urls as urls_cart
 from checkout import urls as urls_checkout
+from dashboard import urls as urls_dashboard
+from home import urls as urls_home
+from organisation import urls as urls_organisation
+from product import urls as urls_product
 from round import urls as urls_round
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
     url(r'^$', RedirectView.as_view(url='home/')),
-    url(r'^home/', include(urls_home)),
     url(r'^accounts/', include(urls_accounts)),
-    url(r'^product/', include(urls_product)),
+    url(r'^admin/', admin.site.urls),
+    url(r'^campaign/', include(urls_campaign)),
     url(r'^cart/', include(urls_cart)),
     url(r'^checkout/', include(urls_checkout)),
+    url(r'^dashboard/', include(urls_dashboard)),
+    url(r'^home/', include(urls_home)),
     url(r'^organisation/', include(urls_organisation)),
-    url(r'^campaign/', include(urls_campaign)),
+    url(r'^product/', include(urls_product)),
     url(r'^round/', include(urls_round)),
 ]
 # if settings.DEBUG:
