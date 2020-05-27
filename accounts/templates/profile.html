@@ -2,13 +2,18 @@
 {% block content %}
 
     <pre class="page-summary">User Profile</pre>
-    <p>You are logged in as <strong>{{ user.email }}</strong></p>
-    <p>Your user name is  <strong>{{ user.username }}</strong></p>
-    <p>The group you belong to is
-        <strong>
+    <p>You are signed-in as: <span class="highlight">{{ user.email }}</span></p>
+    <p>Your user name is: <span class="highlight">{{ user.username }}</span></p>
+    {% if not groups %}
+        <p>You do not belongs to any groups just yet.</p>
+    {% else %}
+        <p>The group you belong to is:
+            <span class="highlight">
             {% for group in groups %}
                 {{ group.name }}
             {% endfor %}
-        </strong>
-    </p>
+            </span>
+        </p>
+    {% endif %}
+
 {% endblock %}
