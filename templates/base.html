@@ -20,7 +20,7 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-masthead navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
@@ -61,7 +61,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             {% if user.is_authenticated %}
-                                {% if request.session.group == 'Administrator' %}
+                                {% if request.session.group == 'Admin' %}
                                     <li><a href="{% url 'dashboard' %}">My Dashboard</a></li>
                                     <li class="divider"></li>
                                     <li><a href="{% url 'all_organisations' %}">Organisations</a></li>
