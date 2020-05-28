@@ -7,12 +7,14 @@
             <p>Active Campaigns:</p>
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                 {% for campaign in campaigns %}
+                <!-- PARENT PANEL -->
                 <div class="panel dashboard-panel-default">
                     <div class="panel-heading" role="tab" id="heading{{ forloop.counter }}">
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <h4 class="panel-title">
-                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}"
+                                        aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
                                         Campaign No: {{ campaign.id }},
                                         Name: {{ campaign.name }},
                                         Description: {{ campaign.description }},
@@ -54,6 +56,8 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- CHILD PANEL -->
                 <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse in" role="tabpanel">
                     <div class="list-group">
                         {% for round in campaign.rounds.all %}
