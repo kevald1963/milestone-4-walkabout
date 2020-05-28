@@ -10,59 +10,114 @@ However, this app is not just for use by political parties, it can also be used 
 
 **Glossary of terms**
 
-- Campaign. A Campaign refers to the leafleting, canvassing and surveying activities that occur across an electoral area, usually carried out within one calendar month. They are made up of a set of Rounds.
+- Campaign. A Campaign refers to the leafleting, canvassing and surveying activities that occur across a geographical area. They are made up of a set of Rounds.
 
-- Round. A Round is a group of streets within an electoral area.
+- Round. A Round is a group of streets within a geographical area.
 
-- Street. A Street is a generic term for any place where households are situated, and includes paths, roads, lanes, avenues, cul-de-sacs, courts, etc.
+- Street. A Street is a generic term for any place where households, businesses or other types of properties are situated, and includes paths, roads, lanes, avenues, cul-de-sacs, courts, etc.
 
+- Address. An Address is an individual property or tenancy where people live, work or gather for an activity.
 
 **Commercial considerations**
 
-I am approaching the development of this app with a view to making it a professional product that would not only satisfy the criteria of the milestone project but could, perhaps, be further developed beyond to become a useful app in the real world.
+I have approached the development of this app with a view to making it a professional product that would not only satisfy the criteria of the milestone project but could, perhaps, be further developed beyond to become a useful app in the real world.
 
-Although I my activities on behalf of my local Green party are done on a voluntary basis, a development such as this, along with ongoing support, would be too much to undertake without some form of remuneration. I have listed some business models ideas below that I am considering.
+I have implemented the following approach to its design:
 
-- The GPEW has a federal structure, with each local party responsible for its own funding and activities. Although, I surmise many local parties do not have high incomes or reserves, there are many of them, so the app could further developed on a ‘hobby’ basis and, after field-testing by my local party, be gradually licensed out to a number of them on a high-volume, reasonable-cost subscription basis, preferably with the endorsement of GPEW. One potential pitfall of this approach is the increasing amount of support required, so the app would have to be properly proven in field-use before being released. Data uploads and updates or training could additionally be charged for.
+- Have generalised the app in such a way so that it can easily be configured, without too much technical intervention for use by commercial companies involved in leafleting, parcel delivery, etc. By ‘generalised’, I mean abstract as much content (like logos, organisational titles, organisational terms, etc) as possible into the database so the front-end needs little, or no, change between different customers.
+ 
+- A limited, free product is offered to appeal to community organisations and small businesses. Limitation will be implemented by the number of devices that can concurrently use the app at anyone time. Larger organisations will be able to purchase subscriptions for larger numbers of concurrent devices. These products are called BASE products.
 
-- Generalise the app in such a way so that it could also easily be configured, without too much technical intervention for use by commercial companies involved in leafleting, parcel delivery, etc. By ‘generalise the app’, I mean abstract as much content (like logos, organisational titles, organisational terms, etc) as possible into the database so the front-end needs little, or no, change between different customers. Commercial companies would be charged a commercial rate for a licence subscription. Any remaining revenues, after costs, could be used to subsidise the subscription cost to local Green parties wanting to use the app.
-
-- Give the app away for free to local parties but with in-app adverts to fund development and support. The adverts could be removed on payment of a subscription. Such adverts, and the organisations that produce them, would have to be carefully vetted to ensure they comply with the Green Party’s core values and standards. This approach is unlikely to be financially viable, as the audience would not be large, even across all local parties affiliated to GPEW.
-
-- A series of crowdfunding efforts by the local party (or a consortium of local parties) to fund the development and marketing of the app. My local party has successfully used crowdfunding a number of times, so this may be a viable option. It’s a commonly used method of raising funds for election expenses across the GPEW. In return, the crowdfunding party (or consortium would get use of the app for free, or low-cost, an agreed share of any remaining revenues, after costs, generated from licensing the app to other local parties across England and Wales. I envisage the app could be installed for free, either with limited functionality, or with full functionality but with constraints on the amount of usable data, or the number of users accessing it at any one time. Such constraints could be automatically removed on payment of a subscription.
-
-**Fulfilling the Milestone project criteria**
-
-It is too early at this stage to decide which model to use but for the purpose of the milestone project, I will assume the latter scenario above i.e. that the app is in a well-developed state, and can be used for free, either with limited functionality or data. The customer organisation will then have the option remove those constraints on payment of a subscription using Stripe’s test functionality. I envision subscription payments would be made by the customer on behalf of a group of users, rather than individual users making payments themselves i.e. a local Green party would pay on behalf of its active members, or a commercial company would pay on behalf of its employees. I will generalise the app, so that it is “future-proofed” for potential use by other organisations, not just local Green parties. In any case the idea of separating content from presentational structure is a good development practice that appeals to me.
+- Paid-for address data loads will be available to all customers, even for those with the free product. They wil only be limited by the number of devices their base product allows. 
 
 ## UX
 
 **App Audience**
 
-The app is primarily aimed at local Green Party activists to help them manage election leafleting and canvassing in local council wards or parliamentary constituencies. As discussed above, the app may also be of use to commercial companies for bulk leafleting, parcel delivery, etc.
+The app was initially aimed at local Green Party activists to help them manage election leafleting and canvassing in local council wards or parliamentary constituencies. As discussed above, the app may also be of use to commercial companies for bulk leafleting, parcel delivery, etc.
 
 ### User Stories
 
-Initially, the site will have two types of User: Basic and Admin. It may be desirable to create other types of users, e.g. a Trusted User. A facility to do this will be included in the app functionality.
-**User permissions**
+Initially, the site will have four types of User: Superuser, Administrator, Agent and Anonymous. It may be desirable to create other types of users, e.g. a Trusted Agent with some administrative permissions. A facility to do this will be included in the app functionality.
 
-**Basic Users**
+**User Types**
 
-It is important that app users do not accidentally, or deliberately, perform CHUD (Create, Hide, Update and Delete) operations on data outside their round, hence the need for this user type so that data for their round is ring-fenced to them and other members on the same team. At the same time, movement of members between teams needs to be flexible to cope with changing circumstances on the ground. Assignment of such members to different rounds needs to be done without waiting for the approval of an Admin User.
+*Anonymous users*
 
-**Admin Users**
+These are visitors who are not yet registered, or signed in to the app. These will only be able to see and use the app’s landing page, information pages, product page, cart page, etc. They will not be able view or create any campaign data until they either register a product or sign in with the appropriate Agent or Administrator permissions set up for them.
 
-This is the app’s customer organisation, or any trusted individuals assigned by it to such a role. They will have full control over the entire data content of the site, including creating, viewing, updating, archiving and deleting of any data. Most of this should be possible through the app, rather than by direct access to the database.
+*Guest users*
 
-**Basic User** stories to be catered for:
+These are visitors who have registered and signed in with a view to subscribing to the app. Typically, they will be representatives of businesses, charities, local government, or they may be a sole trader, such as a tradesperson who wants to use the app to assist in advertising their service. They will not only be able to see and use the pages available to Anonymous Users but, crucially, will be able to access the checkout to make a subscription, free or paid-for. Initially, they are not assigned to any group, so have no permissions, but once the have subscribed to a product, they will be assigned to the Admin group and thereby become Administrators.
+ 
+*Agents*
+
+These are the people who do the literature deliveries, canvassing or surveying. They have access to data that pertains to the particular campaigns to which they have been assigned. An Administrator can also act as an Agent of the same organisation. It is important that app users do not accidentally, or deliberately, perform CUD (Create, Update and Delete) operations on data outside their assigned round, hence the need for this user type so that data for their round is ring-fenced to them and other members on the same team. At the same time, movement of members between teams needs to be flexible to cope with changing circumstances on the ground. Assignment of such members to different rounds needs to be done without waiting for the approval of an Admin User. Agent status will be conferred on a user by assigning them to the Agent group. See below for permissions.
+
+*Administrators*
+
+This is the app’s customer organisations, or any trusted individuals assigned by them to such a role. They will have full control over the entire data content of the site, including creating, viewing, updating, archiving and deleting of any data. Most of this should be possible through the app, rather than by direct access to the database. Administrator status will be conferred on a user by assigning them to the Admin group. See below for permissions.
+
+*Superusers*
+
+This is the owner of the app, and/or the owner’s employees or representatives. They will have access to all data on the system. A Superuser can also act as a customer Administrator, if intervention is required to correct problems in a customer’s system such as diagnosing a data corruption, faulty page or whatever.
+
+**Django Group Permissions**
+
+*Agent Group:*
+
+* campaign | campaign | Can change campaign</option>
+* round | address | Can add address</option>
+* round | address | Can change address</option>
+* round | round | Can add round</option>
+* round | round | Can change round</option>
+* round | street | Can add street</option>
+* round | street | Can change street</option>
+
+*Admin Group:*
+
+* auth | group | Can add group
+* auth | group | Can change group
+* auth | user | Can add user</option>
+* auth | user | Can change user</option>
+* auth | user | Can delete user</option>
+* campaign | campaign | Can add campaign</option>
+* campaign | campaign | Can change campaign</option>
+* campaign | campaign | Can delete campaign</option>
+* organisation | organisation | Can add organisation</option>
+* organisation | organisation | Can change organisation</option>
+* organisation | organisation | Can delete organisation</option>
+* round | address | Can add address</option>
+* round | address | Can change address</option>
+* round | address | Can delete address</option>
+* round | round | Can add round</option>
+* round | round | Can change round</option>
+* round | round | Can delete round</option>
+* round | street | Can add street</option>
+* round | street | Can change street</option>
+* round | street | Can delete street</option>
+
+*Anonymous User stories to be catered for:*
 
 I want to
 
-- Register myself as app user.
+- Register myself as an app user.
 
 - Login to the app.
 
 - Logout of the app.
+
+- Explore the apps pages for information on what it does, how it works, products offered, how much it costs, etc.
+
+*Guest User stories to be catered for:*
+
+- All the things that Anonymous User can do.
+
+- Select a product, or products, and place it/them in the cart.
+
+- Go to the checkout and subscribe to the app, for the free or paid-for service. 
+
+*Agent User stories to be catered for:*
 
 - Assign myself to a round if no round has been assigned to me.
 
@@ -92,11 +147,11 @@ I want to
 
 - view information about other people’s rounds such as the percentage of addresses they have covered.
 
-ADMIN USER stories to be catered for:
+*Administrator user stories to be catered for:*
 
 I want to
 
-- carry out all the functions that a Basic User can do (as above).
+- carry out all the functions that an Agent User can do.
 
 - Create streets of addresses.
 
@@ -138,7 +193,7 @@ The files below are stored in:
 
 ### Database structure
 
-The MySQL relational database will be used by this app for all data storage. Table structures for this release are shown in the Excel spreadsheet below, stored in:
+The Postgres relational database has been used by this app for all dynamic data storage. Table structures for this release are shown in the Excel spreadsheet below, stored in:
 
 [To be updated]
 
