@@ -18,13 +18,3 @@ class CustomUserAdmin(UserAdmin):
         'last_login',
         'date_joined',
     ]
-
-    def get_form(self, request, obj=None, **kwargs):
-        form = super().get_form(request, obj, **kwargs)
-        is_superuser = request.user.is_superuser
-
-        # Only allow superusers to modify username, is_active, etc.
-        if not is_superuser:
-            form.base_fields['username'].disabled = True
-            form.base_fields['is_active'].disabled = True
-        return form
