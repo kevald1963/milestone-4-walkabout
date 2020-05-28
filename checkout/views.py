@@ -85,8 +85,7 @@ def checkout_paid(request):
                     )
                     order_line_item.save()
 
-                create_organisation(order)
-                upgrade_user(request)
+                do_subscription_tasks(request, order)
 
                 messages.error(request, "You have successfully paid. Thank you for your order!")
 
@@ -137,8 +136,7 @@ def checkout_free(request):
                 )
                 order_line_item.save()
 
-            create_organisation(order)
-            upgrade_user(request)
+            do_subscription_tasks(request, order)
 
             messages.error(request, "You have been successfully subscribed to our FREE product.")
 
@@ -155,9 +153,21 @@ def checkout_free(request):
     return render(request, 'checkout.html', {'order_form': order_form})
 
 
+def do_subscription_tasks(request, order):
+    """
+    Called from checkout_paid & checkout_free views. Runs various tasks
+    needed after a successful subscription.
+    """
+    create_organisation(order)
+    upgrade_user(request)
+    create_agent_group()
+
+    return
+
+
 def create_organisation(order):
     """
-    Called from checkout view. Check organisation exists for this request user. If it doesn't, then create
+    Check organisation exists for this request user. If it doesn't, then create
     it from the supplied order details.
     """
     try:
@@ -180,53 +190,139 @@ def create_organisation(order):
 
         org.save()  # Save the new organisation.
 
-        return 0
+    return
 
 
 def upgrade_user(request):
     """
-    Upgrade the to Administrator status, but only # if this is their first order on the system.
-    If they have subscribed before they should already # have that status. Initial Administrator
-    status is conferred as a result of a first purchase of a
-    base product. Administrator status is set by adding the user to the 'Administrator' group.
+    Upgrade the user to Administrator status, but only if this is their first order on the system.
+    If they have subscribed before they should already have that status. Initial Administrator
+    status is conferred as a result of a first purchase of a base product. Administrator status
+    is set by adding the user to the 'Admin' group.
     """
-
-    existing_admin_group = Group.objects.get(name='Administrator')
+    try:
+        existing_admin_group = Group.objects.get(name='Admin')
+    except ObjectDoesNotExist:
+        existing_admin_group = None
 
     if existing_admin_group:
-        # ===========================================================================================
-        # If Administrator group exists on Group table then check for any groups the user belongs to.
-        # Only add user to the Administrator group if they don't belong to any group whatsoever, as
-        # we don't want to upgrade an Agent to an Administrator, as it may cause security problems.
-        # An existing Administrators can upgrade the user manually, if necessary.
-        # ===========================================================================================
+        # ====================================================================================
+        # If Admin group exists on Group table then check for any groups the user belongs to.
+        # Only add user to the Admin group if they don't belong to any group whatsoever, as
+        # we don't want to upgrade an Agent to an Admin, as it may cause security issues..An
+        # existing Administrator can upgrade the user manually, if necessary.
+        # ====================================================================================
         user_group = Group.objects.filter(user=request.user).values_list('name', flat=True)
         if not user_group:
-            # If user not in any group then add them to the Administrator group.
+            # If user not in any group then add them to the Admin group.
             this_user = User.objects.get(username=request.user)
             this_user.groups.add(existing_admin_group)
     else:
-        # ================================================================================
-        # The Administrator group does not exist, so create it, save it and add relevant
+        # ========================================================================
+        # The Admin group does not exist, so create it, save it and add relevant
         # permissions to it before adding the request user to it.
-        # ================================================================================
-        content_type = ContentType.objects.get_for_model(User)
-        add_user = Permission.objects.get(content_type=content_type, codename='add_user')
-        change_user = Permission.objects.get(content_type=content_type, codename='change_user')
-        delete_user = Permission.objects.get(content_type=content_type, codename='delete_user')
+        # ========================================================================
 
-        new_group, created = Group.objects.get_or_create(name='Administrator')
+        new_group, created = Group.objects.get_or_create(name='Admin')
         if created:
-            # Add permissions to newly-created group.
-            new_group.permissions.add(add_user, change_user, delete_user)
+            # Set up permissions
+            content_type = ContentType.objects.get_for_model(User)
 
-            # Get the current user and add to newly created group.
+            add_group = Permission.objects.get(content_type=content_type, codename='add_group')
+            change_group = Permission.objects.get(content_type=content_type, codename='change_group')
+
+            add_user = Permission.objects.get(content_type=content_type, codename='add_user')
+            change_user = Permission.objects.get(content_type=content_type, codename='change_user')
+            delete_user = Permission.objects.get(content_type=content_type, codename='delete_user')
+
+            add_organisation = Permission.objects.get(content_type=content_type, codename='add_organisation')
+            change_organisation = Permission.objects.get(content_type=content_type, codename='change_organisation')
+            delete_organisation = Permission.objects.get(content_type=content_type, codename='delete_organisation')
+
+            add_campaign = Permission.objects.get(content_type=content_type, codename='add_campaign')
+            change_campaign = Permission.objects.get(content_type=content_type, codename='change_campaign')
+            delete_campaign = Permission.objects.get(content_type=content_type, codename='delete_campaign')
+
+            add_round = Permission.objects.get(content_type=content_type, codename='add_round')
+            change_round = Permission.objects.get(content_type=content_type, codename='change_round')
+            delete_round = Permission.objects.get(content_type=content_type, codename='delete_round')
+
+            add_address = Permission.objects.get(content_type=content_type, codename='add_address')
+            change_address = Permission.objects.get(content_type=content_type, codename='change_address')
+            delete_address = Permission.objects.get(content_type=content_type, codename='delete_address')
+
+            add_street = Permission.objects.get(content_type=content_type, codename='add_street')
+            change_street = Permission.objects.get(content_type=content_type, codename='change_street')
+            delete_street = Permission.objects.get(content_type=content_type, codename='delete_street')
+
+            # Add permissions to newly-created group.
+            new_group.permissions.add(
+                add_group, change_group,
+
+                add_user, change_user, delete_user,
+
+                add_organisation, change_organisation, delete_organisation,
+                add_campaign, change_campaign, delete_campaign,
+
+                add_round, change_round, delete_round,
+
+                add_street, change_street, delete_street,
+
+                add_address, change_address, delete_address,
+            )
+            new_group.save()
+
+            # Get the current user and add to newly-created group.
             this_user = User.objects.get(username=request.user)
             this_user.group.add(new_group)
 
-    # Finally set the user to staff status flag so they can access the Django administration system.
+    # Finally set the user to staff status so they can access the Django administration system.
     this_user = User.objects.get(username=request.user)
     this_user.is_staff = True
     this_user.save()
+
+    return
+
+
+def create_agent_group():
+    """
+    Create a default Agent group, if one doesn't already exist. This is so that Administrators
+    can create Agent users for their organisation and assign them to that group. If this organisation
+    has subscribed before, then an Agent group may already exist.
+    """
+    try:
+        existing_agent_group = Group.objects.get(name='Agent')
+    except ObjectDoesNotExist:
+        existing_agent_group = None
+
+    if not existing_agent_group:
+
+        new_group, created = Group.objects.get_or_create(name='Agent')
+        if created:
+            # Set up permissions
+            content_type = ContentType.objects.get_for_model(User)
+
+            change_campaign = Permission.objects.get(content_type=content_type, codename='change_campaign')
+
+            add_round = Permission.objects.get(content_type=content_type, codename='add_round')
+            change_round = Permission.objects.get(content_type=content_type, codename='change_round')
+
+            add_address = Permission.objects.get(content_type=content_type, codename='add_address')
+            change_address = Permission.objects.get(content_type=content_type, codename='change_address')
+
+            add_street = Permission.objects.get(content_type=content_type, codename='add_street')
+            change_street = Permission.objects.get(content_type=content_type, codename='change_street')
+
+            # Add permissions to newly-created group.
+            new_group.permissions.add(
+                change_campaign,
+                add_round,
+                change_round,
+                add_street,
+                change_street,
+                add_address,
+                change_address,
+            )
+            new_group.save()
 
     return

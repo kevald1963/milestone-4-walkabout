@@ -62,40 +62,51 @@ This is the app’s customer organisations, or any trusted individuals assigned 
 
 This is the owner of the app, and/or the owner’s employees or representatives. They will have access to all data on the system. A Superuser can also act as a customer Administrator, if intervention is required to correct problems in a customer’s system such as diagnosing a data corruption, faulty page or whatever.
 
-**Django Group Permissions**
+**Django default Group Permissions**
+
+These are not set up manually, but are created when a first base product has been successfully subscribed to. Thereafter, checks are made on subsequent subscriptions to see if the groups exist. If they are not they will be recreated.
 
 *Agent Group:*
 
-* campaign | campaign | Can change campaign</option>
-* round | address | Can add address</option>
-* round | address | Can change address</option>
-* round | round | Can add round</option>
-* round | round | Can change round</option>
-* round | street | Can add street</option>
-* round | street | Can change street</option>
+* campaign | campaign | Can change campaign
+
+* round | address | Can add address
+* round | address | Can change address
+
+* round | round | Can add round
+* round | round | Can change round
+
+* round | street | Can add street
+* round | street | Can change street
 
 *Admin Group:*
 
 * auth | group | Can add group
 * auth | group | Can change group
-* auth | user | Can add user</option>
-* auth | user | Can change user</option>
-* auth | user | Can delete user</option>
-* campaign | campaign | Can add campaign</option>
-* campaign | campaign | Can change campaign</option>
-* campaign | campaign | Can delete campaign</option>
-* organisation | organisation | Can add organisation</option>
-* organisation | organisation | Can change organisation</option>
-* organisation | organisation | Can delete organisation</option>
-* round | address | Can add address</option>
-* round | address | Can change address</option>
-* round | address | Can delete address</option>
-* round | round | Can add round</option>
-* round | round | Can change round</option>
-* round | round | Can delete round</option>
-* round | street | Can add street</option>
-* round | street | Can change street</option>
-* round | street | Can delete street</option>
+
+* auth | user | Can add user
+* auth | user | Can change user
+* auth | user | Can delete user
+
+* campaign | campaign | Can add campaign
+* campaign | campaign | Can change campaign
+* campaign | campaign | Can delete campaign
+
+* organisation | organisation | Can add organisation
+* organisation | organisation | Can change organisation
+* organisation | organisation | Can delete organisation
+
+* round | address | Can add address
+* round | address | Can change address
+* round | address | Can delete address
+
+* round | round | Can add round
+* round | round | Can change round
+* round | round | Can delete round
+
+* round | street | Can add street
+* round | street | Can change street
+* round | street | Can delete street
 
 *Anonymous User stories to be catered for:*
 
