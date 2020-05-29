@@ -8,7 +8,7 @@
         <a href="{{ request.GET.next }}" class="btn btn-custom" style="color: white;">Cancel</a>
     {% else %}
         <input type="hidden" name="next" value="{{ request.GET.next }}">
-        <a href="{{ request.GET.next }}" class="btn btn-custom" style="color: white;">Cancel</a>
+        <a href="{{ request.GET.next }}" class="btn btn-custom" style="color: white;">Return</a>
         <div class="filter" title="Search image from freepnglogos.com">
             <input id="filter-input" onkeyup="filter()" placeholder="Filter by address number.." type="text">
         </div>
@@ -28,7 +28,7 @@
                                             <!-- Display a horizontal button group for sm, md and lg devices. -->
                                             <div class="hidden-xs col-sm-12 col-md-12 col-lg-12">
                                                 <div class="btn-group" role="group" aria-label="Horizontal button group for Edit Comments and Delete Comments.">
-                                                    {% if request.session.group == 'Administrators' %}
+                                                    {% if request.session.group == request.session.default_admin_group %}
                                                         <!-- Limit access to deleting addresses to Administrators only. -->
                                                         <span class="btn link-btn-purple"><a href="{% url 'edit_address' street.id address.id %}">Edit Comments</a></span>
                                                         <span class="btn link-btn-red"><a href="{% url 'delete_address' address.id %}?next={{ request.path|urlencode }}">Delete Address</a></span>

@@ -50,7 +50,7 @@
                                                 <a href="{% url 'view_addresses' street.id %}?next={{ request.path|urlencode }}">View Addresses</a>
                                             </span>
                                             <span class="btn link-btn-orange">
-                                                <a href="{% url 'create_addresses' street.id %}">Create Addresses</a>
+                                                <a href="{% url 'create_addresses' street.id %}?next={{ request.path|urlencode }}">Create Addresses</a>
                                             </span>
                                         {% else %}
                                             <span class="btn link-btn-light-blue">
