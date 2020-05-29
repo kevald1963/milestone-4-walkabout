@@ -29,7 +29,7 @@
                                     <div class="btn-group" role="group"
                                         aria-label="Button group for Edit Street, Delete Street,
                                         View Addresses and Create Addresses according to user permissions.">
-                                        {% if request.session.group == 'Administrators' %}
+                                        {% if request.session.group == request.session.default_admin_group %}
                                             <!-- Limit access to editing and deletion of streets, and creation of
                                                  addresses to Administrators only. -->
                                             <span class="btn link-btn-purple">

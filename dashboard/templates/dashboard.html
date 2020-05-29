@@ -80,7 +80,7 @@
                                         {% endfor %}
                                     </ul>
                                     <!-- STREET DETAILS BUTTON -->
-                                    {% if request.session.group == 'Administrators' %}
+                                    {% if request.session.group == request.session.default_admin_group %}
                                         <!-- Limit access to Linked Streets page to Administrators only
                                              as it allows creation and deletion of streets. -->
                                         <a href="{% url 'linked_streets' round.id %}" class="btn link-btn-orange btn-panel-list"

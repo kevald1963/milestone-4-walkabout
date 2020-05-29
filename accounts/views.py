@@ -3,12 +3,18 @@ from django.contrib.auth.models import Group
 from django.contrib import messages, auth
 from django.core.urlresolvers import reverse
 from .forms import UserLoginForm, UserRegistrationForm
-from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 import traceback
 import logging
 
+# A default group of Agent can be set in the session, if user's group is not found in database.
+# This is the lowest level of access for a signed-in user.
 DEFAULT_USER_GROUP = 'Agents'
+
+# Default Admin group constant is compared with the user's actual group to control access to various
+# functions in the app via the template language. If the name of the Administrator group changes then it
+# only needs to be changed here once for the whole app.
+DEFAULT_ADMIN_GROUP = 'Admin'
 
 
 # Create your views here.
@@ -25,6 +31,12 @@ def login(request):
     """
     A view that manages the login form.
     """
+    # Clear any existing default_admin_group from the session.
+    if "default_admin_group" in request.session:
+        del request.session["default_admin_group"]
+
+    request.session["default_admin_group"] = DEFAULT_ADMIN_GROUP
+
     if request.method == 'POST':
         user_form = UserLoginForm(request.POST)
         if user_form.is_valid():
@@ -32,7 +44,7 @@ def login(request):
                                      password=request.POST['password'])
             if user:
                 auth.login(request, user)
-                # Clear existing group from the session.
+                # Clear any existing group from the session.
                 if "group" in request.session:
                     del request.session["group"]
 
@@ -42,8 +54,8 @@ def login(request):
                     if not group:
                         request.session["group"] = DEFAULT_USER_GROUP
                         messages.error(request, "Your user group has not been found so you have been "
-                                                "assigned, for this session, to the [ "
-                                                + DEFAULT_USER_GROUP + " ] group. "
+                                                "assigned to the [ "
+                                                + DEFAULT_USER_GROUP + " ] group for this session,"
                                                 "Please contact your Administrator to set up a permanent one for you.")
 
                     else:
