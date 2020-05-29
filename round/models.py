@@ -22,7 +22,7 @@ class Street(models.Model):
     comments = models.TextField(blank=True)
     door_number_start = models.SmallIntegerField()
     door_number_end = models.SmallIntegerField()
-    round = models.ForeignKey(Round, on_delete=models.PROTECT)
+    round = models.ForeignKey(Round, on_delete=models.PROTECT, null=True, blank=True)
     post_code = models.CharField(max_length=10, null=False, blank=True)
 
     class Meta:
