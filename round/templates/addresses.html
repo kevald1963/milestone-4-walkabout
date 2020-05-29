@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="container">
     <pre class="page-summary">Street: {{ street.name }}</pre>
     {% if not addresses %}
         <p>No addresses linked yet to this round.</p>
@@ -43,6 +42,5 @@
             {% endfor %}
         </ul>
     {% endif %}
-</div>
 
 {% endblock %}

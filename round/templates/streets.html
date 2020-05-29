@@ -1,9 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="container">
     <pre class="page-summary">All Streets</pre>
-    {% if not streets %}
+    {% if streets %}
         <p>
             No streets created yet. Click
             <a href="{% url 'new_street' %}?next={{ request.path|urlencode }}" class="inline page-link">here</a>
@@ -45,6 +44,5 @@
             {% endfor %}
         </ul>
     {% endif %}
-</div>
 
 {% endblock %}
