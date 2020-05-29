@@ -8,6 +8,15 @@
     {% endfor %}
     {% if not streets %}
         <p>No streets linked yet to this round.</p>
+        <p>
+            Click <a href="{% url 'new_street' %}?next={{ request.path|urlencode }}" class="inline page-link">here</a>
+            to create a new one.
+        </p>
+        <p>
+            Click <a href="{% url 'all_streets' %}" class="inline page-link">here</a>
+            to link to an existing one.
+        </p>
+
     {% else %}
         <div class="filter" title="Search image from freepnglogos.com">
             <input id="filter-input" onkeyup="filter()" placeholder="Filter by street name.." type="text">
@@ -28,7 +37,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <div class="btn-group" role="group"
                                         aria-label="Button group for Edit Street, Delete Street,
-                                        View Addresses and Create Addresses according to user permissions.">
+                                        View Addresses and Create Addresses.Agent users can only see View Addresses.">
                                         {% if request.session.group == request.session.default_admin_group %}
                                             <!-- Limit access to editing and deletion of streets, and creation of
                                                  addresses to Administrators only. -->

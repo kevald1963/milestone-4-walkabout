@@ -3,7 +3,6 @@
 {% block content %}
 
     <pre class="page-summary">Edit street</pre>
-    <a href="{{ request.GET.next }}" class="btn btn-custom" style="color: white;">Back</a>
     <form method="POST">
         {% csrf_token %}
         {{ form | as_bootstrap }}

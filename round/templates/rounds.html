@@ -3,10 +3,10 @@
 
     <pre class="page-summary">Rounds</pre>
     {% if not rounds %}
+        <p>No rounds created yet.</p>
         <p>
-            No rounds created yet. Click
-            <a href="{% url 'new_round' %}" class="inline page-link">here</a>
-            here to create a new one.
+            Click <a href="{% url 'new_round' %}" class="inline page-link">here</a>
+            to create a new one.
         </p>
     {% else %}
         <span class="btn btn-custom"><a href="{% url 'new_round' %}">Add Round</a></span>

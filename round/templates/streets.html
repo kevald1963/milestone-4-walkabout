@@ -5,9 +5,9 @@
     <pre class="page-summary">All Streets</pre>
     {% if not streets %}
         <p>
-            No streets created yet for this round. Click
-            <a href="{% url 'new_street' %}" class="inline page-link">here</a>
-            here to create a new one.
+            No streets created yet. Click
+            <a href="{% url 'new_street' %}?next={{ request.path|urlencode }}" class="inline page-link">here</a>
+            to create a new one.
         </p>
     {% else %}
         <div class="filter" title="Search image from freepnglogos.com">
@@ -28,8 +28,10 @@
                                         <!-- Display a horizontal button group for sm, md and lg devices. -->
                                         <div class="hidden-xs col-sm-12 col-md-12 col-lg-12">
                                             <div class="btn-group" role="group" aria-label="Horizontal button group for Edit Street and Delete Street.">
-                                                <span class="btn link-btn-purple btn-md"><a href="{% url 'edit_street' street.id %}">Edit</a></span>
-                                                <span class="btn link-btn-red btn-md"><a href="{% url 'delete_street' street.id %}">Delete</a></span>
+                                                <span class="btn link-btn-purple btn-md">
+                                                    <a href="{% url 'edit_street' street.id %}?next={{ request.path|urlencode }}">Edit</a></span>
+                                                <span class="btn link-btn-red btn-md">
+                                                    <a href="{% url 'delete_street' street.id %}?next={{ request.path|urlencode }}">Delete</a></span>
                                                 <span class="btn link-btn-light-blue btn-md"><a href="{% url 'view_addresses' street.id %}">View addresses</a></span>
                                                 <span class="btn link-btn-orange btn-md"><a href="{% url 'create_addresses' street.id %}">Create addresses</a></span>
                                             </div>

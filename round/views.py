@@ -48,7 +48,7 @@ def all_streets(request):
     """
     Get all the streets from the database, ordered by name.
     """
-    streets = Street.objects.all().order_by('round', 'name')
+    streets = Street.objects.all().order_by('name', 'round')
     return render(request, 'streets.html', {'streets': streets})
 
 
