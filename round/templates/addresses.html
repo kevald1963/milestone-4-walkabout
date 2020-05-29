@@ -7,6 +7,8 @@
         <input type="hidden" name="next" value="{{ request.GET.next }}">
         <a href="{{ request.GET.next }}" class="btn btn-custom" style="color: white;">Cancel</a>
     {% else %}
+        <input type="hidden" name="next" value="{{ request.GET.next }}">
+        <a href="{{ request.GET.next }}" class="btn btn-custom" style="color: white;">Cancel</a>
         <div class="filter" title="Search image from freepnglogos.com">
             <input id="filter-input" onkeyup="filter()" placeholder="Filter by address number.." type="text">
         </div>

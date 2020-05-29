@@ -54,7 +54,7 @@
                                             </span>
                                         {% else %}
                                             <span class="btn link-btn-light-blue">
-                                                <a href="{% url 'view_addresses' street.id %}">View Addresses</a>
+                                                <a href="{% url 'view_addresses' street.id %}?next={{ request.path|urlencode }}">View Addresses</a>
                                             </span>
                                         {% endif %}
                                     </div>
