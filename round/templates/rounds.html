@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="container">
     <pre class="page-summary">Rounds</pre>
     {% if not rounds %}
         <p>
@@ -10,7 +9,8 @@
             here to create a new one.
         </p>
     {% else %}
-        <span class="btn btn-custom"><a href="{% url 'all_streets' %}">All streets</a></span>
+        <span class="btn btn-custom"><a href="{% url 'new_round' %}">Add Round</a></span>
+        <span class="btn btn-custom"><a href="{% url 'all_streets' %}">All Streets</a></span>
         <div class="filter" title="Search image from freepnglogos.com">
             <input id="filter-input" onkeyup="filter()" placeholder="Filter by round name.." type="text">
         </div>
@@ -50,6 +50,5 @@
             {% endfor %}
         </ul>
     {% endif %}
-</div>
 
 {% endblock %}
