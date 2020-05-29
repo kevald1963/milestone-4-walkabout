@@ -2,7 +2,7 @@
 {% block content %}
 
     <pre class="page-summary">All Streets</pre>
-    {% if streets %}
+    {% if not streets %}
         <p>
             No streets created yet. Click
             <a href="{% url 'new_street' %}?next={{ request.path|urlencode }}" class="inline page-link">here</a>
