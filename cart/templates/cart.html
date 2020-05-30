@@ -6,7 +6,6 @@
 
 {% block content %}
 
-<div class="container">
     {% if cart_items %}
         <p class="product-pitch">To remove an item from the Cart, change the quantity to zero and click Amend.</p>
     {% endif %}
@@ -82,6 +81,5 @@
         <a href="{% url 'all_products' %}" class="btn btn-custom" role="button">
             <span class="glyphicon glyphicon-gift" aria-hidden="true"></span> Continue Shopping</a>
     </div>
-</div>
 
 {% endblock %}
