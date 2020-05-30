@@ -68,6 +68,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             {% if user.is_authenticated %}
+                                <!-- ADMIN PERMISSIONS -->
                                 {% if request.session.group == request.session.default_admin_group %}
                                     <li><a href="{% url 'dashboard' %}">My Dashboard</a></li>
                                     <li class="divider"></li>
@@ -85,14 +86,24 @@
                                     <li><a href="{% url 'logout' %}" class="dropdown-toggle">
                                         <i class="fa fa-sign-out"></i> Sign Out</a></li>
                                 {%  else %}
-                                    <li><a href="{% url 'dashboard' %}">My Dashboard</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="{% url 'profile' %}" class="dropdown-toggle">
-                                        <i class="fa fa-user"></i> Profile [{{ user }}]</a></li>
-                                    <li><a href="{% url 'logout' %}" class="dropdown-toggle">
-                                        <i class="fa fa-sign-out"></i> Sign Out</a></li>
+                                    <!-- AGENT PERMISSIONS -->
+                                    {% if request.session.group == request.session.default_agent_group %}
+                                        <li><a href="{% url 'dashboard' %}">My Dashboard</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="{% url 'profile' %}" class="dropdown-toggle">
+                                            <i class="fa fa-user"></i> Profile [{{ user }}]</a></li>
+                                        <li><a href="{% url 'logout' %}" class="dropdown-toggle">
+                                            <i class="fa fa-sign-out"></i> Sign Out</a></li>
+                                    {%  else %}
+                                        <!-- USERS NOT ATTACHED TO ANY SUBSCRIBING ORGANISATION -->
+                                        <li><a href="{% url 'profile' %}" class="dropdown-toggle">
+                                            <i class="fa fa-user"></i> Profile [{{ user }}]</a></li>
+                                        <li><a href="{% url 'logout' %}" class="dropdown-toggle">
+                                            <i class="fa fa-sign-out"></i> Sign Out</a></li>
+                                    {% endif %}
                                 {% endif %}
                             {%  else %}
+                                <!-- UNAUTHENTICATED USERS -->
                                 <li><a href="{% url 'register' %}" class="dropdown-toggle">
                                     <i class="fa fa-user-plus"></i> Register</a></li>
                                 <li><a href="{% url 'login' %}" class="dropdown-toggle">

@@ -9,7 +9,7 @@ import logging
 
 # A default group of Agent can be set in the session, if user's group is not found in database.
 # This is the lowest level of access for a signed-in user.
-DEFAULT_USER_GROUP = 'Agents'
+DEFAULT_AGENT_GROUP = 'Agent'
 
 # Default Admin group constant is compared with the user's actual group to control access to various
 # functions in the app via the template language. If the name of the Administrator group changes then it
@@ -35,6 +35,9 @@ def login(request):
     if "default_admin_group" in request.session:
         del request.session["default_admin_group"]
 
+    # Store the string literals for the two main types of users in the session.
+    # These are used throughout app to give or restrict permissions to certain pages.
+    request.session["default_agent_group"] = DEFAULT_AGENT_GROUP
     request.session["default_admin_group"] = DEFAULT_ADMIN_GROUP
 
     if request.method == 'POST':
@@ -44,21 +47,14 @@ def login(request):
                                      password=request.POST['password'])
             if user:
                 auth.login(request, user)
-                # Clear any existing group from the session.
+                # Clear any existing group, user belongs to, from the session.
                 if "group" in request.session:
                     del request.session["group"]
 
-                # Set session to user's group. There should only be one group per user..for now!
+                # Set session to user's group stored in database. There should only be one group per user..for now!
                 try:
                     group = Group.objects.filter(user=request.user).values_list('name', flat=True)
-                    if not group:
-                        request.session["group"] = DEFAULT_USER_GROUP
-                        messages.error(request, "Your user group has not been found so you have been "
-                                                "assigned to the [ "
-                                                + DEFAULT_USER_GROUP + " ] group for this session,"
-                                                "Please contact your Administrator to set up a permanent one for you.")
-
-                    else:
+                    if group:
                         request.session["group"] = group[0]
                         if len(group) > 1:
                             messages.error(request, "Too many groups have been found for your user, so you have been "
