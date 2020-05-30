@@ -208,15 +208,6 @@ p.brand-benefits  {
     margin-right: -5px;
 }
 
-.dashboard-panel {
-    background-color: Gainsboro;
-    color: black;
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    padding-left: 3px;
-    margin-top: 5px;
-}
-
 #filter-input {
     background-image: url('/static/images/search-26227.png');
     background-size: 2% auto;
