@@ -227,29 +227,40 @@ In addition, you may also use this section to discuss plans for additional featu
 
 In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
 
-- [JQuery](https://jquery.com)
-    - The project uses **JQuery** to simplify DOM manipulation.
+- [HTML5](https://www.w3.org/TR/html52/) 
+  - To build page structure and content
 
+- [CSS3](https://www.w3.org/standards/techs/css#w3c_all)
+  - To style page structure and content.
 
+- [Bootstrap 3.3.7](https://getbootstrap.com/docs/3.3/getting-started/)
+  - To provide template components to easily create and style responsive elements like the navigation menu, buttons, etc.
+
+- [Google Fonts](https://fonts.google.com/)
+  - For 'Roboto' font style used.
+
+- [Font Awesome 4.7](https://fontawesome.com/icons?d=gallery)
+  - Used to create 'icon' characters for menus, email links, etc.
+
+- [JQuery](https://jquery.com) / [JavaScript](https://www.w3schools.com/js/js_versions.asp)
+  - Used to simplify DOM manipulation for search fields, operation of collapsible components, etc.
+
+- [Django 1.11](https://www.djangoproject.com/)
+  - A Python framework for rapid web development.
+
+- [Python 3.8](https://www.python.org/)
+  - Server side programming language to interface between database and HTML pages.
+
+- [PostgreSQL](https://www.postgresql.org/)
+  - An open source relational database used to store all user data, accessed using Django's Object Relational Mapper.
+  
 ## Testing
 
-In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
+The huge scale of this project has prevented me from creating any automated tests for it. However, I am well aware of the crucial need for these in the next phase of development, where the project is going to get even bigger and more difficult to test.
 
-Whenever it is feasible, prefer to automate your tests, and if you've done so, provide a brief explanation of your approach, link to the test file(s) and explain how to run them.
+However, I have thoroughly tested the project manually and documented the tests in the test plan below. The test plan consists of 74 functional and 16 responsiveness tests. I have written up any issues found in the Notes field of the relevant test.
 
-For any scenarios that have not been automated, test the user stories manually and provide as much detail as is relevant. A particularly useful form for describing your testing process is via scenarios, such as:
-
-1. Contact form:
-    1. Go to the "Contact Us" page
-    2. Try to submit the empty form and verify that an error message about the required fields appears
-    3. Try to submit the form with an invalid email address and verify that a relevant error message appears
-    4. Try to submit the form with all inputs valid and verify that a success message appears.
-
-In addition, you should mention in this section how your project looks and works on different browsers and screen sizes.
-
-You should also mention in this section any interesting bugs or problems you discovered during your testing, even if you haven't addressed them yet.
-
-If this section grows too long, you may want to split it off into a separate file and link to it from here.
+- Excel workbook,'Test plan - Walkabout', stored in the [Project Documentation](https://github.com/kevald1963/milestone-4-walkabout/tree/master/Project%20Documentation/Test%20plan) folder in the GitHub repository, details all the functional and responsiveness tests carried out across several popular browsers.
 
 ## Deployment
 
