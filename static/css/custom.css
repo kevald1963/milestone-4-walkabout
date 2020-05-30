@@ -147,8 +147,13 @@ h3.no-top-margin {
     background-color: #c67605;
 }
 
-.menu-home {
-    font-size: 30px;
+.navbar-brand {
+    font-family: 'Leckerli One';
+    font-size: 20px;
+}
+
+.menu-my-account {
+    font-size: 16px;
 }
 
 .menu-other {

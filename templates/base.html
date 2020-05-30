@@ -1,5 +1,5 @@
 {% load staticfiles %}
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -30,10 +30,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="menu-home" href="/"><i class="fa fa-home" aria-hidden="true"></i></a>
+                <a class="navbar-brand hidden-xs" href="#">
+                    <i class="fa fa-magic" aria-hidden="true"> Spellbound Software</i>
+                </a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
+
+                    <!-- HOME -->
+                    <li>
+                        <a href="/" class="menu-other"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+                    </li>
 
                     <!-- PRODUCTS -->
                     <li class="dropdown">
@@ -53,9 +60,9 @@
 
                     <!-- MY ACCOUNT -->
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle menu-other" data-toggle="dropdown" role="button"
+                        <a href="#" class="dropdown-toggle menu-my-account" data-toggle="dropdown" role="button"
                             aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-sitemap hidden-xs" aria-hidden="true"></i>
+                            <i class="fa fa-book hidden-xs" aria-hidden="true"></i>
                             <span> My Account</span>
                             <span class="caret"></span>
                         </a>
