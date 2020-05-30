@@ -1,10 +1,10 @@
 # Walkabout 
 
-Walkabout is an app for managing leafleting, canvassing and surveying campaigns.
+Walkabout is a general app for managing leafleting, canvassing and surveying campaigns.
 
 **Inspiration for project**
 
-I am an active member of South Tyneside Green Party (STGP), an affiliate of the Green Party of England and Wales (GPEW). The idea for developing this app has come from my own experience of leafleting on behalf of STGP using paper copies of maps and street rounds. These are not only cumbersome to handle and susceptible to weather conditions but, from an organiser’s point of view, the later collation of valuable information from the round, such as missed streets and households, new supporters, and so forth, is difficult and time consuming, especially across teams of activists. Furthermore, while most leafleting campaigns cover every household in the round, there are times when only specific households are delivered to e.g. New Year cards to supporters. Canvassing also tends to be targeted at known or likely supporters. Correctly selecting the data for printing out data for specific households only, is currently a labour-intensive job. An app could automate all these routine and tedious functions.
+I am an active member of South Tyneside Green Party (STGP), an affiliate of the Green Party of England and Wales (GPEW). The idea for developing this app has come from my own experience of leafleting on behalf of STGP using paper copies of maps and street rounds. These are not only cumbersome to handle and susceptible to weather conditions but, from an organiser’s point of view, the later collation of valuable information from the round, such as missed streets and households, new supporters, and so forth, is difficult and time consuming, especially across several teams of activists. Furthermore, while most leafleting campaigns cover every household in the round, there are times when only specific households are delivered to e.g. New Year cards to supporters. Canvassing also tends to be targeted at known or likely supporters. Correctly selecting the data for printing out data for specific households only, is currently a labour-intensive job. An app could automate all these routine and tedious functions.
 
 However, this app is not just for use by political parties, it can also be used by parcel delivery companies, market researchers, trade advertisers, community groups and so on. The app has been written so that much of the content relating to the organisation using it, is stored on the database so that it can be displayed on the app's pages rather than hard-coding into them. This means that the content can easily be changed by the end user. Various custom pages have been created to allow management of such user data.
 
@@ -30,15 +30,44 @@ I have implemented the following approach to its design:
 
 - Paid-for address data loads will be available to all customers, even for those with the free product. They wil only be limited by the number of devices their base product allows. 
 
+**How the app operates - or should!**
+
+The purpose of the app is to earn revenue by providing a convenient data service to organisations involved in leafleting, canvassing and surveying campaigns.
+
+The app is well-developed but from a real world point of view it is still a prototype. It currently only caters for one customer organisation. Obviously, it will need to cater for many if it is going to earn any serious revenue. It is absolutely crucial that data does not get mixed up between customers, so a separate schema for each may need to be created for each at the time of them subscribing. 
+
+Here is the typical expected scenario for a new customer looking for an app for their campaigning needs:
+
+- They browse the site for information about the app without registering to begin with.
+
+- They want to try, or buy, the app, so register on the site first. Alternatively, they select a product, view it in the cart and try to check it out. If they have not registered then they will be asked to do so at that point before being allowed to proceed.
+
+- They enter their order and make payment.
+
+- Their schema is created with all necessary tables and the following is done:
+
+  - An Admin group, with permissions, is created and the user is assigned to it.
+
+  - The parent organisation data is created from the order header.
+
+  - The subscription data is created from the order details.
+
+- The customer will now be granted access to all data entry forms to create Admin and Agent users, create sub-organisations or groups for campaign purposes. 
+
+- They will also be able to create campaigns, rounds, streets and addresses, or use a paid-for address data load if they do not want to create all the addresses they need.
+
 ## UX
 
-**App Audience**
+**User Stories**
 
-The app was initially aimed at local Green Party activists to help them manage election leafleting and canvassing in local council wards or parliamentary constituencies. As discussed above, the app may also be of use to commercial companies for bulk leafleting, parcel delivery, etc.
+Initially, the site will have five types of User: 
+- Superuser
+- Administrator
+- Agent
+- Guest
+- Anonymous.
 
-### User Stories
-
-Initially, the site will have four types of User: Superuser, Administrator, Agent and Anonymous. It may be desirable to create other types of users, e.g. a Trusted Agent with some administrative permissions. A facility to do this will be included in the app functionality.
+It may be desirable to create other types of users, e.g. a Trusted Agent with some administrative permissions. A facility to do this is included in the app functionality.
 
 **User Types**
 
@@ -48,7 +77,7 @@ These are visitors who are not yet registered, or signed in to the app. These wi
 
 *Guest users*
 
-These are visitors who have registered and signed in with a view to subscribing to the app. Typically, they will be representatives of businesses, charities, local government, or they may be a sole trader, such as a tradesperson who wants to use the app to assist in advertising their service. They will not only be able to see and use the pages available to Anonymous Users but, crucially, will be able to access the checkout to make a subscription, free or paid-for. Initially, they are not assigned to any group, so have no permissions, but once the have subscribed to a product, they will be assigned to the Admin group and thereby become Administrators.
+These are visitors who have registered and signed in with a view to subscribing to the app. Typically, they will be representatives of businesses, charities, local government, or they may be a sole trader, such as a tradesperson, who wants to use the app to assist in advertising their service. They will not only be able to see and use the pages available to Anonymous Users but, crucially, will be able to access the checkout to make a subscription, free or paid-for. Initially, they are not assigned to any group, so have no permissions, but once they have subscribed to a product, they will be assigned to the Admin group and thereby become Administrators over their own systems.
  
 *Agents*
 
@@ -61,6 +90,10 @@ This is the app’s customer organisations, or any trusted individuals assigned 
 *Superusers*
 
 This is the owner of the app, and/or the owner’s employees or representatives. They will have access to all data on the system. A Superuser can also act as a customer Administrator, if intervention is required to correct problems in a customer’s system such as diagnosing a data corruption, faulty page or whatever.
+
+*Security issues*
+
+There is an issue with the current version of the app, in that there is nothing stopping an Administrator to assign Superuser status to themselves or someone else. An attempt was made to disable the 'Is superuser?' field in the Django Admin system to all except Superusers, but was unable to get it to work. This will be dealt with in the next phase.
 
 **Django default Group Permissions**
 
@@ -108,7 +141,7 @@ These are not set up manually, but are created when a first base product has bee
 * round | street | Can change street
 * round | street | Can delete street
 
-*Anonymous User stories to be catered for:*
+**Anonymous User stories to be catered for:**
 
 I want to
 
@@ -120,7 +153,7 @@ I want to
 
 - Explore the apps pages for information on what it does, how it works, products offered, how much it costs, etc.
 
-*Guest User stories to be catered for:*
+**Guest User stories to be catered for:**
 
 - All the things that Anonymous User can do.
 
@@ -128,7 +161,7 @@ I want to
 
 - Go to the checkout and subscribe to the app, for the free or paid-for service. 
 
-*Agent User stories to be catered for:*
+**Agent User stories to be catered for:**
 
 - Assign myself to a round if no round has been assigned to me.
 
@@ -158,11 +191,17 @@ I want to
 
 - view information about other people’s rounds such as the percentage of addresses they have covered.
 
-*Administrator user stories to be catered for:*
+**Administrator user stories to be catered for:**
 
 I want to
 
 - carry out all the functions that an Agent User can do.
+
+- Create organisations
+
+- Create other Administrators for my system.
+
+- Create Agents for my system.
 
 - Create streets of addresses.
 
@@ -198,19 +237,40 @@ I want to
 
 ### Wireframes
 
-The files below are stored in:
+Although these are a good starting point, they bear little resemblance to the final design!
 
-[To be updated]
+They can be downloaded from [this folder](https://github.com/kevald1963/milestone-4-walkabout/tree/master/_Project%20Documentation/Screen%20layouts) on GitHub.
 
 ### Database structure
 
-The Postgres relational database has been used by this app for all dynamic data storage. Table structures for this release are shown in the Excel spreadsheet below, stored in:
+The Postgres relational database has been used by this app for all dynamic data storage. The database contains the following tables:
 
-[To be updated]
+- Users
+- Organisation
+- Campaign
+- Round
+- Street
+- Address
+- Product
+- Order
+- OrderLineItem
+- Subscription (created but not yet used)
+
+The structure is complex and needs a diagram to express the relationships properly. However, the size of the project overtook me so I will just give a brief description here:
+
+- The Round, Street and Address tables are linked to each other by foreign keys .
+
+- The Round and Campaign tables have a many-to-many relationship.
+
+- The OrderLineItem has a FK relationship to both the Order and Product table.
+
+- The Subscription has a FK relationship to both the Order and Organisation table but needs some further thought. 
+
+- The relationships between User, Organisation and Campaign need some further thought. There are some FK relationships but many-to-many relationships may need to be implemented between all three tables.
 
 ## Features
 
-In this section, you should go over the different parts of your project, and describe each in a sentence or so.
+Please click [here](https://...) to see the Functional Specification for this section. 
  
 ### Existing Features
 - Feature 1 - allows users X to achieve Y, by having them fill out Z
@@ -260,7 +320,7 @@ The huge scale of this project has prevented me from creating any automated test
 
 However, I have thoroughly tested the project manually and documented the tests in the test plan below. The test plan consists of 74 functional and 16 responsiveness tests. I have written up any issues found in the Notes field of the relevant test.
 
-- Excel workbook,'Test plan - Walkabout', stored in the [Project Documentation](https://github.com/kevald1963/milestone-4-walkabout/tree/master/Project%20Documentation/Test%20plan) folder in the GitHub repository, details all the functional and responsiveness tests carried out across several popular browsers.
+- Excel workbook,'Test plan - Walkabout'. Download from GitHub [here](https://github.com/kevald1963/milestone-4-walkabout/blob/master/_Project%20Documentation/Test%20plan/Test%20plan%20-%20Walkabout.xlsx). 
 
 ## Deployment
 
