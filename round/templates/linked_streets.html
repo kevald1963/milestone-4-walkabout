@@ -27,15 +27,42 @@
             {% for street in streets %}
                 <li>
                     <div class="row">
-                        <div class="col-xs-12 col-md-3">
+                        <div class="col-xs-12 col-md-6">
                             <p>{{ street.name }}</p>
                         </div>
                         <div class="col-xs-12 col-md-6">
                             <div class="row">
                                 <!-- Display a horizontal button group for sm, md and lg devices. -->
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="hidden-xs hidden-sm col-md-12 col-lg-12">
                                     <div class="btn-group" role="group"
-                                        aria-label="Button group for Edit Street, Delete Street,
+                                        aria-label="Horizontal button group for Edit Street, Delete Street,
+                                        View Addresses and Create Addresses.Agent users can only see View Addresses.">
+                                        {% if request.session.group == request.session.default_admin_group %}
+                                            <!-- Limit access to editing and deletion of streets, and creation of
+                                                 addresses to Administrators only. -->
+                                            <span class="btn link-btn-purple">
+                                                <a href="{% url 'edit_street' street.id %}?next={{ request.path|urlencode }}">Edit</a>
+                                            </span>
+                                            <span class="btn link-btn-red">
+                                                <a href="{% url 'delete_street' street.id %}?next={{ request.path|urlencode }}">Delete</a>
+                                            </span>
+                                            <span class="btn link-btn-light-blue">
+                                                <a href="{% url 'view_addresses' street.id %}?next={{ request.path|urlencode }}">View Addresses</a>
+                                            </span>
+                                            <span class="btn link-btn-orange">
+                                                <a href="{% url 'create_addresses' street.id %}?next={{ request.path|urlencode }}">Create Addresses</a>
+                                            </span>
+                                        {% else %}
+                                            <span class="btn link-btn-light-blue">
+                                                <a href="{% url 'view_addresses' street.id %}?next={{ request.path|urlencode }}">View Addresses</a>
+                                            </span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <!-- Display a vertical button group for sm, md and lg devices. -->
+                                <div class="col-xs-12 col-sm-12 hidden-md hidden-lg">
+                                    <div class="btn-group-vertical" role="group"
+                                        aria-label="Vertical button group for Edit Street, Delete Street,
                                         View Addresses and Create Addresses.Agent users can only see View Addresses.">
                                         {% if request.session.group == request.session.default_admin_group %}
                                             <!-- Limit access to editing and deletion of streets, and creation of

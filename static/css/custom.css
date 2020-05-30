@@ -374,4 +374,7 @@ caption p {
     .btn-group-org {
         margin-top: 15px;
     }
+    .btn-group > .btn:first-child {
+        margin-left: 0px;
+    }
 }
