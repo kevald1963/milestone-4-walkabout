@@ -402,6 +402,10 @@ Images will save to the Organisation table from the Django Admin system but not 
 
 Various email links and 'How it Works' button, at bottom of Home page, are not wired up. Will be done in next phase of development.
 
+*Subscribing user can't login as Administrator*
+
+This happens after the guest user has subscribed to the site successfully. They cannot see all the options available to them on the My Account menu. A workaround for this is to login and log back out again. The system should automatically log them out and ask them to login again to assume their new Admin status.  
+
 ## Deployment
 
 The GitHub repository is at [https://github.com/kevald1963/milestone-4-walkabout](https://github.com/kevald1963/milestone-4-walkabout).
