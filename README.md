@@ -101,7 +101,7 @@ This is the app’s customer organisations, or any trusted individuals assigned 
 
 This is the owner of the app, and/or the owner’s employees or representatives. They will have access to all data on the system. A Superuser can also act as a customer Administrator, if intervention is required to correct problems in a customer’s system such as diagnosing a data corruption, faulty page or whatever.
 
-*Security issues*
+**Security issues**
 
 There is an issue with the current version of the app, in that there is nothing stopping an Administrator to assign Superuser status to themselves or someone else. An attempt was made to disable the 'Is superuser?' field in the Django Admin system to all except Superusers, but was unable to get it to work. This will be dealt with in the next phase.
 
@@ -320,6 +320,7 @@ Here is a summary list of the functions it specifies:
 - Authentication and authorisation security   
 - Maps and direction software
 - Data security
+- Help pages
 
 ### Existing Features
 
@@ -335,6 +336,7 @@ Here is a summary list of the functions it specifies:
 - Subscriptions
 - Maps and direction software
 - Data security
+- Help pages
 
 ## Technologies Used
 
@@ -377,14 +379,94 @@ However, I have thoroughly tested the project manually and documented the tests 
 
 ## Deployment
 
-This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
+The GitHub repository is at [https://github.com/kevald1963/milestone-4-walkabout](https://github.com/kevald1963/milestone-4-walkabout).
 
-In particular, you should provide all details of the differences between the deployed version and the development version, if any, including:
-- Different values for environment variables (Heroku Config Vars)?
-- Different configuration files?
-- Separate git branch?
+The project is deployed on Heroku at [https://walkabout-app.herokuapp.com/](https://walkabout-app.herokuapp.com/home/).
 
-In addition, if it is not obvious, you should also describe how to run your code locally.
+Both the GitHub repository & Heroku are in step with each other.
+
+**Deployment process:**
+
+*On Heroku website:*
+  - Create new app: 'walkabout-app'
+  - Choose region: 'Europe'
+  - In Resources tab, select Heroku Postgre from add-ons and choose Hobby-Dev
+  - In Settings tab Config Vars, copy value of DATABASE_URL
+  
+*In project IDE terminal:*
+  - pip install dj_database_url
+  - pip install psycopg2
+  - pip freeze > requirements.txt
+  
+*In Django settings.py:*
+  - At top of file add: 
+    - import os     
+    - import dj_database_url     
+ 
+  - Under DATABASES section, comment out exist settings for SQLite and replace with:
+    - DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))} 
+ 
+  - Set environment variables for IDE as follows:
+    - DATABASE_URL = value copied from Heroku for env variable of the same name.
+    (Django SECRET_KEY was removed from settings and made an env variable early in the project.)  
+
+*In project IDE terminal:*
+  - python manage.py migrations
+  - python manage.py migrate (This will migrate the local database to the new Postgres one on Heroku.)
+  - python manage.py superuser (to create a superuser for new database)
+ 
+*On Heroku website:*
+  - In Settings tab Config Vars, add all environmental settings and their values from the IDE ones. Full list:
+    - AWS_ACCESS_KEY_ID
+    - AWS_SECRET_ACCESS_KEY
+    - DATABASE_URL
+    - DISABLE_COLLECTSTATIC = 0 (Allows Heroku to upload static files.)
+    - SECRET_KEY
+    - STRIPE_PUBLISHABLE
+    - STRIPE_SECRET
+
+  - In Deployment tab, connect to GitHub and link to the repository for this app. 
+
+*In project IDE terminal:*
+  - pip install gunicorn (a package for connecting to Heroku server)
+  - pip freeze > requirements.txt
+  - Create Procfile:
+    - echo web: gunicorn walkabout-app.wsgi > Procfile
+  - git add .
+  - git commit -m "Added Procfile for Heroku deployment."
+  - git push -u origin master 
+  
+*On Heroku website:*
+  - In Settings tab Config Vars, add all environmental settings and their values from the IDE ones. Full list:
+    - DISABLE_COLLECTSTATIC = 1 (Stops Heroku uploading static files.)
+ 
+  - In Deploy tab:
+    - Click on 'Deploy Branch' and check for any errors in the window as it tries to build the app.
+    - Click on 'Enable Automatic Deploys'.
+  - In Settings tab, copy the Heroku URL for the app i.e. 'walkabout-app.herokuapp.com'.
+
+*In Django settings.py:*
+  - Add 'walkabout-app.herokuapp.com' to ALLOWED_HOSTS
+  - In the database section replace the code for the Postgres database with the following code so that the project will work with SQLite locally as well as Postgres remotely:
+
+  if "DATABASE_URL" in os.environ:
+      DATABASES = {
+          'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+      }
+  else:
+      DATABASES = {
+          'default': {
+              'ENGINE': 'django.db.backends.sqlite3',
+              'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+      },
+  }
+  
+*In project IDE terminal:*
+  - git add .
+  - git commit -m "Added allowed host for Heroku."
+  - git push -u origin master 
+  - Open the app on Heroku and check it works as expected, and is showing data from remote Postgres database. 
+  - Open the app locally and check it works as expected and is showing data from local SQLite database.  
 
 ## Credits
 
@@ -392,10 +474,10 @@ In addition, if it is not obvious, you should also describe how to run your code
 - The text for section Y was copied from the [Wikipedia article Z](https://en.wikipedia.org/wiki/Z)
 
 ### Media
-- The photos used in this site were obtained from ...
+- The photos images used for the Organisation pages are from the South Tyneside Green Party's Facebook Organising page, with their permission.
 
 ### Acknowledgements
 
-- I received inspiration for this project from X
+- I received inspiration for this project from my voluntary work with South Tyneside
 
 [![Build Status](https://travis-ci.com/kevald1963/milestone-4-walkabout.svg?branch=master)](https://travis-ci.com/kevald1963/milestone-4-walkabout)
