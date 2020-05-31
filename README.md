@@ -66,6 +66,10 @@ Below is a typical scenario for a new customer looking for an app for their camp
 
 - Once all data has been created, and campaigns linked to rounds, the system is ready for use by signed-on customer users (Agents or Administrators) working in the field. A campaign dashboard is provided for this purpose so they can link to campaigns.
 
+*App creation*
+
+The individual apps within the Walkabout project app are mainly based on either model entities like Organisation, Campaign, Product, etc. But there are some exceptions e.g. Round, Street and Address models are all under the round app because they are so tightly integrated. Also there are some apps that can be based on function only, such as the cart, checkout, dashboard and home apps.  
+
 ## UX
 
 **User Stories**
@@ -396,7 +400,7 @@ Images will save to the Organisation table from the Django Admin system but not 
 
 *Missing links*
 
-Various email links and 'How it Works' button, at bottom of Home page, are not wired. Will be done in next phase of development.
+Various email links and 'How it Works' button, at bottom of Home page, are not wired up. Will be done in next phase of development.
 
 ## Deployment
 
@@ -509,7 +513,6 @@ Both the GitHub repository & Heroku are in step with each other.
 - Unfortunately, I've forgotten where I got the clipart image for the Home page but I confirm it was legally free! 
 
 ### Acknowledgements
-I would like to thank every one who has helped me with this project, or offered encouragement when the going was tough. In particular 
-to my wife for her support, and also to my mentor Reuben Ferrante for his wise guidance, patience and thoroughness in evaluating my project as it developed. 
+I would like to thank every one who has helped me with this project, or offered encouragement when the going was tough. In particular to my wife, Margaret, for her support, and also to my mentor Reuben Ferrante for his wise guidance, patience and thoroughness in evaluating my project as it developed. 
 
 [![Build Status](https://travis-ci.com/kevald1963/milestone-4-walkabout.svg?branch=master)](https://travis-ci.com/kevald1963/milestone-4-walkabout)
