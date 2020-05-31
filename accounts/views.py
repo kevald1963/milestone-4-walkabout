@@ -105,12 +105,11 @@ def register(request):
                                      password=request.POST.get('password1'))
 
             if user:
-                auth.login(request, user)
-                messages.success(request, "You have successfully registered")
+                messages.success(request, "You have successfully registered. Please sign in.")
                 return redirect(reverse('index'))
 
             else:
-                messages.error(request, "unable to log you in at this time!")
+                messages.error(request, "Unable to sign you in at this time!")
     else:
         user_form = UserRegistrationForm()
 
