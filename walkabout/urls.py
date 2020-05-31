@@ -44,7 +44,7 @@ urlpatterns = [
     url(r'^product/', include(urls_product)),
     url(r'^round/', include(urls_round)),
 ]
-# if settings.DEBUG:
-#     print("URLS configured to serve static and media files locally.")
-#     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    print("URLS configured to serve static and media files locally.")
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
