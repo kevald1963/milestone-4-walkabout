@@ -266,6 +266,7 @@ The Postgres relational database has been used by this app for all dynamic data 
 - Street
 - Address
 - Product
+- Discount
 - Order
 - OrderLineItem
 - Subscription (created but not yet used)
@@ -281,6 +282,8 @@ The structure is complex and needs a diagram to express the relationships proper
 - The Subscription has a FK relationship to both the Order and Organisation table but needs some further thought. 
 
 - The relationships between User, Organisation and Campaign need some further thought. There are some FK relationships but many-to-many relationships may need to be implemented between all three tables.
+
+- The Discount table is standalone.
 
 **Existing data**
 
@@ -377,6 +380,24 @@ However, I have thoroughly tested the project manually and documented the tests 
 
 - Excel workbook,'Test plan - Walkabout'. Download from GitHub [here](https://github.com/kevald1963/milestone-4-walkabout/blob/master/_Project%20Documentation/Test%20plan/Test%20plan%20-%20Walkabout.xlsx). 
 
+### Known faults
+
+*Cart validation*
+
+The Cart validation is especially convoluted because the six products offered all have some interaction with each other. Not all can be subscribed to together or in certain multiples. For example, the UK address data load would never be bought with a data load for, say, five UK authorities. I left many of these combinations out of the test plan because I know they won't work. This whole area needs rethought. I am considering do the validation at the Checkout i.e. let invalid combinations be added to the Cart but disallow them at Checkout, rather than as they are added to the Cart. 
+
+*Annoying 'ghost' horizontal scroll bar*
+
+This appears, fleetingly, in the Navbar when refreshing or changing pages. I have checked the Navbar markup but it appears valid in Pycharm. I noticed this not long after the Dashboard was created but the markup in there also appears valid. It will have to be tracked down by a process of elimination, removing markup from various pages and then seeing the effect.
+
+*Images not saving*
+
+Images will save to the Organisation table from the Django Admin system but not from app Add form for the Organisation table. May be a problem with S3 settings in settings.py. I have checked these already but it may be a good place to start.  
+
+*Missing links*
+
+Various email links and 'How it Works' button, at bottom of Home page, are not wired. Will be done in next phase of development.
+
 ## Deployment
 
 The GitHub repository is at [https://github.com/kevald1963/milestone-4-walkabout](https://github.com/kevald1963/milestone-4-walkabout).
@@ -404,8 +425,9 @@ Both the GitHub repository & Heroku are in step with each other.
     - import dj_database_url     
  
   - Under DATABASES section, comment out exist settings for SQLite and replace with:
-    - DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))} 
- 
+  ```
+  DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))} 
+  ```
   - Set environment variables for IDE as follows:
     - DATABASE_URL = value copied from Heroku for env variable of the same name.
     (Django SECRET_KEY was removed from settings and made an env variable early in the project.)  
@@ -449,6 +471,7 @@ Both the GitHub repository & Heroku are in step with each other.
   - Add 'walkabout-app.herokuapp.com' to ALLOWED_HOSTS
   - In the database section replace the code for the Postgres database with the following code so that the project will work with SQLite locally as well as Postgres remotely:
 
+  ```
   if "DATABASE_URL" in os.environ:
       DATABASES = {
           'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
@@ -460,6 +483,7 @@ Both the GitHub repository & Heroku are in step with each other.
               'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
       },
   }
+  ```
   
 *In project IDE terminal:*
   - git add .
@@ -469,15 +493,23 @@ Both the GitHub repository & Heroku are in step with each other.
   - Open the app locally and check it works as expected and is showing data from local SQLite database.  
 
 ## Credits
-
+- Too many to list here but includes:
+  - Slack channel users
+  - Stack Overflow users
+  - Django Docs
+  - The Python Tutorial
+  - W3 Schools
+ 
 ### Content
-- The text for section Y was copied from the [Wikipedia article Z](https://en.wikipedia.org/wiki/Z)
+- All text content for the app was written by myself.
 
 ### Media
-- The photos images used for the Organisation pages are from the South Tyneside Green Party's Facebook Organising page, with their permission.
+- The images used for the Organisation pages are from the South Tyneside Green Party's private Facebook Organising page, with their permission.
+- Five clipart images used for the Product pages are from [Wikimedia Commons](https://www.wikimedia.org/) and one is from [Illustoon](https://illustoon.com/)
+- Unfortunately, I've forgotten where I got the clipart image for the Home page but I confirm it was legally free! 
 
 ### Acknowledgements
-
-- I received inspiration for this project from my voluntary work with South Tyneside
+I would like to thank every one who has helped me with this project, or offered encouragement when the going was tough. In particular 
+to my wife for her support, and also to my mentor Reuben Ferrante for his wise guidance, patience and thoroughness in evaluating my project as it developed. 
 
 [![Build Status](https://travis-ci.com/kevald1963/milestone-4-walkabout.svg?branch=master)](https://travis-ci.com/kevald1963/milestone-4-walkabout)
