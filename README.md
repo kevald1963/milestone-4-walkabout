@@ -30,17 +30,25 @@ I have implemented the following approach to its design:
 
 - Paid-for address data loads will be available to all customers, even for those with the free product. They wil only be limited by the number of devices their base product allows. 
 
-**How the app operates - or should!**
+**Design Considerations**
 
-The purpose of the app is to earn revenue by providing a convenient data service to organisations involved in leafleting, canvassing and surveying campaigns.
+The purpose of the app is to earn revenue by providing a convenient data service to individuals, businesses or organisations involved in leafleting, canvassing and surveying campaigns.
 
-The app is well-developed but from a real world point of view it is still a prototype. It currently only caters for one customer organisation. Obviously, it will need to cater for many if it is going to earn any serious revenue. It is absolutely crucial that data does not get mixed up between customers, so a separate schema for each may need to be created for each at the time of them subscribing. 
+The app is fairly well-developed for the purposes of meeting the project criteria, but from a real world point of view it is still a prototype. It currently only caters for one customer organisation. Obviously, it will need to cater for many if it is going to earn any serious revenue. 
 
-Here is the typical expected scenario for a new customer looking for an app for their campaigning needs:
+It is absolutely crucial that data does not get mixed up between different customers so, for future development, I am reluctant to allow data from separate customers to share the same database tables, even if the data could be kept 'separate' programatically. It will only take one silly human error for data to get mixed up and ruin the app's reputation in the market place.
+
+So for this reason, I am intending that a separate database schema for each customer is only created at the time of them subscribing to a product. Such schemas will not be created for visitors to the app, who are mainly checking it for suitability, even if they have registered with the app. 
+
+Even schemas created for subscribed customers, especially those signing up for the free product, need to be monitored because if the app has cost them nothing, they may decide not use it and leave the schema dormant. A housekeeping policy would have to be in place to archive or delete such schemas after a certain period of time has elapsed. A warning would have to be issued by email to the customer about such action beforehand. 
+
+*Operation - how the app is intended to work*
+
+Below is a typical scenario for a new customer looking for an app for their campaigning needs. Most, but not all, of this is currently catered for in the app.
 
 - They browse the site for information about the app without registering to begin with.
 
-- They want to try, or buy, the app, so register on the site first. Alternatively, they select a product, view it in the cart and try to check it out. If they have not registered then they will be asked to do so at that point before being allowed to proceed.
+- They want to try, or buy, the app, so register on the site first. Alternatively, they select a product, view it in the cart and try to check it out. If they have not registered, then they will be asked to do so at that point before being allowed to proceed. At this stage they are regarded as a Guest user with only limited permissions on the system. 
 
 - They enter their order and make payment.
 
@@ -54,7 +62,9 @@ Here is the typical expected scenario for a new customer looking for an app for 
 
 - The customer will now be granted access to all data entry forms to create Admin and Agent users, create sub-organisations or groups for campaign purposes. 
 
-- They will also be able to create campaigns, rounds, streets and addresses, or use a paid-for address data load if they do not want to create all the addresses they need.
+- They will also be able to create campaigns, rounds, streets and addresses, or use a paid-for address data load if they do not want to manually create all the addresses they need.
+
+- Once all data has been created, and campaigns linked to rounds, the system is ready for use by signed-on customer users (Agents or Administrators) working in the field. A campaign dashboard is provided for this purpose so they can link to campaigns.
 
 ## UX
 
@@ -157,17 +167,21 @@ I want to
 
 - All the things that Anonymous User can do.
 
-- Select a product, or products, and place it/them in the cart.
+- Select a product, or products, and place it, or them, in the cart.
 
 - Go to the checkout and subscribe to the app, for the free or paid-for service. 
 
 **Agent User stories to be catered for:**
 
-- Assign myself to a round if no round has been assigned to me.
+- All the things that a Guest User can do.
 
-- Transfer myself from one round to another where this is desirable.
+- Assign myself to a campaign if no campaign has been assigned to me.
 
-- view an interactive map of the round I have been assigned to.
+- Transfer myself from one campaign to another where this is desirable.
+
+- Get directions to the round to which I have been assigned.
+
+- view an interactive map of the round to which I have been assigned.
 
 - view a list of streets, and addresses within those streets.
 
@@ -199,7 +213,7 @@ I want to
 
 - Create organisations
 
-- Create other Administrators for my system.
+- Create other Administrators and Agents on the system.
 
 - Create Agents for my system.
 
@@ -227,7 +241,7 @@ I want to
 
 - Delete campaigns.
 
-- Allocate individuals to a round.
+- Allocate users (Admin or Agents) to a campaign.
 
 - View the progress of a campaign i.e. view which rounds have been done.
 
@@ -268,20 +282,59 @@ The structure is complex and needs a diagram to express the relationships proper
 
 - The relationships between User, Organisation and Campaign need some further thought. There are some FK relationships but many-to-many relationships may need to be implemented between all three tables.
 
+**Existing data**
+
+To save on tedious data entry some data has been created for the app on Heroku already such as users, groups, orders, organisations, campaigns, rounds, streets and addresses. Product data has also been created but CUD operations on it can only be done by Superusers.
+
+Please feel free to use the below Test users created on system, or create your own if you wish.
+
+*Superusers*
+- reuben99 / django99
+- kevald1963 / python99
+
+*Administrators*
+- elf78 / bobcat33
+- davidf / musiclover
+
+*Agents*
+- lesliehan / Umbrella
+- pebro67 / Barbour22
+
+*Guests (limited permissions)*
+- chrism22 / funnybun
+- suziet / bliss123
+
+Please note that all user email addresses are fictitious.
+
 ## Features
 
-Please click [here](https://...) to see the Functional Specification for this section. 
- 
+Please click [here](https://github.com/kevald1963/milestone-4-walkabout/blob/master/_Project%20Documentation/Functional%20specification/Functional%20specification%20-%20Walkabout.docx) to download the Functional Specification for this section. This specifies the full list of functionality for the app before it can be regarded as a professional product. Not all of this has been implemented, of course,
+
+Here is a summary list of the functions it specifies:
+- Products
+- Cart
+- Checkout
+- Subscriptions
+- Campaign management functionality
+- Data entry forms for managing campaign-related data
+- Authentication and authorisation security   
+- Maps and direction software
+- Data security
+
 ### Existing Features
-- Feature 1 - allows users X to achieve Y, by having them fill out Z
-- ...
 
-For some/all of your features, you may choose to reference the specific project files that implement them, although this is entirely optional.
-
-In addition, you may also use this section to discuss plans for additional features to be implemented in the future:
+- Products
+- Cart
+- Checkout
+- Campaign management functionality
+- Data entry forms for managing campaign-related data
+- Authentication and authorisation security   
 
 ### Features Left to Implement
-- Another feature idea
+
+- Subscriptions
+- Maps and direction software
+- Data security
 
 ## Technologies Used
 
